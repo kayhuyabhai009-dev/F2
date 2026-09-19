@@ -114,6 +114,10 @@ case "$t" in
   jadx)      exec "$TOOLS/jadx/bin/jadx" "\$@" ;;
   apksigner) exec "\$JAVA_HOME/bin/java" -jar "$TOOLS/android/build-tools/lib/apksigner.jar" "\$@" ;;
   baksmali|smali)
+             if [ $# -eq 0 ]; then
+               echo "usage: $t $([ $t = baksmali ] && echo 'd <classes.dex> -o <outdir>' || echo 'a <smali-dir> -o <out.dex>')" >&2
+               exit 1
+             fi
              CP=\$(ls "$TOOLS"/jadx/lib/*.jar | tr '\n' ':')
              [ "$t" = baksmali ] && M=org.jf.baksmali.Main || M=org.jf.smali.Main
              exec "\$JAVA_HOME/bin/java" -cp "\$CP" \$M "\$@" ;;
