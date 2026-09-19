@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# jadx driver for the *modern* jadx-core jar that ships inside the `jadx-mcp`
+# npm package (the official jadx CLI release is not downloadable in this
+# sandbox: GitHub release assets and Maven Central are blocked).
+#
+# Usage: jadx <input.apk|classes.dex> <outdir> [nores]
+set -euo pipefail
+TOOLS_DIR="${TOOLS_DIR:-/opt/tools}"
+JAVA="${JAVA_HOME:-$TOOLS_DIR/jdk17/jre}/bin/java"
+CP="$TOOLS_DIR/jadx/wrapper:$TOOLS_DIR/jadx/jadx-core-modern.jar"
+if [ $# -lt 2 ]; then echo "usage: jadx <input.apk|input.dex> <outdir> [nores]" >&2; exit 2; fi
+exec "$JAVA" -Xmx2g -cp "$CP" JadxRunner "$@"

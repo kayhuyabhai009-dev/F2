@@ -1,0 +1,233 @@
+#!/usr/bin/env python3
+"""zipalign - pure-Python reimplementation of Android's tools/zipalign.
+
+Usage:
+  zipalign [-f] [-v] [-c] [-p] [-P <kb>] <alignment> <in.apk> [out.apk]
+
+  <alignment>  alignment for all entry data, usually 4 (or 16384 for 16 KB pages)
+  -p           page-align stored (uncompressed) .so entries
+  -P <kb>      page size in KB used by -p (default 4096 bytes / 4 KB)
+  -c           check only
+  -f           overwrite output
+  -v           verbose
+
+Alignment is achieved by appending a well-formed padding extra field
+(id 0xd935, data = 2-byte alignment + zero fill) to the *local file header*
+of each entry, exactly like AOSP's ZipAlign does. Central directory records
+are preserved as-is (only offsets are updated).
+"""
+import struct, sys, os
+
+PADDING_EXTRA_ID = 0xD935
+EOCD_SIG = b'PK\x05\x06'
+CDSIG    = b'PK\x01\x02'
+LOCSIG   = b'PK\x03\x04'
+DD_SIG   = b'PK\x07\x08'
+
+
+def find_eocd(buf):
+    pos = len(buf)
+    lo = max(0, len(buf) - (22 + 65535))
+    while True:
+        pos = buf.rfind(EOCD_SIG, lo, pos)
+        if pos < 0:
+            raise ValueError('EOCD not found: not a zip/apk file')
+        if pos + 22 <= len(buf):
+            clen = struct.unpack_from('<H', buf, pos + 20)[0]
+            if pos + 22 + clen == len(buf):
+                return pos
+
+
+def extra_is_wellformed(ex):
+    j = 0
+    while j + 4 <= len(ex):
+        _, tsz = struct.unpack_from('<HH', ex, j)
+        if j + 4 + tsz > len(ex):
+            return False
+        j += 4 + tsz
+    return j == len(ex)
+
+
+def parse(buf):
+    eocd = find_eocd(buf)
+    _, disk, cd_disk, n_disk, n_total, cd_size, cd_off, clen = struct.unpack_from('<IHHHHIIH', buf, eocd)
+    entries = []
+    pos = cd_off
+    for _ in range(n_total):
+        if buf[pos:pos + 4] != CDSIG:
+            raise ValueError('bad central directory signature at offset %d' % pos)
+        f = struct.unpack_from('<IHHHHHHIIIHHHHHII', buf, pos)
+        (_, vmb, vne, flags, method, mtime, mdate, crc, csize, usize,
+         nlen, elen, clen2, dstart, iattr, eattr, lho) = f
+        e = {
+            'vmb': vmb, 'vne': vne, 'flags': flags, 'method': method, 'mtime': mtime,
+            'mdate': mdate, 'crc': crc, 'csize': csize, 'usize': usize, 'dstart': dstart,
+            'iattr': iattr, 'eattr': eattr, 'lho': lho,
+            'name': buf[pos + 46:pos + 46 + nlen],
+            'extra': buf[pos + 46 + nlen:pos + 46 + nlen + elen],
+            'comment': buf[pos + 46 + nlen + elen:pos + 46 + nlen + elen + clen2],
+            'new_off': None,
+        }
+        entries.append(e)
+        pos += 46 + nlen + elen + clen2
+    return entries, dict(n_total=n_total, n_disk=n_disk, disk=disk, cd_disk=cd_disk, clen=clen)
+
+
+def want_alignment(e, alignment, page_size):
+    if page_size and e['method'] == 0 and e['name'].endswith(b'.so'):
+        return max(page_size, alignment)
+    return alignment
+
+
+def pad_block(align, need):
+    """Extra-field block that appends exactly `need` bytes to the extra field.
+
+    Layout: id(2) + datasize(2) + data(datasize).  `need` must be >= 6, and
+    datasize = need - 4, so the caller's byte budget stays exact.
+    """
+    datasize = need - 4
+    return struct.pack('<HH', PADDING_EXTRA_ID, datasize) + struct.pack('<H', align & 0xFFFF)[:min(2, datasize)] + b'\0' * (datasize - 2)
+
+
+def rewrite(buf, entries, alignment, page_size, verbose=False):
+    out = bytearray()
+    for e in entries:
+        lho = e['lho']
+        if buf[lho:lho + 4] != LOCSIG:
+            raise ValueError('bad local file header for %r' % e['name'])
+        (_, lvne, lflags, lmethod, lt, ld, lcrc, lcsize, lusize, lnlen, lelen) = \
+            struct.unpack_from('<IHHHHHIIIHH', buf, lho)
+        lname = buf[lho + 30:lho + 30 + lnlen]
+        lextra = buf[lho + 30 + lnlen:lho + 30 + lnlen + lelen]
+        if lname != e['name']:
+            raise ValueError('local/central name mismatch for %r' % e['name'])
+        e['new_off'] = len(out)
+        align = want_alignment(e, alignment, page_size)
+        # drop unusable (malformed) local extras rather than propagating garbage
+        base_extra = lextra if extra_is_wellformed(lextra) else b''
+        added = (-(e['new_off'] + 30 + len(e['name']) + len(base_extra))) % align
+        while 0 < added < 6:
+            added += align
+        if added:
+            extra = base_extra + pad_block(align, added)
+        else:
+            extra = base_extra
+        if verbose and extra is not base_extra:
+            print('  pad %-58s +%d (align %d)' % (e['name'].decode('utf-8', 'replace')[:58], added, align))
+        out += LOCSIG + struct.pack('<HHHHHIIIHH', lvne, lflags, lmethod, lt, ld,
+                                    lcrc, lcsize, lusize, len(e['name']), len(extra))
+        out += e['name'] + extra
+        data_start = lho + 30 + lnlen + lelen
+        # When bit 3 (data descriptor) is set the local header carries zeroed
+        # sizes; the authoritative values live in the central directory.
+        if lflags & 0x08:
+            csize = e['csize']
+        else:
+            csize = lcsize
+        out += buf[data_start:data_start + csize]
+        if lflags & 0x08:
+            dpos = data_start + csize
+            if buf[dpos:dpos + 4] == DD_SIG:
+                out += buf[dpos:dpos + 16]
+            elif dpos + 12 <= len(buf):
+                out += buf[dpos:dpos + 12]
+
+    cd_off = len(out)
+    for e in entries:
+        out += CDSIG + struct.pack('<HHHHHHIIIHHHHHII', e['vmb'], e['vne'], e['flags'], e['method'],
+                                   e['mtime'], e['mdate'], e['crc'], e['csize'], e['usize'],
+                                   len(e['name']), len(e['extra']), len(e['comment']),
+                                   e['dstart'], e['iattr'], e['eattr'], e['new_off'])
+        out += e['name'] + e['extra'] + e['comment']
+    cd_size = len(out) - cd_off
+    meta = parse(buf)[1]
+    out += EOCD_SIG + struct.pack('<HHHHIIH', meta['disk'], meta['cd_disk'], meta['n_disk'],
+                                  meta['n_total'], cd_size, cd_off, meta['clen'])
+    return bytes(out)
+
+
+
+def verify_data_integrity(out, entries):
+    """Re-read the archive and confirm each entry's payload still decompresses
+    to data matching the CRC recorded in the central directory."""
+    import zlib
+    ents, _ = parse(bytes(out))
+    if len(ents) != len(entries):
+        raise ValueError('entry count changed during rewrite')
+    for chk in ents:
+        lho = chk['lho']
+        lnlen, lelen = struct.unpack_from('<HH', out, lho + 26)
+        start = lho + 30 + lnlen + lelen
+        raw = bytes(out[start:start + chk['csize']])
+        if chk['method'] == 8:
+            try:
+                payload = zlib.decompress(raw, -15)
+            except Exception as exc:
+                raise ValueError('entry %r does not inflate after rewrite: %s' % (chk['name'], exc))
+        else:
+            payload = raw
+        if (zlib.crc32(payload) & 0xFFFFFFFF) != chk['crc']:
+            raise ValueError('CRC mismatch after rewrite for %r' % chk['name'])
+    return True
+
+def check(path, alignment, page_size, verbose=False):
+    buf = open(path, 'rb').read()
+    entries, _ = parse(buf)
+    bad = 0
+    for e in entries:
+        lho = e['lho']
+        lnlen, lelen = struct.unpack_from('<HH', buf, lho + 26)
+        off = lho + 30 + lnlen + lelen
+        want = want_alignment(e, alignment, page_size)
+        if off % want:
+            bad += 1
+            if verbose or bad <= 10:
+                print('  BAD  %-58s offset=%d (%%%d=%d)' %
+                      (e['name'].decode('utf-8', 'replace')[:58], off, want, off % want))
+    print('Verification %s: %d of %d entries misaligned (alignment=%d%s)' %
+          ('FAILED' if bad else 'successful', bad, len(entries), alignment,
+           ', page-aligned .so=%d' % page_size if page_size else ''))
+    return bad == 0
+
+
+def main(argv):
+    force = page = chk = verbose = False
+    page_kb = None
+    args = []
+    i = 0
+    while i < len(argv):
+        a = argv[i]
+        if a == '-f': force = True
+        elif a == '-v': verbose = True
+        elif a == '-p': page = True
+        elif a == '-c': chk = True
+        elif a == '-P':
+            i += 1
+            page_kb = int(argv[i]); page = True
+        else: args.append(a)
+        i += 1
+    if len(args) < 2 or not args[0].isdigit():
+        print(__doc__); return 2
+    alignment = int(args[0])
+    src = args[1]
+    page_size = 0
+    if page:
+        page_size = (page_kb * 1024) if page_kb else (alignment if alignment >= 4096 else 4096)
+    if chk:
+        return 0 if check(src, alignment, page_size, verbose) else 1
+    dst = args[2] if len(args) > 2 else src + '.aligned'
+    if os.path.exists(dst) and not force:
+        print('Output %s exists (use -f)' % dst); return 2
+    so = os.path.getsize(src)
+    buf = open(src, 'rb').read()
+    entries, _ = parse(buf)
+    out = rewrite(buf, entries, alignment, page_size, verbose)
+    verify_data_integrity(out, entries)
+    with open(dst, 'wb') as fh:
+        fh.write(out)
+    print('Wrote %s (%d -> %d bytes, +%.1f%%)' % (dst, so, len(out), 100.0 * (len(out) - so) / so))
+    return 0 if check(dst, alignment, page_size) else 1
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
