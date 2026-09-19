@@ -150,6 +150,20 @@ ENV
 chmod +x "$TOOLS/env.sh"
 ok "wrappers: $(ls "$TOOLS/bin" | tr '\n' ' ')"
 
+# ---------------------------------------------------------------- 6b. mitmproxy
+say "6b/7  mitmproxy (traffic capture — WebSocket support ke saath)"
+if ! command -v mitmdump >/dev/null 2>&1 && [ ! -x "$HOME/.local/bin/mitmdump" ]; then
+  $PIP install --user --break-system-packages -q mitmproxy 2>&1 | tail -2
+fi
+if [ -x "$HOME/.local/bin/mitmdump" ]; then
+  ok "mitmproxy $("$HOME/.local/bin/mitmdump" --version 2>&1 | head -1)"
+  ln -sf "$HOME/.local/bin/mitmdump"   "$TOOLS/bin/mitmdump"   2>/dev/null
+  ln -sf "$HOME/.local/bin/mitmweb"    "$TOOLS/bin/mitmweb"    2>/dev/null
+  ln -sf "$HOME/.local/bin/mitmproxy"  "$TOOLS/bin/mitmproxy"  2>/dev/null
+else
+  warn "mitmproxy skip (optional — sirf traffic capture ke liye chahiye)"
+fi
+
 # ---------------------------------------------------------------- 7. keystore
 say "7/7  debug keystore (APK signing)"
 KS="$TOOLS/keystores/debug.keystore"

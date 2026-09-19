@@ -51,6 +51,26 @@ $R cycle  yoyo.apk              # full round-trip test (decode→build→sign)
 $R ksgen  mykey                 # apna signing keystore
 ```
 
+## Traffic capture — app ka network traffic dekhna
+
+```bash
+bash tools/setup-toolchain.sh              # mitmproxy bhi install ho jata hai
+bash tools/capture.sh ca                   # mitmproxy CA banao (hash + file bata dega)
+bash tools/capture.sh adb-ca               # CA → device ke SYSTEM trust store me (root)
+bash tools/capture.sh adb-proxy            # device ka proxy set karo
+# phir mitmweb chalao → WebSocket/Socket.IO frames bhi dikhenge
+```
+
+Poori guide: **[CAPTURE-GUIDE.md](CAPTURE-GUIDE.md)**
+
+> **Zaroori:** APK modify karne ki **zaroorat nahi**. System-CA wala tareeka device level pe kaam
+> karta hai — APK waisa hi rehta hai, re-sign nahi hota, isliye signature/clone detection ka
+> koi lafda nahi aata.
+>
+> **HTTPCanary kaam nahi karega** — app ka game traffic Socket.IO/WebSocket hai, HTTPCanary
+> HTTP-only tool hai. Aur user-installed CA ko Android 7+ pe ye app trust nahi karta
+> (`network_security_config.xml` me `<certificates src="user"/>` nahi hai).
+
 ## yoyo.apk ke andar kya hai
 
 ```
