@@ -1,0 +1,18 @@
+# decompile / patch output (regenerable — re.sh se dobara ban jaata hai)
+work/
+*.idsig
+*_patched.apk
+*_signed.apk
+*_aligned.apk
+*_roundtrip.apk
+
+# extracted toolchain
+/tools/jdk/
+/tools/android/
+/tools/jadx/
+/tools/bin/
+/tools/keystores/*.keystore
+
+# misc
+*.log
+.DS_Store
