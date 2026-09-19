@@ -39,11 +39,27 @@ echo "APK inspection / decode / rebuild"
 [ -x "$TOOLS_DIR/bin/jadx" ]  && row "jadx (modern jadx-core driver)" ok "$([ -f "$TOOLS_DIR/jadx/jadx-core-modern.jar" ] && echo jar-present)" || row "jadx (modern)" miss "missing"
 [ -x "$TOOLS_DIR/jadx/jadx-1.1.0/bin/jadx" ] && row "jadx CLI 1.1.0 (bundled)" ok "v$("$TOOLS_DIR/jadx/jadx-1.1.0/bin/jadx" --version 2>/dev/null | head -1)" || row "jadx CLI 1.1.0" warn "optional"
 [ -f "$TOOLS_DIR/jadx/dx-1.16.jar" ] && row "dx 1.16 (class -> dex fallback)" ok "present" || row "dx" warn "optional"
-have d8 && row "d8 (modern dexer)" ok "present" || row "d8 / r8 (modern dexer)" warn "NOT available: dl.google.com + Maven Central blocked"
+if [ -x "$TOOLS_DIR/bin/d8" ] || command -v d8 >/dev/null 2>&1; then
+  row "d8 (modern dexer)" ok "$(command -v d8 || echo "$TOOLS_DIR/bin/d8")"
+elif [ -f "$TOOLS_DIR/jadx/d8.jar" ]; then
+  row "d8 (modern dexer)" ok "jar present ($TOOLS_DIR/jadx/d8.jar)"
+else
+  row "d8 / r8 (modern dexer)" warn "not imported — drop build-tools_r35-linux.zip into vendor/"
+fi
+[ -d "$TOOLS_DIR/build-tools/current" ] && row "Android build-tools" ok "$(ls "$TOOLS_DIR/build-tools/current" 2>/dev/null | head -3 | tr '\n' ' ')" || row "Android build-tools" warn "not imported (optional)"
+[ -f "$TOOLS_DIR/android-platform/current/android.jar" ] && row "android.jar (platform)" ok "present" || row "android.jar (platform)" warn "not imported (optional)"
+[ -d "$TOOLS_DIR/cmdline-tools/current" ] && row "cmdline-tools (sdkmanager)" ok "present" || row "cmdline-tools" warn "not imported (optional)"
+[ -d "$TOOLS_DIR/ndk/current" ] && row "Android NDK" ok "present" || row "Android NDK" warn "not imported (optional)"
 
 echo "Signing / alignment"
 [ -f "$TOOLS_DIR/apktool/apksigner.jar" ] && row "apksigner (Android apksig)" ok "v$(java -jar "$TOOLS_DIR/apktool/apksigner.jar" --version 2>/dev/null)" || row "apksigner" miss "missing"
-[ -x "$TOOLS_DIR/bin/zipalign" ] && row "zipalign (pure-python impl.)" ok "ok" || row "zipalign" miss "missing"
+if [ -x "$TOOLS_DIR/build-tools/current/zipalign" ]; then
+  row "zipalign (official binary)" ok "$TOOLS_DIR/build-tools/current/zipalign"
+elif [ -x "$TOOLS_DIR/bin/zipalign" ]; then
+  row "zipalign (pure-python impl.)" ok "ok"
+else
+  row "zipalign" miss "missing"
+fi
 [ -f "$TOOLS_DIR/keys/test.keystore" ] && row "test keystore (PKCS12)" ok "$TOOLS_DIR/keys/test.keystore" || row "test keystore" miss "missing"
 
 echo "Native / low-level analysis"
@@ -64,7 +80,13 @@ if [ -f "$TOOLS_DIR/npm/node_modules/@mauricelam/ghidra-decompiler-wasm/dist/ghi
 else
   row "Ghidra decompiler (WASM)" warn "run install.sh --with-node"
 fi
-have ghidraRun && row "Ghidra (full install)" ok "present" || row "Ghidra (full install)" warn "BLOCKED: needs a GitHub release asset (~400 MB) — see toolchain/README.md"
+if [ -x "$TOOLS_DIR/ghidra/support/analyzeHeadless" ]; then
+  row "Ghidra (full install)" ok "analyzeHeadless present (vendor import)"
+elif [ -x "$TOOLS_DIR/bin/ghidra-headless" ]; then
+  row "Ghidra (full install)" ok "wrapper present"
+else
+  row "Ghidra (full install)" warn "not imported — drop ghidra_*.zip (split) into vendor/"
+fi
 
 echo "Runtime testing"
 [ -x "$TOOLS_DIR/platform-tools/adb" ] && row "adb / platform-tools" ok "$(try "$TOOLS_DIR/platform-tools/adb" version)" || row "adb" miss "missing"

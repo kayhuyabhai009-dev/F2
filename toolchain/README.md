@@ -67,8 +67,26 @@ Docker Hub, jsDelivr/unpkg/CDNJS, archive.org.
 | 7 | **Newest apktool (2.11.x) / jadx (1.5.x) / apksigner** | Release assets + Maven Central blocked | 2.9.3 / modern jadx-core already decode current APKs; newest builds handle bleeding‑edge resources better | optional: `apktool_2.11.1.jar`, `jadx-1.5.3-all.jar` |
 | 8 | **Debian packages (`apt`)** via `sudo apt-get` | Debian mirrors blocked | Everything needed was obtained from PyPI/npm/GitHub/source instead | not needed |
 
-If you upload any of the above, tell me and I will wire it in immediately (a small
-`vendor/` drop-in is enough — the install script's `TOOLS_DIR` layout is documented below).
+### How to unblock them — the `vendor/` drop-in (already wired)
+
+Anything you download on your own PC goes into **`vendor/`**; the importer does the rest:
+
+```bash
+bash vendor/fetch-offline.sh --all      # (on YOUR PC) downloads + splits + hashes
+git add vendor && git commit -m "vendor: offline artifacts" && git push
+
+bash toolchain/vendor-import.sh --list  # (in the sandbox) dry run
+bash toolchain/vendor-import.sh         # join parts, verify sha256, extract, wire wrappers
+```
+
+`vendor-import.sh` understands Ghidra, build-tools, cmdline-tools, platform
+(`android.jar`), NDK, frida-server and standalone jars (apktool / jadx-all / apksigner /
+d8 / r8), auto-joins `split`/7-zip/HJSplit parts, verifies `vendor/SHA256SUMS.txt`,
+skips what is already installed and is safe to re-run (`--force` to redo). Details and
+the exact upload list: **`vendor/README.md`**.
+
+> **Never commit Git LFS pointers** for these files — LFS objects are served from a host
+> that is blocked here, so pointers are useless. Commit real bytes (split if > 95 MB).
 
 ## 3. Layout
 

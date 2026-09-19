@@ -48,7 +48,7 @@ mkdir -p "$TOOLS_DIR"/{bin,cache,keys,work,apktool,jadx,platform-tools}
 cd "$TOOLS_DIR/cache"
 
 # -----------------------------------------------------------------------------
-say "1/9  JDK (javac, jar, keytool, jarsigner, javadoc, jshell)"
+say "1/10  JDK (javac, jar, keytool, jarsigner, javadoc, jshell)"
 # The npm package `javajre-linux-64` is actually a complete JDK 17 distribution
 # (~174 MB tarball). Temurin/Adoptium download hosts are blocked in this sandbox.
 if [ ! -x "$TOOLS_DIR/jdk17/jre/bin/javac" ]; then
@@ -60,7 +60,7 @@ fi
 "$TOOLS_DIR/jdk17/jre/bin/javac" -version && ok "JDK 17 -> $TOOLS_DIR/jdk17/jre"
 
 # -----------------------------------------------------------------------------
-say "2/9  Extra JREs 21 / 25 (for tools that require a newer JVM)"
+say "2/10  Extra JREs 21 / 25 (for tools that require a newer JVM)"
 for spec in "21.0.8.2:jre21" "25.0.2.1:jre25"; do
   ver="${spec%%:*}"; dest="${spec##*:}"
   if [ ! -x "$TOOLS_DIR/$dest/bin/java" ]; then
@@ -78,7 +78,7 @@ for spec in "21.0.8.2:jre21" "25.0.2.1:jre25"; do
 done
 
 # -----------------------------------------------------------------------------
-say "3/9  APK jars: apktool, apksigner, jadx, dx"
+say "3/10  APK jars: apktool, apksigner, jadx, dx"
 # `@postar/apktool-node` bundles apktool.jar (2.9.3) + the real Android apksigner jar
 if [ ! -f "$TOOLS_DIR/apktool/apktool.jar" ]; then
   npm pack @postar/apktool-node --silent >/dev/null
@@ -104,7 +104,7 @@ cp "$REPO_DIR/toolchain/bin/jadx" "$TOOLS_DIR/bin/jadx" && chmod +x "$TOOLS_DIR/
 ok "apktool $( (cd "$TOOLS_DIR" && java -jar apktool/apktool.jar --version) 2>/dev/null ) | apksigner present | jadx wrapper compiled"
 
 # -----------------------------------------------------------------------------
-say "4/9  aapt, aapt2, zipalign"
+say "4/10  aapt, aapt2, zipalign"
 mkdir -p "$TOOLS_DIR/bin"
 if [ ! -x "$TOOLS_DIR/bin/aapt" ]; then
   unzip -o -q -j "$TOOLS_DIR/apktool/apktool.jar" 'prebuilt/linux/aapt' -d "$TOOLS_DIR/bin" && chmod +x "$TOOLS_DIR/bin/aapt"
@@ -123,7 +123,7 @@ install -m 755 "$REPO_DIR/toolchain/bin/zipalign" "$TOOLS_DIR/bin/zipalign"
 ok "aapt $("$TOOLS_DIR/bin/aapt" version | head -1) | aapt2 ok | zipalign ok"
 
 # -----------------------------------------------------------------------------
-say "5/9  adb (platform-tools)"
+say "5/10  adb (platform-tools)"
 if [ ! -x "$TOOLS_DIR/platform-tools/adb" ]; then
   python3 -m pip download adbutils --no-deps -q -d "$TOOLS_DIR/cache/adbutils"
   python3 - "$TOOLS_DIR" <<'PY'
@@ -136,7 +136,7 @@ fi
 ok "$("$TOOLS_DIR/platform-tools/adb" version | head -1) (NOTE: no device/emulator available in sandbox)"
 
 # -----------------------------------------------------------------------------
-say "6/9  Python analysis stack (venv)"
+say "6/10  Python analysis stack (venv)"
 [ -d "$TOOLS_DIR/venv" ] || python3 -m venv "$TOOLS_DIR/venv"
 "$TOOLS_DIR/venv/bin/pip" install -q --upgrade pip wheel >/dev/null
 "$TOOLS_DIR/venv/bin/pip" install -q \
@@ -147,7 +147,7 @@ say "6/9  Python analysis stack (venv)"
 ok "python venv ready: $TOOLS_DIR/venv"
 
 # -----------------------------------------------------------------------------
-say "7/9  Node helper packages"
+say "7/10  Node helper packages"
 if [ "$WITH_NODE" = 1 ] && command -v npm >/dev/null; then
   mkdir -p "$TOOLS_DIR/npm" && cd "$TOOLS_DIR/npm"
   npm init -y >/dev/null 2>&1
@@ -159,7 +159,7 @@ else
 fi
 
 # -----------------------------------------------------------------------------
-say "8/9  radare2"
+say "8/10  radare2"
 if [ "$WITH_R2" = 1 ]; then
   if [ ! -x "$TOOLS_DIR/radare2/bin/r2" ]; then
     mkdir -p "$TOOLS_DIR/src" && cd "$TOOLS_DIR/src"
@@ -176,7 +176,7 @@ else
 fi
 
 # -----------------------------------------------------------------------------
-say "9/9  test signing key"
+say "9/10  test signing key"
 if [ ! -f "$TOOLS_DIR/keys/test.keystore" ]; then
   "$TOOLS_DIR/jdk17/jre/bin/keytool" -genkeypair -keystore "$TOOLS_DIR/keys/test.keystore" \
     -storetype PKCS12 -alias testkey -keyalg RSA -keysize 2048 -validity 10000 \
@@ -184,6 +184,14 @@ if [ ! -f "$TOOLS_DIR/keys/test.keystore" ]; then
     -dname "CN=Test Key, OU=Dev, O=F2 Sandbox, L=Patna, ST=Bihar, C=IN" >/dev/null 2>&1
 fi
 ok "test keystore: $TOOLS_DIR/keys/test.keystore (storepass/keypass = android, alias = testkey)"
+
+# -----------------------------------------------------------------------------
+say "10/10 vendor/ artifacts (if any were uploaded)"
+if [ -n "$(find "$REPO_DIR/vendor" -maxdepth 2 -type f \( -iname '*.zip' -o -iname '*.jar' -o -iname '*.xz' -o -iname '*.tar.*' -o -iname '*.part.*' \) 2>/dev/null | head -1)" ]; then
+  bash "$REPO_DIR/toolchain/vendor-import.sh" || warn "vendor import reported problems"
+else
+  warn "nothing in vendor/ yet — see vendor/README.md for what to upload"
+fi
 
 # -----------------------------------------------------------------------------
 say "done — status"
