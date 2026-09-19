@@ -58,7 +58,7 @@ bash tools/setup-toolchain.sh              # mitmproxy bhi install ho jata hai
 bash tools/capture.sh ca                   # mitmproxy CA banao (hash + file bata dega)
 bash tools/capture.sh adb-ca               # CA → device ke SYSTEM trust store me (root)
 bash tools/capture.sh adb-proxy            # device ka proxy set karo
-# phir mitmweb chalao → WebSocket/Socket.IO frames bhi dikhenge
+# phir mitmweb chalao → WebSocket frames bhi dikhenge (decoder: -s tools/yono-proto.py)
 ```
 
 Poori guide: **[CAPTURE-GUIDE.md](CAPTURE-GUIDE.md)**
@@ -67,9 +67,31 @@ Poori guide: **[CAPTURE-GUIDE.md](CAPTURE-GUIDE.md)**
 > karta hai — APK waisa hi rehta hai, re-sign nahi hota, isliye signature/clone detection ka
 > koi lafda nahi aata.
 >
-> **HTTPCanary kaam nahi karega** — app ka game traffic Socket.IO/WebSocket hai, HTTPCanary
+> **HTTPCanary kaam nahi karega** — app ka game traffic raw WebSocket hai, HTTPCanary
 > HTTP-only tool hai. Aur user-installed CA ko Android 7+ pe ye app trust nahi karta
 > (`network_security_config.xml` me `<certificates src="user"/>` nahi hai).
+
+## Protocol decode — captured traffic ko padhna
+
+Capture kar liya, par frames binary hain? `yono-proto.py` unhe readable banata hai —
+app ke andar se recover kiya gaya format: **8-byte header + msgpack(JSON)**.
+
+```bash
+python3 tools/yono-proto.py --self-test        # checksum + frame + crypto round-trip
+
+# live: mitmproxy addon (decoded frames terminal + work/traffic/*.jsonl)
+export YONO_P_K='...' YONO_P_AK='...'          # encrypted HTTP responses ke liye (optional)
+mitmdump -s tools/yono-proto.py --listen-port 8080
+
+# offline
+python3 tools/yono-proto.py --hex '0029 1742 6aae5653 d927 7b22...'
+python3 tools/yono-proto.py --pack '{"c":11}'                    # apna frame banao
+python3 tools/yono-proto.py --cent-sign 'http://host/x' --uid 1  # HTTP auth header
+python3 tools/yono-proto.py --decrypt-response '{"data":...}'    # encrypted response
+```
+
+Protocol spec (frame layout, checksum, command ids, HTTP auth, encrypted responses):
+**[PROTOCOL.md](PROTOCOL.md)** · keys/endpoints `work/PROTOCOL-LOCAL.md` (gitignored).
 
 ## yoyo.apk ke andar kya hai
 
@@ -78,11 +100,15 @@ com.tppart.games.yo            Cocos Creator JS game
 ├── classes.dex                1.7 MB  (1718 java classes)
 ├── lib/arm64-v8a/libcocos2djs.so    22 MB   ← game engine
 ├── lib/armeabi-v7a/libcocos2djs.so  17.5 MB
-├── assets/src/settings.jsc    2.4 MB  ← encrypted/compiled game script
+├── assets/src/settings.jsc    2.4 MB  ← XXTEA-encrypted gzip → JS (decrypt: work/)
 ├── assets/main.js             7.8 KB
 ├── assets/jsb-adapter/*.js    JS engine glue
 └── assets/res/import/*.json   1766 game data files
 ```
+
+`.jsc` assets **XXTEA** se encrypted hain aur andar **gzip** hai (11.5 MB JS total).
+Key native library me hardcoded hai; decrypt karne ke baad poora client logic readable ho jaata hai.
+Decrypt recipe + keys: `work/PROTOCOL-LOCAL.md` (local-only, public repo me nahi).
 
 Signer: `CN=lamislot` · v1+v2 signed · targetSdk 35
 

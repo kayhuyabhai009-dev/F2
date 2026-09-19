@@ -12,7 +12,7 @@ Nahi hoga. Do kaaran:
 
 | Problem | Detail |
 |---|---|
-| **WebSocket support nahi** | Game ka asli play traffic **Socket.IO / WebSocket** hai, HTTP nahi. HTTPCanary use nahi dikha sakta. Verified: `.so` me `jsb_socketio.cpp`, `jsb_websocket.cpp` + libuv raw TCP, protocol string `/socket.io/1/websocket/?EIO=2&transport=websocket&sid=` |
+| **WebSocket support nahi** | Game ka asli play traffic **raw WebSocket** hai (`new WebSocket(ws://host/ws)`, binary frames), HTTP nahi. HTTPCanary HTTP-only tool hai. Decrypted client JS se verified: `NetManager.connect()` → `ws(s)://<server>/ws`, aur har frame `8-byte header + msgpack(JSON)` hota hai (dekho [PROTOCOL.md](PROTOCOL.md)) |
 | **User CA trust nahi** | HTTPS ke liye app ko system CA chahiye (neeche #2) |
 
 **Isliye HTTPCanary ki jagah `mitmproxy` use karenge** (already install ho gaya — v11.0.2). Isme WebSocket frames properly dikhte hain.
@@ -38,7 +38,7 @@ Aur **signature check ka traffic capture se koi rishta nahi** — wo sirf APK re
 | Game bundles (247) | **plain HTTP** | `http://ifs.yonorummy.in/GameX/1.6.8.7/<Game>` | **kuch bhi nahi chahiye** — seedha dikhta hai |
 | Game rules | HTTPS | `https://ifs.yonogamebox.com/gamerule` | system CA chahiye |
 | Partner site | HTTPS | `www.philslotsagent.com` | system CA chahiye |
-| **Game play** | **Socket.IO / WebSocket** (native, libuv) | asli server runtime pe pata chalega | mitmproxy chahiye |
+| **Game play** | **raw WebSocket**, binary frames (native libuv/jsb) | login/node server — `wss://<host>/ws` | mitmproxy chahiye (decoder: `yono-proto.py`) |
 | Firebase | HTTPS | Google endpoints | capture ho sakta hai, ignore karo |
 
 > Asli "play" server ka URL encrypted JS (`.jsc`) me hai — **isi liye capture kar rahe ho**. Wo runtime pe hi pata chalega.
@@ -58,7 +58,11 @@ bash tools/capture.sh start
 ```
 
 `mitmweb` ka UI browser me: **http://127.0.0.1:8081**
-WebSocket / Socket.IO frames **"WebSocket"** tab me alag se milte hain.
+WebSocket frames **"WebSocket"** tab me alag se milte hain. Binary frames ko readable banane ke liye decoder addon use karo:
+
+```bash
+mitmweb -s tools/yono-proto.py --listen-port 8080     # decoded frames + work/traffic/*.jsonl
+```
 
 ### Step 2 — mitmproxy ka CA banao
 
@@ -177,7 +181,7 @@ Ye **re-sign** maangta hai, aur tab signature check fire karega. Isliye:
 |---|---|
 | Game asset downloads (`http://ifs.yonorummy.in/...`) | ✅ plaintext, bina CA |
 | `https://ifs.yonogamebox.com/gamerule` | ✅ system CA ke saath |
-| WebSocket / Socket.IO handshake + frames | ✅ mitmproxy me |
+| WebSocket handshake + frames (decoded) | ✅ mitmproxy + `yono-proto.py` addon |
 | Login / bet / game events | ✅ agar WebSocket pe hain |
 | Server URLs (jo `.jsc` me chhupi hain) | ✅ **yahan se hi pata chalenge** |
 | Firebase/GMS traffic | ✅ dikhega, ignore karo |
@@ -190,7 +194,7 @@ Ye **re-sign** maangta hai, aur tab signature check fire karega. Isliye:
 
 ## 5. Ek line me summary
 
-> HTTPCanary chhod do (WebSocket nahi dikhata). **Rooted device + mitmproxy system CA** use karo — APK bilkul chhedna nahi padta, isliye signature/clone detection ka koi lafda hi nahi aata. Game ka play traffic Socket.IO hai, wo mitmweb ke WebSocket tab me milega.
+> HTTPCanary chhod do (WebSocket nahi dikhata). **Rooted device + mitmproxy system CA** use karo — APK bilkul chhedna nahi padta, isliye signature/clone detection ka koi lafda hi nahi aata. Play traffic raw WebSocket hai; `yono-proto.py` addon ke saath frames decoded (JSON) milenge.
 
 ---
 
