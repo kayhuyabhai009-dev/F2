@@ -107,6 +107,7 @@ for t in apktool jadx aapt aapt2 apksigner zipalign d8 dexdump baksmali smali; d
   cat > "$TOOLS/bin/$t" <<WRAP
 #!/usr/bin/env bash
 export JAVA_HOME="\${JAVA_HOME:-$TOOLS/jdk}"
+export PATH="\$JAVA_HOME/bin:\$PATH"
 export RE_TOOLS="$TOOLS"
 export LD_LIBRARY_PATH="$TOOLS/android/build-tools/lib64:\${LD_LIBRARY_PATH:-}"
 case "$t" in
