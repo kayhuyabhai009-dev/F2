@@ -33,7 +33,8 @@ source toolchain/env.sh                  # put everything on PATH
 | Dex tooling | **baksmali/smali** (inside apktool), **dx 1.16** | — | smali round-trip via apktool |
 | APK signing | **apksigner** (Android `apksig`) | 0.9 | signed + `verify` v1/v2/v3 = true |
 | APK signing | **apk_sign_ts** (pure JS v1/v2/v3) | 1.0.1 | optional, Node |
-| APK alignment | **zipalign** (own pure-Python reimplementation of AOSP `tools/zipalign`) | 1.0 | `toolchain/bin/zipalign` — 2476/2476 entries aligned, CRC-verified |
+| APK alignment | **zipalign (official binary, imported from build-tools 35)** | 35.0.0 | `zipalign -c 4` PASS on `yoyo.apk`; cross-verified against the bundled implementation |
+| APK alignment | **zipalign** (own pure-Python AOSP-semantics reimplementation) | 1.1 | `toolchain/bin/zipalign` — stored-entry alignment + CRC-verified rewrite, output accepted by the official tool |
 | Keys/certs | **keytool** + generated **PKCS12 test keystore** | JDK 17 | `/opt/tools/keys/test.keystore` (pass `android`, alias `testkey`) |
 | Android SDK | **platform-tools / adb** | 1.0.41 (36.0.0) | daemon starts; no device attached |
 | Native analysis | **radare2** (built from GitHub source) | 6.2.2 | `rabin2 -I`, `r2 -c "aa; aflc"` → 17,916 functions in `libcocos2djs.so` |
@@ -59,7 +60,7 @@ Docker Hub, jsDelivr/unpkg/CDNJS, archive.org.
 | # | Item | Why it's blocked | Impact | What to upload to our GitHub |
 |---|---|---|---|---|
 | 1 | **Ghidra (full install, `analyzeHeadless`/GUI)** | Only ships as a GitHub **release asset** (~400 MB) → redirected to a blocked host | No full Ghidra. Substitutes already working: r2 + angr + LIEF + capstone + pypcode + **Ghidra decompiler‑as‑WASM** | `ghidra_11.x_PUBLIC_*.zip`, split: `split -b 90m ghidra_*.zip gh.part.` → commit under `vendor/ghidra/`. I reassemble with `cat gh.part.* > ghidra.zip` |
-| 2 | **Android SDK build-tools 34/35 (full)**, incl. `d8`/`r8`, native `zipalign` | `dl.google.com` blocked | aapt/aapt2/apksigner/zipalign already covered; **d8/r8 missing** (only legacy `dx` 1.16) | `build-tools_r35-linux.zip` (or the individual `d8.jar`, `lib/d8.jar`, `r8.jar`), plus `commandlinetools-linux-*.zip` |
+| 2 | ~~Android SDK build-tools 35, cmdline-tools~~ | — | **RESOLVED**: imported from `main` (`build-tools_r35_linux.zip`, `commandlinetools-linux-*` split parts). Real `aapt2` 2.19, `zipalign`, **`d8` 8.6.2**, **`r8` 9.3.16**, `apksigner`, `dexdump`, `sdkmanager` 22.0 now installed | — |
 | 3 | **Android SDK platform / `android.jar`** | `dl.google.com` blocked | cannot compile Android framework code (`javac` against android.jar) | `platform-35_r0*.zip` |
 | 4 | **Android emulator + system images** | `dl.google.com` blocked **and no `/dev/kvm`** in the sandbox | Runtime/behaviour testing is **impossible here** — uploading files won't fix the missing hypervisor. Use your own PC (Android Studio emulator / real device over USB) | nothing (not useful) |
 | 5 | **Gradle/Maven dependency resolution** | Maven Central + Google Maven blocked | Can't run a normal Gradle/Android build from source in here; plain `javac`/`jar` builds work fine | if you need it: your `~/.gradle/caches` (large) |
@@ -118,8 +119,8 @@ F2/
 source toolchain/env.sh
 apktool d -f -o /tmp/dec yoyo.apk                  # decode (manifest+res+smali+libs)
 jadx yoyo.apk /tmp/src --nores                     # decompile to Java
-zipalign -c 4 yoyo.apk                             # check -> FAILS (APK was not aligned)
-zipalign -f -p 4 yoyo.apk /tmp/aligned.apk         # fix (CRC-verified rewrite)
+zipalign -c 4 yoyo.apk                             # exit 0 (correctly 4-byte aligned)
+zipalign -c -P 16 16384 yoyo.apk                   # exit 1 (not 16 KB-page aligned)
 apksigner sign --ks $TEST_KEYSTORE --ks-pass pass:android \
     --key-pass pass:android --out /tmp/signed.apk /tmp/aligned.apk
 apksigner verify --verbose /tmp/signed.apk         # v1+v2+v3 = true

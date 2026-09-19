@@ -4,12 +4,15 @@
 Usage:
   zipalign [-f] [-v] [-c] [-p] [-P <kb>] <alignment> <in.apk> [out.apk]
 
-  <alignment>  alignment for all entry data, usually 4 (or 16384 for 16 KB pages)
+  <alignment>  alignment for stored (uncompressed) entry data, usually 4,
+               or 16384 / -P 16 for 16 KB page devices
   -p           page-align stored (uncompressed) .so entries
-  -P <kb>      page size in KB used by -p (default 4096 bytes / 4 KB)
+  -P <kb>      page size in KB for .so page alignment (e.g. -P 16 for 16 KB)
   -c           check only
   -f           overwrite output
   -v           verbose
+  --all-entries  stricter mode: also require compressed entries to be aligned
+               (NOT what AOSP does; useful only for diagnostics)
 
 Alignment is achieved by appending a well-formed padding extra field
 (id 0xd935, data = 2-byte alignment + zero fill) to the *local file header*
@@ -74,7 +77,16 @@ def parse(buf):
 
 
 def want_alignment(e, alignment, page_size):
-    if page_size and e['method'] == 0 and e['name'].endswith(b'.so'):
+    """Required alignment for an entry's data offset.
+
+    AOSP only aligns *uncompressed* (stored) entries: compressed data is
+    inflated by the reader, so its on-disk offset is irrelevant.  Shared
+    libraries are additionally page-aligned when they are stored uncompressed.
+    Returns 0 when no alignment is required.
+    """
+    if e['method'] != 0:
+        return 0
+    if page_size and e['name'].endswith(b'.so'):
         return max(page_size, alignment)
     return alignment
 
@@ -105,13 +117,12 @@ def rewrite(buf, entries, alignment, page_size, verbose=False):
         align = want_alignment(e, alignment, page_size)
         # drop unusable (malformed) local extras rather than propagating garbage
         base_extra = lextra if extra_is_wellformed(lextra) else b''
-        added = (-(e['new_off'] + 30 + len(e['name']) + len(base_extra))) % align
-        while 0 < added < 6:
-            added += align
-        if added:
-            extra = base_extra + pad_block(align, added)
-        else:
-            extra = base_extra
+        added = 0
+        if align:
+            added = (-(e['new_off'] + 30 + len(e['name']) + len(base_extra))) % align
+            while 0 < added < 6:
+                added += align
+        extra = base_extra + pad_block(align, added) if added else base_extra
         if verbose and extra is not base_extra:
             print('  pad %-58s +%d (align %d)' % (e['name'].decode('utf-8', 'replace')[:58], added, align))
         out += LOCSIG + struct.pack('<HHHHHIIIHH', lvne, lflags, lmethod, lt, ld,
@@ -170,28 +181,36 @@ def verify_data_integrity(out, entries):
             raise ValueError('CRC mismatch after rewrite for %r' % chk['name'])
     return True
 
-def check(path, alignment, page_size, verbose=False):
+def check(path, alignment, page_size, verbose=False, all_entries=False):
     buf = open(path, 'rb').read()
     entries, _ = parse(buf)
-    bad = 0
+    bad = checked = 0
     for e in entries:
         lho = e['lho']
         lnlen, lelen = struct.unpack_from('<HH', buf, lho + 26)
         off = lho + 30 + lnlen + lelen
-        want = want_alignment(e, alignment, page_size)
+        want = want_alignment(e, alignment, page_size) if all_entries or e['method'] == 0 else 0
+        name = e['name'].decode('utf-8', 'replace')
+        if not want:
+            if verbose:
+                print('  %8d %s (OK - compressed)' % (off, name))
+            continue
+        checked += 1
         if off % want:
             bad += 1
-            if verbose or bad <= 10:
-                print('  BAD  %-58s offset=%d (%%%d=%d)' %
-                      (e['name'].decode('utf-8', 'replace')[:58], off, want, off % want))
-    print('Verification %s: %d of %d entries misaligned (alignment=%d%s)' %
-          ('FAILED' if bad else 'successful', bad, len(entries), alignment,
-           ', page-aligned .so=%d' % page_size if page_size else ''))
+            print('  %8d %s (BAD - %% %d = %d)' % (off, name, want, off % want))
+        elif verbose:
+            print('  %8d %s (OK)' % (off, name))
+    print('Verification %s: %d of %d alignment-checked entries misaligned '
+          '(alignment=%d%s; %d compressed entries skipped)' %
+          ('successful' if not bad else 'FAILED', bad, checked, alignment,
+           ', page-aligned .so=%d' % page_size if page_size else '',
+           len(entries) - checked))
     return bad == 0
 
 
 def main(argv):
-    force = page = chk = verbose = False
+    force = page = chk = verbose = all_entries = False
     page_kb = None
     args = []
     i = 0
@@ -201,6 +220,7 @@ def main(argv):
         elif a == '-v': verbose = True
         elif a == '-p': page = True
         elif a == '-c': chk = True
+        elif a == '--all-entries': all_entries = True
         elif a == '-P':
             i += 1
             page_kb = int(argv[i]); page = True
@@ -214,7 +234,7 @@ def main(argv):
     if page:
         page_size = (page_kb * 1024) if page_kb else (alignment if alignment >= 4096 else 4096)
     if chk:
-        return 0 if check(src, alignment, page_size, verbose) else 1
+        return 0 if check(src, alignment, page_size, verbose, all_entries) else 1
     dst = args[2] if len(args) > 2 else src + '.aligned'
     if os.path.exists(dst) and not force:
         print('Output %s exists (use -f)' % dst); return 2
@@ -226,7 +246,7 @@ def main(argv):
     with open(dst, 'wb') as fh:
         fh.write(out)
     print('Wrote %s (%d -> %d bytes, +%.1f%%)' % (dst, so, len(out), 100.0 * (len(out) - so) / so))
-    return 0 if check(dst, alignment, page_size) else 1
+    return 0 if check(dst, alignment, page_size, verbose, all_entries) else 1
 
 
 if __name__ == '__main__':

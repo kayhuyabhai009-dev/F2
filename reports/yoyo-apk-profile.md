@@ -40,12 +40,17 @@ Permissions (9): `INTERNET`, `ACCESS_NETWORK_STATE`, `VIBRATE`, `WAKE_LOCK`,
 
 ## Notable findings
 
-1. **The APK is not zipaligned** — 1624 of 2476 entries have misaligned data
-   (`zipalign -c 4 yoyo.apk` → FAILED). A store/Gradle release build is normally
-   4-byte aligned; this one looks repacked by a non-standard pipeline.
-   Fix: `zipalign -f -p 4 yoyo.apk yoyo_aligned.apk` (provided implementation,
-   see `toolchain/bin/zipalign`).
-2. **Native libraries are compressed** (`method=8`, legacy `extractNativeLibs`
+1. **Zipalignment: the APK is correctly 4-byte zipaligned** — official
+   `zipalign -c 4 yoyo.apk` → exit 0, "Verification succesful" (316 stored entries
+   aligned; the 2160 deflated entries are exempt, AOSP only aligns uncompressed data).
+   *Correction:* an earlier version of this report claimed the APK was unaligned; that
+   came from a check that (incorrectly) also required compressed entries to be aligned.
+   The bundled `toolchain/bin/zipalign` has since been fixed to follow AOSP semantics,
+   and its output is cross-verified against the official Android binary.
+2. **Not 16 KB-page aligned** — `zipalign -c -P 16 16384 yoyo.apk` → exit 1. Relevant
+   for 16 KB-page kernels (Android 15+ on such devices), which expect stored
+   `lib/*.so` to be 16384-aligned and ideally stored uncompressed.
+3. **Native libraries are compressed** (`method=8`, legacy `extractNativeLibs`
    packaging). Uncompressed `.so` is what 16 KB-page devices prefer; if you want
    page alignment, store them uncompressed and run `zipalign -f -p -P 16 16384 …`.
 3. Native lib is a stripped, full-RELRO, canary+PIC+**NX** AArch64 Cocos2d-JS
@@ -60,7 +65,8 @@ Permissions (9): `INTERNET`, `ACCESS_NETWORK_STATE`, `VIBRATE`, `WAKE_LOCK`,
 source toolchain/env.sh
 apksigner verify --print-certs yoyo.apk
 aapt2 dump badging yoyo.apk
-zipalign -c 4 yoyo.apk                       # FAILS: not aligned
+zipalign -c 4 yoyo.apk                       # exit 0: correctly 4-byte aligned
+zipalign -c -P 16 16384 yoyo.apk             # exit 1: NOT 16 KB-page aligned
 apktool d -f -o yoyo_apktool yoyo.apk        # 91 MB tree, smali + resources
 jadx yoyo.apk yoyo_jadx --nores              # ~1.5k-1.7k .java files
 rabin2 -I yoyo_apktool/lib/arm64-v8a/libcocos2djs.so

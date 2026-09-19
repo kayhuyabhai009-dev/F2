@@ -85,10 +85,20 @@ if [ ! -f "$TOOLS_DIR/apktool/apktool.jar" ]; then
   tar xzf postar-apktool-node-*.tgz -C "$TOOLS_DIR/apktool" --strip-components=2 package/lib
 fi
 # `jadx-mcp` bundles a modern shaded jadx-core; `@mishguru/jadx-node` a jadx CLI
-[ -f "$TOOLS_DIR/jadx/jadx-core-modern.jar" ] || { npm pack jadx-mcp --silent >/dev/null; tar xzf jadx-mcp-*.tgz -C "$TOOLS_DIR/jadx" --strip-components=2 package/jadx-mcp.jar 2>/dev/null || true; }
+if [ ! -f "$TOOLS_DIR/jadx/jadx-core-modern.jar" ]; then
+  npm pack jadx-mcp --silent >/dev/null
+  tar xzf jadx-mcp-*.tgz -C "$TOOLS_DIR/cache" package/jadx-mcp.jar 2>/dev/null || true
+  [ -f "$TOOLS_DIR/cache/package/jadx-mcp.jar" ] && mv -f "$TOOLS_DIR/cache/package/jadx-mcp.jar" "$TOOLS_DIR/jadx/jadx-core-modern.jar"
+  rm -rf "$TOOLS_DIR/cache/package"
+fi
+[ -f "$TOOLS_DIR/jadx/jadx-core-modern.jar" ] && ok "jadx-core jar -> $TOOLS_DIR/jadx/jadx-core-modern.jar" || warn "jadx-core jar missing (import vendor/jadx-*-all.jar to use the official CLI)"
 if [ ! -d "$TOOLS_DIR/jadx/jadx-1.1.0" ]; then
   npm pack @mishguru/jadx-node --silent >/dev/null
-  tar xzf mishguru-jadx-node-*.tgz -C "$TOOLS_DIR/jadx" --strip-components=2 package/resources || true
+  tar xzf mishguru-jadx-node-*.tgz -C "$TOOLS_DIR/cache" package/resources 2>/dev/null || true
+  if [ -d "$TOOLS_DIR/cache/package/resources" ]; then
+    cp -r "$TOOLS_DIR/cache/package/resources/." "$TOOLS_DIR/jadx/" 2>/dev/null || true
+    rm -rf "$TOOLS_DIR/cache/package"
+  fi
 fi
 chmod +x "$TOOLS_DIR/jadx/jadx-1.1.0/bin/"* 2>/dev/null || true
 # dx: legacy class -> dex converter (fallback where d8/r8 are not obtainable)
@@ -99,7 +109,12 @@ fi
 # jadx Java driver (compiled here -> also proves javac works)
 mkdir -p "$TOOLS_DIR/jadx/wrapper"
 cp "$REPO_DIR/toolchain/bin/JadxRunner.java" "$TOOLS_DIR/jadx/wrapper/"
-( cd "$TOOLS_DIR/jadx/wrapper" && "$TOOLS_DIR/jdk17/jre/bin/javac" -nowarn -cp "$TOOLS_DIR/jadx/jadx-core-modern.jar" JadxRunner.java )
+if [ -f "$TOOLS_DIR/jadx/jadx-core-modern.jar" ]; then
+  ( cd "$TOOLS_DIR/jadx/wrapper" && "$TOOLS_DIR/jdk17/jre/bin/javac" -nowarn -cp "$TOOLS_DIR/jadx/jadx-core-modern.jar" JadxRunner.java ) \
+    && ok "JadxRunner compiled (javac works)" || warn "JadxRunner compile failed"
+else
+  warn "skipping JadxRunner (no jadx-core jar)"
+fi
 cp "$REPO_DIR/toolchain/bin/jadx" "$TOOLS_DIR/bin/jadx" && chmod +x "$TOOLS_DIR/bin/jadx"
 ok "apktool $( (cd "$TOOLS_DIR" && java -jar apktool/apktool.jar --version) 2>/dev/null ) | apksigner present | jadx wrapper compiled"
 
@@ -187,7 +202,7 @@ ok "test keystore: $TOOLS_DIR/keys/test.keystore (storepass/keypass = android, a
 
 # -----------------------------------------------------------------------------
 say "10/10 vendor/ artifacts (if any were uploaded)"
-if [ -n "$(find "$REPO_DIR/vendor" -maxdepth 2 -type f \( -iname '*.zip' -o -iname '*.jar' -o -iname '*.xz' -o -iname '*.tar.*' -o -iname '*.part.*' \) 2>/dev/null | head -1)" ]; then
+if [ -n "$(find "$REPO_DIR/vendor" -maxdepth 2 -type f \( -iname '*.zip' -o -iname '*.jar' -o -iname '*.xz' -o -iname '*.tar.*' -o -iname '*.part.*' -o -iname '*.zip.*' -o -iname '*.jar.*' \) 2>/dev/null | head -1)" ]; then
   bash "$REPO_DIR/toolchain/vendor-import.sh" || warn "vendor import reported problems"
 else
   warn "nothing in vendor/ yet — see vendor/README.md for what to upload"

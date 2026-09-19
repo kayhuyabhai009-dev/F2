@@ -100,7 +100,8 @@ install_jar() { # $1 jar, $2 target path
 say "scanning $VENDOR_DIR"
 mapfile -t FILES < <(find "$VENDOR_DIR" -maxdepth 2 -type f \
     \( -iname "*.zip" -o -iname "*.tar.gz" -o -iname "*.tar.xz" -o -iname "*.tgz" \
-       -o -iname "*.jar" -o -iname "*.xz" -o -iname "*.gz" -o -iname "*.part.*" \) \
+       -o -iname "*.jar" -o -iname "*.xz" -o -iname "*.gz" -o -iname "*.part.*" \
+       -o -iname "*.zip.*" -o -iname "*.jar.*" -o -iname "*.tar.*" -o -iname "*.tgz.*" -o -iname "*.xz.*" \) \
     ! -name "README.md" | sort)
 [ ${#FILES[@]} -gt 0 ] || { bad "nothing to import (vendor/ has no archives/jars)"; exit 1; }
 
@@ -124,6 +125,7 @@ for base in $(printf '%s\n' "${!BASES[@]}" | sort); do
   case "$base" in
     *.part.[0-9][0-9][0-9]) continue ;;
     *.part.[a-z][a-z])      continue ;;
+    *.zip.*|*.jar.*|*.tar.*|*.tgz.*|*.xz.*) continue ;;
     *.[0-9][0-9][0-9])      [ -z "${FILESET[$base]:-}" ] && continue ;;
     *.[a-z][a-z])           [ -z "${FILESET[$base]:-}" ] && continue ;;
   esac
@@ -183,15 +185,27 @@ EOF
         bad "ghidra/support/analyzeHeadless not found after extraction"
       fi ;;
     buildtools)
-      vdir="$TOOLS_DIR/build-tools/$(date +%Y%m%d-%H%M%S)"
-      unzip_into "$joined" "$vdir" 1
+      tmp="$TOOLS_DIR/build-tools/.staging.$$"
+      unzip_into "$joined" "$tmp" 1
+      # use the real package revision so `sdkmanager` does not complain about
+      # an "inconsistent location"
+      ver="$(sed -n 's/^Pkg\.Revision=//p' "$tmp/source.properties" 2>/dev/null | head -1)"
+      vdir="$TOOLS_DIR/build-tools/${ver:-$(date +%Y%m%d-%H%M%S)}"
+      rm -rf "$vdir"; mv "$tmp" "$vdir"
       if [ -x "$vdir/aapt2" ] || [ -f "$vdir/aapt2" ]; then
         chmod +x "$vdir"/{aapt,aapt2,zipalign,d8,r8,apksigner,dexdump,aidl,split-select,etc1tool} 2>/dev/null || true
         [ -x "$TOOLS_DIR/bin/zipalign" ] && cp -f "$TOOLS_DIR/bin/zipalign" "$TOOLS_DIR/bin/zipalign-py" 2>/dev/null || true
         ln -sfn "$vdir" "$TOOLS_DIR/build-tools/current"
         ok "build-tools -> $vdir (symlinked as build-tools/current)"
         for b in aapt aapt2 zipalign d8 r8 apksigner dexdump; do
-          [ -e "$vdir/$b" ] && ok "  $b: $("$vdir/$b" --version 2>&1 | head -1 || true)"
+          [ -e "$vdir/$b" ] || continue
+          case "$b" in
+            aapt|aapt2)  v="$("$vdir/$b" version 2>&1 | head -1)" ;;
+            apksigner)   v="$(PATH="$JDK/bin:$PATH" JAVA_HOME="$JDK" "$vdir/$b" --version 2>&1 | head -1)" ;;
+            d8|r8)       v="$(PATH="$JDK/bin:$PATH" JAVA_HOME="$JDK" "$vdir/$b" --version 2>&1 | head -1)" ;;
+            *)           v="$("$vdir/$b" 2>&1 | head -1)" ;;
+          esac
+          ok "  $b: ${v:-present}"
         done
       else
         bad "extraction does not look like Android build-tools"
@@ -201,6 +215,17 @@ EOF
       unzip_into "$joined" "$vdir" 1
       chmod +x "$vdir"/bin/* 2>/dev/null || true
       ln -sfn "$vdir" "$TOOLS_DIR/cmdline-tools/current"
+      # r8 ships in cmdline-tools/lib -> expose it as a command
+      if [ -f "$vdir/lib/r8.jar" ]; then
+        cp -f "$vdir/lib/r8.jar" "$TOOLS_DIR/jadx/r8.jar"
+        cat > "$TOOLS_DIR/bin/r8" <<EOF
+#!/usr/bin/env bash
+# R8 shrinker / optimizer (from cmdline-tools/lib/r8.jar)
+exec "\${JAVA_HOME:-$JDK}/bin/java" -cp "$TOOLS_DIR/jadx/r8.jar" com.android.tools.r8.R8 "\$@"
+EOF
+        chmod +x "$TOOLS_DIR/bin/r8"
+        ok "  r8 wrapper installed (r8 --version)"
+      fi
       ok "cmdline-tools -> $vdir (sdkmanager/avdmanager under bin/)" ;;
     platform)
       vdir="$TOOLS_DIR/android-platform/$(date +%Y%m%d-%H%M%S)"
