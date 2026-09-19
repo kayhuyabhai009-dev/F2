@@ -56,8 +56,13 @@ $R ksgen  mykey                 # apna signing keystore
 ```bash
 bash tools/setup-toolchain.sh              # mitmproxy bhi install ho jata hai
 bash tools/capture.sh ca                   # mitmproxy CA banao (hash + file bata dega)
-bash tools/capture.sh adb-ca               # CA → device ke SYSTEM trust store me (root)
+
+# phone rooted hai:
+bash tools/capture.sh adb-ca               # CA → device ke SYSTEM trust store me
 bash tools/capture.sh adb-proxy            # device ka proxy set karo
+
+# phone non-rooted hai (koi root ki zaroorat nahi, APK bhi same rehta hai):
+bash tools/capture.sh emu                  # emulator + adb root + CA + proxy (10.0.2.2)
 # phir mitmweb chalao → WebSocket frames bhi dikhenge (decoder: -s tools/yono-proto.py)
 ```
 

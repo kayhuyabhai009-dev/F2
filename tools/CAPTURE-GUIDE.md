@@ -5,29 +5,70 @@
 
 ---
 
-## 0. Pehle 2 galatfehmiyan door
+## 0. Pehle 3 galatfehmiyan door
+
+### ❌ "Non-rooted phone + HTTPCanary se ho jayega"
+**TLS traffic readable nahi hoga** — aur wajah app ki "protection" nahi, Android ka trust model hai:
+
+| Fact | Value (verified) |
+|---|---|
+| App `targetSdkVersion` | **35** → Android 7.0+ par **user-installed CA trust nahi hota** |
+| `network_security_config.xml` | sirf `<base-config cleartextTrafficPermitted="true"/>` — **koi `<trust-anchors>` nahi**, `<certificates src="user"/>` **nahi** |
+| Certificate pinning | **0 configured** (sirf bundled OkHttp library ki classes hain, app ne kuch pin nahi kiya) |
+
+HTTPCanary non-rooted par apna CA **user store** me daalta hai. Ye app us store ko dekhta hi nahi.
+Isliye HTTPCanary me `wss://` connection **dikh sakta hai, par andar ka content readable nahi hoga**
+(TLS handshake uske CA se nahi hota) — ya connection hi fail hoga.
+
+> WSS frames dikhna aur unka **readable hona** do alag cheezein hain. App-level
+> encryption alag layer hai (dekho [PROTOCOL.md](PROTOCOL.md)), uske liye `yono-proto.py` hai.
+
+### ✅ Iske 3 asli hal
+
+| Route | Root chahiye? | APK modify? | Kaam karta hai? |
+|---|---|---|---|
+| **A. Emulator (Google APIs image)** | emulator ke andar haan (free) | **nahi** | ✅ best |
+| **B. Apna phone root karo** | haan | **nahi** | ✅ |
+| **C. App aapka hai? vendor se keystore / debug build lo** | nahi | **nahi** | ✅ cleanest |
+
+```bash
+# ── Route A: emulator (non-rooted PHONE ki zaroorat nahi) ──
+bash tools/capture.sh ca        # CA banao
+# emulator chalao (Google APIs image, Play Store wali nahi) → phir:
+bash tools/capture.sh emu       # adb root + CA system store + proxy 10.0.2.2:8080
+mitmdump -s tools/yono-proto.py --listen-port 8080
+adb install yoyo.apk            # bilkul wahi APK — modify nahi, re-sign nahi
+```
 
 ### ❌ "HTTPCanary se capture ho jayega"
-Nahi hoga. Do kaaran:
-
-| Problem | Detail |
-|---|---|
-| **WebSocket support nahi** | Game ka asli play traffic **raw WebSocket** hai (`new WebSocket(ws://host/ws)`, binary frames), HTTP nahi. HTTPCanary HTTP-only tool hai. Decrypted client JS se verified: `NetManager.connect()` → `ws(s)://<server>/ws`, aur har frame `8-byte header + msgpack(JSON)` hota hai (dekho [PROTOCOL.md](PROTOCOL.md)) |
-| **User CA trust nahi** | HTTPS ke liye app ko system CA chahiye (neeche #2) |
-
-**Isliye HTTPCanary ki jagah `mitmproxy` use karenge** (already install ho gaya — v11.0.2). Isme WebSocket frames properly dikhte hain.
+Upar wali wajah se nahi hota (CA trust), tool ki galti nahi.
+Game ka asli play traffic **raw WebSocket** hai (`ws://host/ws`, binary frames) —
+mitmproxy ke **"WebSocket"** tab me alag se dikhta hai, aur `yono-proto.py` addon
+use seedha **JSON** me decode kar deta hai.
 
 ### ❌ "Pehle detection hataana padega"
-Zaroorat nahi. Verified — app me **kuch bhi capture ko block nahi karta**:
+Zaroorat nahi — aur **hatane ko kuch hai bhi nahi**. Verified (decrypted JS + smali, dono se):
 
 | Blocker type | Is app me |
 |---|---|
 | VPN / proxy detection (`tun0`, `ppp0`, `isVpnConnected`, `TRANSPORT_VPN`) | **0** |
 | Root detection (`su` paths, Magisk, RootBeer) | **0** |
-| Certificate pinning | **0 configured** (`CertificatePinner` class sirf bundled OkHttp ke andar hai; app ne koi pin set nahi kiya) |
+| Frida / Xposed / hook detection | **0** |
+| Debugger / ptrace check | **0** |
 | `FLAG_SECURE` / MediaProjection | **0** |
+| Certificate pinning | **0 configured** |
+| Play Integrity / SafetyNet | **0** |
 
-Aur **signature check ka traffic capture se koi rishta nahi** — wo sirf APK re-sign hone pe fire karta hai. Proxy traffic capture device ke network level pe hota hai, APK ko chhoota bhi nahi.
+Sirf **ek** cheez hai — aur wo capture se related nahi: `ProjUtil.checksignture()`
+APK ke **signature** ko ek pinned hash se match karta hai (clone/repack detect karne ke liye).
+Capture device ke network level par hota hai, APK ke andar nahi — isliye APK chhue bina
+ye check kabhi fire hi nahi hota. **Ye check capture ko rok nahi raha; rokne wali
+cheez sirf CA trust hai (upar dekho).**
+
+> Ek APK ko re-sign karke chalane ka matlab hota hai us signature check ko todna —
+> warna app khud "cannot run at this mode" bol ke band ho jaata hai. Agar app aapka
+> hai to uski signing key bhi aapke paas hoti, aur phir kuch todna hi nahi padta —
+> wahi seedha raasta hai (Route C).
 
 ---
 

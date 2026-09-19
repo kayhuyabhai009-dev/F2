@@ -144,6 +144,63 @@ adb-ca)
   echo "     4) reboot — Magisk usko automatically system store me move kar dega"
   ;;
 
+# ─────────────────────────────────────────────────────── emu
+# Non-rooted phone ho ya na ho — emulator + system CA = APK bilkul chhua nahi jaata.
+emu)
+  command -v adb >/dev/null 2>&1 || die "adb nahi mila"
+  [ -f "$CONFDIR/mitmproxy-ca-cert.pem" ] || die "pehle: bash tools/capture.sh ca"
+  HASH=$(openssl x509 -inform PEM -subject_hash_old -in "$CONFDIR/mitmproxy-ca-cert.pem" | head -1)
+  F="/tmp/${HASH}.0"
+  [ -f "$F" ] || cp "$CONFDIR/mitmproxy-ca-cert.pem" "$F"
+
+  say "emulator detect"
+  adb devices | sed -n '2,$p' | grep -q . || {
+    echo "   koi emulator connect nahi hai. Pehle ek AVD chalao:"
+    echo "     AVD banao  : Android Studio -> Device Manager -> Create Device"
+    echo "                  System image me 'Google APIs' chuno"
+    echo "                  (Play Store wali image root nahi hoti)"
+    echo "     ya CLI se : sdkmanager 'system-images;android-33;google_apis;x86_64'"
+    echo "                 avdmanager create avd -n yono -k 'system-images;android-33;google_apis;x86_64'"
+    echo "                 emulator -avd yono"
+    exit 1
+  }
+
+  say "adb root (Google APIs image me chalta hai, Play Store image me nahi)"
+  adb root >/dev/null 2>&1 || true
+  sleep 2
+  adb wait-for-device
+  adb remount >/dev/null 2>&1 || warn "remount fail — 'adb root' chala hua hai? (Play Store image root nahi deta)"
+
+  say "CA → system trust store"
+  adb push "$F" "/sdcard/${HASH}.0" >/dev/null || die "push fail"
+  (( adb shell "cat /sdcard/${HASH}.0 > /system/etc/security/cacerts/${HASH}.0" && \
+     adb shell "chmod 644 /system/etc/security/cacerts/${HASH}.0" ) >/dev/null 2>&1 ) \
+    || die "system store me likhne me fail — 'adb root' + 'adb remount' chalao"
+  adb shell "ls -l /system/etc/security/cacerts/${HASH}.0"
+  ok "CA install ho gayi"
+
+  say "proxy = 10.0.2.2:$PORT  (emulator → host machine)"
+  adb shell settings put global http_proxy "10.0.2.2:$PORT"
+  ok "proxy set"
+
+  echo
+  echo "   ── ab mitm + decoder chalao ──"
+  echo "     source /home/user/tools/env.sh"
+  echo "     mitmdump -s tools/yono-proto.py --listen-port $PORT"
+  echo
+  echo "   ── phir app install karke chalao ──"
+  echo "     adb install yoyo.apk        # APK waisa hi, re-sign nahi, modify nahi"
+  echo
+  echo "   Band karne ke liye: bash tools/capture.sh emu-clear"
+  ;;
+
+# ─────────────────────────────────────────────────────── emu-clear
+emu-clear)
+  command -v adb >/dev/null 2>&1 || die "adb nahi mila"
+  adb shell settings put global http_proxy :0 >/dev/null 2>&1
+  ok "emulator ka proxy hata diya"
+  ;;
+
 # ─────────────────────────────────────────────────────── adb-clear
 adb-clear)
   command -v adb >/dev/null 2>&1 || die "adb nahi mila"
