@@ -132,7 +132,7 @@ dex)
   mkdir -p "$OUT"
   CP=$(ls "$RE_TOOLS"/jadx/lib/*.jar | tr '\n' ':')
   for d in "$T"/*.dex; do
-    "$JAVA_HOME/bin/java" -cp "$CP" com.android.tools.smali.baksmali.Main d "$d" -o "$OUT/$(basename "${d%.dex}")" 2>&1 | tail -2
+    "$JAVA_HOME/bin/java" -cp "$CP" org.jf.baksmali.Main d "$d" -o "$OUT/$(basename "${d%.dex}")" 2>&1 | tail -2
   done
   rm -rf "$T"
   ok "$(find "$OUT" -name '*.smali' | wc -l) smali files"

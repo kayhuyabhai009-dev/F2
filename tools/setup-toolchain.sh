@@ -115,7 +115,7 @@ case "$t" in
   apksigner) exec "\$JAVA_HOME/bin/java" -jar "$TOOLS/android/build-tools/lib/apksigner.jar" "\$@" ;;
   baksmali|smali)
              CP=\$(ls "$TOOLS"/jadx/lib/*.jar | tr '\n' ':')
-             [ "$t" = baksmali ] && M=com.android.tools.smali.baksmali.Main || M=com.android.tools.smali.smali.Main
+             [ "$t" = baksmali ] && M=org.jf.baksmali.Main || M=org.jf.smali.Main
              exec "\$JAVA_HOME/bin/java" -cp "\$CP" \$M "\$@" ;;
   aapt|aapt2|zipalign|d8|dexdump)
              exec "$TOOLS/android/build-tools/$t" "\$@" ;;
