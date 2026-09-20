@@ -437,7 +437,14 @@ ARM64 disassembly of the exported `jsb_set_xxtea_key` function shows it accepts 
 
 - Resource table contains Firebase project identifiers and a Google API key. This key should be restricted by API/package/SHA-1 as appropriate; never treat a mobile API key as a secret.
 - The app contains channel/deep-link identifiers and the static clone-detection signature string.
-- No private key file or obvious password assignment was confirmed by this static pass. A `.pem` asset exists and must be reviewed separately before release; its exact role was not inferred from filename alone.
+- No private key file or obvious password assignment was confirmed by this static pass. The `.pem` asset is a 133-certificate Mozilla CA root bundle imported by Cocos as an asset named `cert`; 18 of those roots were expired as of 2026-09-20. Static analysis did not prove whether the bundle is actively selected at runtime, but it should not silently replace the platform trust store without a documented reason.
+
+### Phase-3 asset graph and trust-bundle findings
+
+- The APK contains **520 duplicate payload entries across 9 SHA-256 groups**. The largest group is 253 identical 63-byte child-manifest metadata files. Other reuse groups include 211 identical 69-byte metadata files, repeated atlas files, and repeated AndroidX version markers. This is packaging deduplication/reuse, not evidence of hidden payloads.
+- The PEM asset `assets/res/raw-assets/85/85de80f7-a503-4c2e-b58d-942d234bc251.pem` contains 133 parseable X.509 CA certificates and is linked to `assets/res/import/85/85de80f7-a503-4c2e-b58d-942d234bc251.json`, whose Cocos asset name is `cert`. Eighteen certificates expired before the analysis date, including DST Root CA X3 and several 2021–2025 roots. The complete subject, issuer, serial, validity, and SHA-256 table is `ca_bundle_certificates.tsv`.
+- All 586 raw assets have importer coverage: 585 use same-UUID Cocos importer records and the nested `default-font.ttf` uses its containing UUID importer record (`cc.TTFFont`). The PEM importer is explicitly named `cert` with native extension `.pem`. Linkage rows, match type, and importer prefixes are in `raw_asset_import_links.tsv`.
+- Three `.bin` assets were treated as opaque little-endian numeric data rather than executed; seven `.plist` files parse as Cocos particle-effect dictionaries; 39 atlases parse as Spine/texture-atlas text; and 55 MP3 headers were summarized without decoding audio. These files are documented in `raw_binary_and_media_metadata.tsv` and `mp3_frame_summary.tsv`.
 
 ## 13. Findings and remediation priorities
 
@@ -487,6 +494,12 @@ ARM64 disassembly of the exported `jsb_set_xxtea_key` function shows it accepts 
 | jsc_entropy.tsv | entropy/header metrics for all compiled JavaScript bytecode |
 | native_script_functions.txt and native_script_xrefs.tsv | ARM64 script-entry disassembly and direct-call scan |
 | phase2_summary.json | phase-2 aggregate measurements |
+| ca_bundle_certificates.tsv | all 133 embedded CA certificates and validity fields |
+| duplicate_payload_groups.tsv | duplicate payload SHA-256 groups |
+| raw_asset_import_links.tsv | Cocos raw-asset/importer relationships |
+| raw_binary_and_media_metadata.tsv | BIN, PLIST, and atlas parser metadata |
+| mp3_frame_summary.tsv | MP3 frame/header summaries |
+| phase3_summary.json | phase-3 aggregate measurements |
 | arm64-v8a_readelf_*.txt and strings | native ARM64 inspection |
 | armeabi-v7a_readelf_*.txt and strings | native ARM32 inspection |
 | decompiled_index.tsv | all 2,175 decompiled class files and line counts |

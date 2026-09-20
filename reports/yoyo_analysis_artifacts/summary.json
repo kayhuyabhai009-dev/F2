@@ -104,5 +104,21 @@
       7.9036,
       7.9999
     ]
+  },
+  "phase3": {
+    "duplicate_sha_groups": 9,
+    "duplicate_entries": 520,
+    "ca_bundle_certificates": 133,
+    "ca_bundle_expired_as_of_2026_09_20": 18,
+    "raw_asset_import_links": 586,
+    "opaque_bin_files": 3,
+    "plist_files": 7,
+    "atlas_files": 39,
+    "mp3_files": 55,
+    "raw_asset_count": 586,
+    "raw_assets_with_importer": 586,
+    "raw_assets_same_uuid_importer": 585,
+    "raw_assets_nested_uuid_importer": 1,
+    "raw_assets_without_importer": 0
   }
 }
