@@ -1,0 +1,66 @@
+{
+  "status": "no_static_key_recovered",
+  "key_literal_found": false,
+  "caveat": "absence of a literal/direct call is not proof that a runtime-injected or indirect key cannot exist",
+  "apk_entries": 2476,
+  "marker_totals": {
+    "xxtea": 6,
+    "jsb_set_xxtea_key": 2,
+    "xxtea_decrypt": 2,
+    "xxtea_encrypt": 2
+  },
+  "non_native_marker_entries": {
+    "xxtea": [],
+    "jsb_set_xxtea_key": [],
+    "xxtea_decrypt": [],
+    "xxtea_encrypt": []
+  },
+  "native_direct_call_scan": [
+    [
+      "arm64",
+      "xxtea_decrypt",
+      "0x70b764",
+      0,
+      ""
+    ],
+    [
+      "arm64",
+      "_Z17jsb_set_xxtea_keyRKNSt6__ndk112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+      "0x6e74ec",
+      0,
+      ""
+    ],
+    [
+      "arm64",
+      "xxtea_encrypt",
+      "0x70b464",
+      0,
+      ""
+    ],
+    [
+      "arm32",
+      "xxtea_decrypt",
+      "0x59351c",
+      0,
+      ""
+    ],
+    [
+      "arm32",
+      "_Z17jsb_set_xxtea_keyRKNSt6__ndk112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+      "0x56d91c",
+      0,
+      ""
+    ],
+    [
+      "arm32",
+      "xxtea_encrypt",
+      "0x593254",
+      0,
+      ""
+    ]
+  ],
+  "jsc_count": 9,
+  "jsc_entropy_min": 7.9036,
+  "jsc_entropy_max": 7.9999,
+  "key_global_arm64_bss_va": "0x156f458"
+}

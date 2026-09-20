@@ -1,0 +1,8 @@
+evidence	observation
+APK-wide exact-marker scan	xxtea marker bytes occur only in the two native Cocos libraries; no APK JS, JSON, manifest, DEX, XML, or other asset contains the marker
+Native exported symbols	both ABIs export jsb_set_xxtea_key, xxtea_encrypt, and xxtea_decrypt; exported API presence alone does not establish use
+ARM64 direct-call scan	no direct BL/BLX target to jsb_set_xxtea_key, xxtea_encrypt, or xxtea_decrypt in .text
+ARM32 direct-call scan	no direct BL/BLX target to jsb_set_xxtea_key, xxtea_encrypt, or xxtea_decrypt in .text
+Key storage	the ARM64 setter writes to a zero-initialized .bss C++ string object at VA 0x156f458; the input bytes are supplied by its caller and are not embedded in the setter
+JSC inventory	all 9 JSC blobs are high-entropy/compiled-looking and contain no readable source header; this cannot distinguish V8 bytecode from XXTEA-encrypted bytecode
+Conclusion	no configured XXTEA/JSC key was recovered statically; a runtime-injected or indirectly registered key remains possible but is not evidenced by the APK

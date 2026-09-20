@@ -12,7 +12,7 @@
 - The application explicitly enables cleartext traffic (`usesCleartextTraffic=true`) and its network-security XML permits cleartext globally.
 - The embedded Cocos hot-update descriptors point to many `http://ifs.yonorummy.in/...` URLs, so content can be fetched over unauthenticated HTTP. This is an active update/content trust boundary, not just a dormant string.
 - `assets/main.js` implements hot-update search-path replacement and temp-directory promotion. A server-side update can therefore change the game’s downloaded content without changing the installed APK signature.
-- The APK includes encrypted/compiled Cocos JavaScript bytecode (`.jsc`) plus native Cocos code. The script engine exports `jsb_set_xxtea_key` and `jsb_run_script`; no plaintext source was recovered from the `.jsc` files in this offline pass.
+- The APK includes opaque/compiled Cocos JavaScript bytecode (`.jsc`) plus native Cocos code. The script engine exports `jsb_set_xxtea_key` and `jsb_run_script`; no plaintext source was recovered from the `.jsc` files in this offline pass, and a configured XXTEA key was not found.
 - The Android Java bridge exposes device identifiers, GSF ID, clipboard, image selection/camera flow, arbitrary URL opening, sharing, Firebase token/topic operations, and JavaScript callback execution. Those are plausible game features, but they widen the impact of compromised remote content.
 - `allowBackup=true`, `requestLegacyExternalStorage=true`, and a provider that exposes external-cache and external-path roots deserve hardening review.
 - A Firebase API key and project identifiers are embedded. Firebase API keys are normally client identifiers rather than standalone secrets, but backend rules and quotas must be verified.
@@ -256,15 +256,15 @@ This is standard-ish Cocos hot-update infrastructure but materially changes trus
 
 | Path | Bytes | Observation |
 |---|---|---|
-| assets/src/assets/framework/script/3rdparty/md5.min.jsc | 1688 | encrypted/compiled-looking bytes; no readable source strings recovered |
-| assets/src/assets/framework/script/3rdparty/sha512.min.jsc | 6528 | encrypted/compiled-looking bytes; no readable source strings recovered |
-| assets/src/assets/framework/script/qrcode/qrcode.jsc | 4040 | encrypted/compiled-looking bytes; no readable source strings recovered |
-| assets/src/assets/libs/async.min.jsc | 8076 | encrypted/compiled-looking bytes; no readable source strings recovered |
-| assets/src/assets/libs/runtime.jsc | 2528 | encrypted/compiled-looking bytes; no readable source strings recovered |
-| assets/src/cocos2d-jsb.jsc | 395868 | encrypted/compiled-looking bytes; no readable source strings recovered |
-| assets/src/physics.jsc | 52056 | encrypted/compiled-looking bytes; no readable source strings recovered |
-| assets/src/project.jsc | 674172 | encrypted/compiled-looking bytes; no readable source strings recovered |
-| assets/src/settings.jsc | 2395304 | encrypted/compiled-looking bytes; no readable source strings recovered |
+| assets/src/assets/framework/script/3rdparty/md5.min.jsc | 1688 | opaque/compiled-looking bytes; no readable source strings recovered |
+| assets/src/assets/framework/script/3rdparty/sha512.min.jsc | 6528 | opaque/compiled-looking bytes; no readable source strings recovered |
+| assets/src/assets/framework/script/qrcode/qrcode.jsc | 4040 | opaque/compiled-looking bytes; no readable source strings recovered |
+| assets/src/assets/libs/async.min.jsc | 8076 | opaque/compiled-looking bytes; no readable source strings recovered |
+| assets/src/assets/libs/runtime.jsc | 2528 | opaque/compiled-looking bytes; no readable source strings recovered |
+| assets/src/cocos2d-jsb.jsc | 395868 | opaque/compiled-looking bytes; no readable source strings recovered |
+| assets/src/physics.jsc | 52056 | opaque/compiled-looking bytes; no readable source strings recovered |
+| assets/src/project.jsc | 674172 | opaque/compiled-looking bytes; no readable source strings recovered |
+| assets/src/settings.jsc | 2395304 | opaque/compiled-looking bytes; no readable source strings recovered |
 
 The `.jsc` files have high-entropy-looking prefixes and lack normal JS source text. The native library exports `jsb_set_xxtea_key`, which is consistent with Cocos script encryption/bytecode support, but the exact encryption mode/key and runtime reachability require dynamic/native disassembly confirmation.
 
@@ -422,7 +422,15 @@ The clone-checking value recovered from `ProjUtil.checksignture` is `3jMaDJlNnNJ
 
 All nine `.jsc` files have high byte entropy: approximately 7.90–8.00 bits/byte, with no normal JavaScript source headers. The large application bytecode files are `settings.jsc` (2,395,304 bytes), `project.jsc` (674,172 bytes), and `cocos2d-jsb.jsc` (395,868 bytes). The complete measurements are in `jsc_entropy.tsv`.
 
-ARM64 disassembly of the exported `jsb_set_xxtea_key` function shows it accepts a C++ string-like object, extracts its pointer/length, and calls an internal helper; `jsb_run_script` and `jsb_run_script_module` similarly pass data into internal script-engine helpers. No direct ARM64 `BL` instruction targeting those three exported entry points was found in the scanned `.text` range, so they may be invoked through dynamic registration/exports or by another runtime path. This is not proof that encryption is inactive. The disassembly is preserved in `native_script_functions.txt`, and the scanned direct-call results are in `native_script_xrefs.tsv`.
+ARM64 disassembly of the exported `jsb_set_xxtea_key` function shows it accepts a C++ string-like object, extracts its pointer/length, and calls an internal string-assignment helper; `jsb_run_script` and `jsb_run_script_module` similarly pass data into internal script-engine helpers. Direct BL/BLX scans of both ARM64 and ARM32 `.text` found no call targeting `jsb_set_xxtea_key`, `xxtea_encrypt`, or `xxtea_decrypt`. The complete key investigation is in `jsc_key_analysis.json`, `jsc_key_evidence.tsv`, `jsc_key_marker_scan.tsv`, and `jsc_key_native_call_scan.tsv`.
+
+### JSC/XXTEA key investigation
+
+- **No JSC encryption key was recovered from the APK.** This is not a guessed key and no candidate such as the package name, brand, domain, or certificate identity is being presented as the key.
+- An APK-wide marker scan found `xxtea`, `jsb_set_xxtea_key`, `xxtea_encrypt`, and `xxtea_decrypt` only in the two native Cocos libraries. No JS, JSON, manifest, XML, DEX, media, or other asset contains an XXTEA marker or visible key assignment.
+- Both ARM64 and ARM32 libraries export generic XXTEA functions, but static direct-call scans found zero BL/BLX callers to the setter, encryptor, or decryptor in either library. The setter’s ARM64 destination is a zero-initialized `.bss` C++ string object at `0x156f458`; the value would have to arrive from a caller at runtime rather than being stored in the setter.
+- The nine `.jsc` blobs remain opaque high-entropy compiled-looking data. High entropy alone does **not** distinguish V8 bytecode from XXTEA-encrypted bytecode, so the correct conclusion is “compiled/opaque; encryption mode and key unconfirmed,” not “the key is [some guessed string].”
+- If a runtime or an external module supplies a key indirectly, static APK evidence cannot recover it here. Confirming that case requires an authorized isolated runtime hook at the setter/decryption boundary or the original Cocos build configuration; neither was performed in this offline pass.
 
 ## 12. Structured asset and media analysis
 
@@ -466,7 +474,7 @@ ARM64 disassembly of the exported `jsb_set_xxtea_key` function shows it accepts 
 | P1 | Clipboard and device/GSF IDs exposed to JS | Can create privacy and regulatory exposure. | Minimize collection; obtain informed consent; avoid GSF/Android ID unless essential; document retention and transmission. |
 | P2 | Hardcoded Firebase API identifiers | Common in Firebase apps but should be restricted and monitored. | Restrict key by package/cert/API; validate Firestore/Storage/FCM rules; rotate if abuse is detected. |
 | P2 | Custom signature/clone checks | Can break repackaging/testing and may be bypassable. | Treat as anti-cloning telemetry only; do not rely on it for authorization or payment security. |
-| P2 | Encrypted JSC prevents source audit | Important game logic is hidden from straightforward source review. | Keep reproducible source/build artifacts privately; document encryption key handling; review native key setup and update verification. |
+| P2 | Opaque/compiled JSC prevents source audit | Important game logic is hidden from straightforward source review; the APK does not establish a configured XXTEA key. | Keep reproducible source/build artifacts privately; document bytecode/encryption configuration; review native key setup and update verification. |
 
 ## 14. Limitations and next steps
 
@@ -513,6 +521,10 @@ ARM64 disassembly of the exported `jsb_set_xxtea_key` function shows it accepts 
 | uploaded_tool_archive_parts.tsv | split command-line-tools part sizes and hashes |
 | phase4_tool_archive_summary.json | phase-4 archive counts and integrity summary |
 | aapt2_phase4_badging.txt and aapt2_phase4_version.txt | reproducible phase-4 native aapt2 validation |
+| jsc_key_analysis.json | JSC/XXTEA key-status aggregate and caveat |
+| jsc_key_evidence.tsv | evidence-backed key investigation conclusions |
+| jsc_key_marker_scan.tsv and jsc_key_native_call_scan.tsv | APK marker and both-ABI direct-call scans |
+| jsc_key_jsc_inventory.tsv | per-JSC entropy/header inventory |
 | arm64-v8a_readelf_*.txt and strings | native ARM64 inspection |
 | armeabi-v7a_readelf_*.txt and strings | native ARM32 inspection |
 | decompiled_index.tsv | all 2,175 decompiled class files and line counts |

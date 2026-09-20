@@ -1,0 +1,9 @@
+apk_entry	marker	count
+lib/arm64-v8a/libcocos2djs.so	xxtea	3
+lib/arm64-v8a/libcocos2djs.so	jsb_set_xxtea_key	1
+lib/arm64-v8a/libcocos2djs.so	xxtea_decrypt	1
+lib/arm64-v8a/libcocos2djs.so	xxtea_encrypt	1
+lib/armeabi-v7a/libcocos2djs.so	xxtea	3
+lib/armeabi-v7a/libcocos2djs.so	jsb_set_xxtea_key	1
+lib/armeabi-v7a/libcocos2djs.so	xxtea_decrypt	1
+lib/armeabi-v7a/libcocos2djs.so	xxtea_encrypt	1

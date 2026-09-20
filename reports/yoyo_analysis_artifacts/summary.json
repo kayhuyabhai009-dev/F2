@@ -129,5 +129,17 @@
     "nested_class_entries": 89499,
     "commandline_split_parts": 5,
     "aapt2_phase4_badging_match": true
+  },
+  "phase5": {
+    "jsc_key_status": "no_static_key_recovered",
+    "key_literal_found": false,
+    "xxtea_marker_total_occurrences": 6,
+    "native_abis_scanned": 2,
+    "direct_calls_to_setter_encrypt_decrypt": 0,
+    "jsc_files_scanned": 9,
+    "jsc_entropy_range_bits_per_byte": [
+      7.9036,
+      7.9999
+    ]
   }
 }

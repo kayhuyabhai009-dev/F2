@@ -1,0 +1,10 @@
+path	bytes	sha256	first16_hex	shannon_entropy	printable_ratio	source_header_observation
+assets/src/assets/framework/script/3rdparty/md5.min.jsc	1688	32be34078e7e94da315c649fa25e0b897f7faea4524c0366fb910ca5633c0805	5ca3cdba30302a07a9005e67452cd42b	7.9036	0.372	no-readable-source-header
+assets/src/assets/framework/script/3rdparty/sha512.min.jsc	6528	c271dcac6e21278870acc1f4500a59388fd249804c4863e3ff30020399b8340c	6e5c9430ba8646078bc56e7963f62c09	7.97	0.3788	no-readable-source-header
+assets/src/assets/framework/script/qrcode/qrcode.jsc	4040	eba1db94b6f644c751d6c5a0d7dd0a416bcf182c5009e09c7e992fec99513ab3	59cff9eb5debb4ca7d3188a6d67ddd05	7.9468	0.3777	no-readable-source-header
+assets/src/assets/libs/async.min.jsc	8076	711a2722a044264c4b858b0a6781a290db1e4249e48abaf4ab00b45d87a4ef58	d453230f76461ee41cd80bf79b68d076	7.9756	0.386	no-readable-source-header
+assets/src/assets/libs/runtime.jsc	2528	05fc27c31951061f9c480d798bac4afea1aedde583051b5497d1f85f700c6d63	e21e314063b8d922b02ca4c02023237f	7.921	0.3762	no-readable-source-header
+assets/src/cocos2d-jsb.jsc	395868	15d8fa4754e05b5a0237a74267324a2d2820c354559bc85927672c535a6a90de	4cd58ca0054c632c578ee9d81ebe49f7	7.9996	0.3834	no-readable-source-header
+assets/src/physics.jsc	52056	1357db1785bab24c49724aae246cb1288cb22ab8fe4ca866b4cc66650ecb4894	c1e889a5844d6e260f5a37f23615028e	7.9964	0.3841	no-readable-source-header
+assets/src/project.jsc	674172	3cc575a504d96e5f4e728ba8647194aa8a366c8bb1806d02f23d2a8b386147f0	d4c3b8445dff02fb402e1b0cd510d054	7.9997	0.3827	no-readable-source-header
+assets/src/settings.jsc	2395304	72174a33bf3cc18c19724cb4db24c219316ba1eeb37fb6f0fd3bd6b3facaac4c	c87ae9fc5c1a1ce076d15ccc96a25438	7.9999	0.383	no-readable-source-header
