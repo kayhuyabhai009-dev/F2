@@ -446,6 +446,14 @@ ARM64 disassembly of the exported `jsb_set_xxtea_key` function shows it accepts 
 - All 586 raw assets have importer coverage: 585 use same-UUID Cocos importer records and the nested `default-font.ttf` uses its containing UUID importer record (`cc.TTFFont`). The PEM importer is explicitly named `cert` with native extension `.pem`. Linkage rows, match type, and importer prefixes are in `raw_asset_import_links.tsv`.
 - Three `.bin` assets were treated as opaque little-endian numeric data rather than executed; seven `.plist` files parse as Cocos particle-effect dictionaries; 39 atlases parse as Spine/texture-atlas text; and 55 MP3 headers were summarized without decoding audio. These files are documented in `raw_binary_and_media_metadata.tsv` and `mp3_frame_summary.tsv`.
 
+### Phase-4 uploaded tool/archive audit
+
+- The four logical uploaded archives were audited entry-by-entry: `apktool_3.0.3.jar` (1,141 entries), `build-tools_r35_linux.zip` (168 entries), `platform-35_r02.zip` (1 entry), and the reassembled five-part Android command-line-tools ZIP (141 entries). Every outer ZIP passed `zipfile.testzip()` with no CRC errors.
+- The command-line-tools upload consists of five repository parts. Their concatenation is 181,833,628 bytes with SHA-256 `4e4c464f145a7512b57d088ac6c278c03c9eea610886b35a5e0804e74eedf583`; individual part sizes and hashes are in `uploaded_tool_archive_parts.tsv`.
+- The outer archives contain 133 valid nested JAR/ZIP packages. Their complete nested inventory contains 95,725 entries, including 89,499 Java `.class` entries. Every nested entry has a SHA-256, size, CRC, compression, timestamp, and parent archive path in `uploaded_nested_archive_inventory.tsv`.
+- The native `aapt2` from the uploaded Build Tools archive executed successfully (`Android Asset Packaging Tool 2.19-11948202`). Its phase-4 badging output exactly matched the earlier `aapt2_badging.txt`, confirming package `com.tppart.games.yo`, version `2.3.0`, compile/target SDK 35, and the previously catalogued permissions.
+- The uploaded `apktool_3.0.3.jar` and Java-dependent `apksigner` wrapper were inventoried but not launched because no JRE is available in this sandbox. This is a tooling limitation, not an APK finding; the APK’s v1/v2 signing structures were already parsed with offline Python evidence.
+
 ## 13. Findings and remediation priorities
 
 | Priority | Finding | Why it matters | Recommended action |
@@ -500,6 +508,11 @@ ARM64 disassembly of the exported `jsb_set_xxtea_key` function shows it accepts 
 | raw_binary_and_media_metadata.tsv | BIN, PLIST, and atlas parser metadata |
 | mp3_frame_summary.tsv | MP3 frame/header summaries |
 | phase3_summary.json | phase-3 aggregate measurements |
+| uploaded_tool_archive_inventory.tsv | every entry in four uploaded logical tool archives |
+| uploaded_nested_archive_inventory.tsv | every entry in nested JAR/ZIP packages from those archives |
+| uploaded_tool_archive_parts.tsv | split command-line-tools part sizes and hashes |
+| phase4_tool_archive_summary.json | phase-4 archive counts and integrity summary |
+| aapt2_phase4_badging.txt and aapt2_phase4_version.txt | reproducible phase-4 native aapt2 validation |
 | arm64-v8a_readelf_*.txt and strings | native ARM64 inspection |
 | armeabi-v7a_readelf_*.txt and strings | native ARM32 inspection |
 | decompiled_index.tsv | all 2,175 decompiled class files and line counts |

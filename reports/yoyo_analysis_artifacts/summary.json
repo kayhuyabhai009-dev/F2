@@ -120,5 +120,14 @@
     "raw_assets_same_uuid_importer": 585,
     "raw_assets_nested_uuid_importer": 1,
     "raw_assets_without_importer": 0
+  },
+  "phase4": {
+    "logical_uploaded_archives": 4,
+    "outer_archive_entries": 1451,
+    "nested_archives": 133,
+    "nested_archive_entries": 95725,
+    "nested_class_entries": 89499,
+    "commandline_split_parts": 5,
+    "aapt2_phase4_badging_match": true
   }
 }
