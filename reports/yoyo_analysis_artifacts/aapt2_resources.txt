@@ -1,0 +1,1797 @@
+Binary APK
+Package name=com.tppart.games.yo id=7f
+  type attr id=01 entryCount=27
+    resource 0x7f010000 attr/alpha
+      () (attr) type=float
+    resource 0x7f010001 attr/buttonSize
+      () (attr) type=reference|enum size=3
+        standard(0x7f05004b)=0x00000000
+        wide(0x7f05005a)=0x00000001
+        icon_only(0x7f05003c)=0x00000002
+    resource 0x7f010002 attr/circleCrop
+      () (attr) type=boolean
+    resource 0x7f010003 attr/colorScheme
+      () (attr) type=reference|enum size=3
+        dark(0x7f050033)=0x00000000
+        light(0x7f050040)=0x00000001
+        auto(0x7f05002a)=0x00000002
+    resource 0x7f010004 attr/coordinatorLayoutStyle
+      () (attr) type=reference
+    resource 0x7f010005 attr/font
+      () (attr) type=reference
+    resource 0x7f010006 attr/fontProviderAuthority
+      () (attr) type=string
+    resource 0x7f010007 attr/fontProviderCerts
+      () (attr) type=reference
+    resource 0x7f010008 attr/fontProviderFetchStrategy
+      () (attr) type=enum size=2
+        blocking(0x7f05002b)=0x00000000
+        async(0x7f050029)=0x00000001
+    resource 0x7f010009 attr/fontProviderFetchTimeout
+      () (attr) type=integer|enum size=1
+        forever(0x7f050039)=0xffffffff
+    resource 0x7f01000a attr/fontProviderPackage
+      () (attr) type=string
+    resource 0x7f01000b attr/fontProviderQuery
+      () (attr) type=string
+    resource 0x7f01000c attr/fontStyle
+      () (attr) type=enum size=2
+        normal(0x7f050044)=0x00000000
+        italic(0x7f05003e)=0x00000001
+    resource 0x7f01000d attr/fontVariationSettings
+      () (attr) type=string
+    resource 0x7f01000e attr/fontWeight
+      () (attr) type=integer
+    resource 0x7f01000f attr/imageAspectRatio
+      () (attr) type=float
+    resource 0x7f010010 attr/imageAspectRatioAdjust
+      () (attr) type=enum size=3
+        none(0x7f050043)=0x00000000
+        adjust_width(0x7f050027)=0x00000001
+        adjust_height(0x7f050026)=0x00000002
+    resource 0x7f010011 attr/keylines
+      () (attr) type=reference
+    resource 0x7f010012 attr/layout_anchor
+      () (attr) type=reference
+    resource 0x7f010013 attr/layout_anchorGravity
+      () (attr) type=flags size=14
+        top(0x7f050059)=0x00000030
+        bottom(0x7f05002c)=0x00000050
+        left(0x7f05003f)=0x00000003
+        right(0x7f050048)=0x00000005
+        center_vertical(0x7f05002f)=0x00000010
+        fill_vertical(0x7f050038)=0x00000070
+        center_horizontal(0x7f05002e)=0x00000001
+        fill_horizontal(0x7f050037)=0x00000007
+        center(0x7f05002d)=0x00000011
+        fill(0x7f050036)=0x00000077
+        clip_vertical(0x7f050032)=0x00000080
+        clip_horizontal(0x7f050031)=0x00000008
+        start(0x7f05004c)=0x00800003
+        end(0x7f050035)=0x00800005
+    resource 0x7f010014 attr/layout_behavior
+      () (attr) type=string
+    resource 0x7f010015 attr/layout_dodgeInsetEdges
+      () (attr) type=flags size=8
+        none(0x7f050043)=0x00000000
+        top(0x7f050059)=0x00000030
+        bottom(0x7f05002c)=0x00000050
+        left(0x7f05003f)=0x00000003
+        right(0x7f050048)=0x00000005
+        start(0x7f05004c)=0x00800003
+        end(0x7f050035)=0x00800005
+        all(0x7f050028)=0x00000077
+    resource 0x7f010016 attr/layout_insetEdge
+      () (attr) type=enum size=7
+        none(0x7f050043)=0x00000000
+        top(0x7f050059)=0x00000030
+        bottom(0x7f05002c)=0x00000050
+        left(0x7f05003f)=0x00000003
+        right(0x7f050048)=0x00000005
+        start(0x7f05004c)=0x00800003
+        end(0x7f050035)=0x00800005
+    resource 0x7f010017 attr/layout_keyline
+      () (attr) type=integer
+    resource 0x7f010018 attr/scopeUris
+      () (attr) type=reference|string
+    resource 0x7f010019 attr/statusBarBackground
+      () (attr) type=reference|color
+    resource 0x7f01001a attr/ttcIndex
+      () (attr) type=integer
+  type color id=02 entryCount=5
+    resource 0x7f02000b color/notification_action_color_filter
+      () @color/secondary_text_default_material_light
+    resource 0x7f02000c color/notification_icon_bg_color
+      () #ff9e9e9e
+    resource 0x7f02000d color/ripple_material_light
+      () #1f000000
+    resource 0x7f02000e color/secondary_text_default_material_light
+      () #8a000000
+    resource 0x7f020010 color/splash_slogan_bg
+      () #ff000000
+  type dimen id=03 entryCount=22
+    resource 0x7f030000 dimen/compat_button_inset_horizontal_material
+      () 4.000000dp
+    resource 0x7f030001 dimen/compat_button_inset_vertical_material
+      () 6.000000dp
+    resource 0x7f030002 dimen/compat_button_padding_horizontal_material
+      () 8.000000dp
+    resource 0x7f030003 dimen/compat_button_padding_vertical_material
+      () 4.000000dp
+    resource 0x7f030004 dimen/compat_control_corner_material
+      () 2.000000dp
+    resource 0x7f030005 dimen/compat_notification_large_icon_max_height
+      () 320.000000dp
+    resource 0x7f030006 dimen/compat_notification_large_icon_max_width
+      () 320.000000dp
+    resource 0x7f030007 dimen/notification_action_icon_size
+      () 32.000000dp
+    resource 0x7f030008 dimen/notification_action_text_size
+      () 13.000000sp
+    resource 0x7f030009 dimen/notification_big_circle_margin
+      () 12.000000dp
+    resource 0x7f03000a dimen/notification_content_margin_start
+      () 0.000000dp
+    resource 0x7f03000b dimen/notification_large_icon_height
+      () 64.000000dp
+    resource 0x7f03000c dimen/notification_large_icon_width
+      () 64.000000dp
+    resource 0x7f03000d dimen/notification_main_column_padding_top
+      () 0.000000dp
+    resource 0x7f03000e dimen/notification_media_narrow_margin
+      () 12.000000dp
+    resource 0x7f03000f dimen/notification_right_icon_size
+      () 16.000000dp
+    resource 0x7f030010 dimen/notification_right_side_padding_top
+      () 4.000000dp
+    resource 0x7f030011 dimen/notification_small_icon_background_padding
+      () 3.000000dp
+    resource 0x7f030012 dimen/notification_small_icon_size_as_large
+      () 24.000000dp
+    resource 0x7f030013 dimen/notification_subtext_size
+      () 13.000000sp
+    resource 0x7f030014 dimen/notification_top_pad
+      () 10.000000dp
+    resource 0x7f030015 dimen/notification_top_pad_large_text
+      () 5.000000dp
+  type drawable id=04 entryCount=18
+    resource 0x7f040000 drawable/common_full_open_on_phone
+      (hdpi) (file) res/ZI.png type=PNG
+      (xhdpi) (file) res/iQ.png type=PNG
+    resource 0x7f040013 drawable/googleg_disabled_color_18
+      (mdpi) (file) res/Dd.png type=PNG
+      (hdpi) (file) res/Eh.png type=PNG
+      (xhdpi) (file) res/7R.png type=PNG
+      (xxhdpi) (file) res/vo.png type=PNG
+    resource 0x7f040014 drawable/googleg_standard_color_18
+      (mdpi) (file) res/f9.png type=PNG
+      (hdpi) (file) res/iW.png type=PNG
+      (xhdpi) (file) res/-p.png type=PNG
+      (xxhdpi) (file) res/_p.png type=PNG
+    resource 0x7f040016 drawable/ic_stat_ic_notification
+      (mdpi) (file) res/VZ.png type=PNG
+      (hdpi) (file) res/gl.png type=PNG
+      (xhdpi) (file) res/Tv.png type=PNG
+      (xxhdpi) (file) res/fw.png type=PNG
+    resource 0x7f040017 drawable/logo
+      () (file) res/zu.png type=PNG
+    resource 0x7f040018 drawable/notification_action_background
+      () (file) res/Ws.xml type=XML
+    resource 0x7f040019 drawable/notification_bg
+      () (file) res/nz.xml type=XML
+    resource 0x7f04001a drawable/notification_bg_low
+      () (file) res/df.xml type=XML
+    resource 0x7f04001b drawable/notification_bg_low_normal
+      (mdpi) (file) res/gK.9.png type=PNG
+      (hdpi) (file) res/je.9.png type=PNG
+      (xhdpi) (file) res/xa.9.png type=PNG
+    resource 0x7f04001c drawable/notification_bg_low_pressed
+      (mdpi) (file) res/U-.9.png type=PNG
+      (hdpi) (file) res/2K.9.png type=PNG
+      (xhdpi) (file) res/o_.9.png type=PNG
+    resource 0x7f04001d drawable/notification_bg_normal
+      (mdpi) (file) res/C_.9.png type=PNG
+      (hdpi) (file) res/sA.9.png type=PNG
+      (xhdpi) (file) res/z-.9.png type=PNG
+    resource 0x7f04001e drawable/notification_bg_normal_pressed
+      (mdpi) (file) res/vL.9.png type=PNG
+      (hdpi) (file) res/wN.9.png type=PNG
+      (xhdpi) (file) res/Ma.9.png type=PNG
+    resource 0x7f04001f drawable/notification_icon_background
+      () (file) res/c6.xml type=XML
+    resource 0x7f040020 drawable/notification_template_icon_bg
+      () #3333b5e5
+    resource 0x7f040021 drawable/notification_template_icon_low_bg
+      () #0cffffff
+    resource 0x7f040022 drawable/notification_tile_bg
+      () (file) res/9m.xml type=XML
+    resource 0x7f040023 drawable/notify_panel_notification_icon_bg
+      (mdpi) (file) res/s4.png type=PNG
+      (hdpi) (file) res/pY.png type=PNG
+      (xhdpi) (file) res/5c.png type=PNG
+    resource 0x7f040024 drawable/slogo_style
+      () (file) res/Kr.xml type=XML
+  type id id=05 entryCount=91
+    resource 0x7f050000 id/accessibility_action_clickable_span
+      () (id)
+    resource 0x7f050001 id/accessibility_custom_action_0
+      () (id)
+    resource 0x7f050002 id/accessibility_custom_action_1
+      () (id)
+    resource 0x7f050003 id/accessibility_custom_action_10
+      () (id)
+    resource 0x7f050004 id/accessibility_custom_action_11
+      () (id)
+    resource 0x7f050005 id/accessibility_custom_action_12
+      () (id)
+    resource 0x7f050006 id/accessibility_custom_action_13
+      () (id)
+    resource 0x7f050007 id/accessibility_custom_action_14
+      () (id)
+    resource 0x7f050008 id/accessibility_custom_action_15
+      () (id)
+    resource 0x7f050009 id/accessibility_custom_action_16
+      () (id)
+    resource 0x7f05000a id/accessibility_custom_action_17
+      () (id)
+    resource 0x7f05000b id/accessibility_custom_action_18
+      () (id)
+    resource 0x7f05000c id/accessibility_custom_action_19
+      () (id)
+    resource 0x7f05000d id/accessibility_custom_action_2
+      () (id)
+    resource 0x7f05000e id/accessibility_custom_action_20
+      () (id)
+    resource 0x7f05000f id/accessibility_custom_action_21
+      () (id)
+    resource 0x7f050010 id/accessibility_custom_action_22
+      () (id)
+    resource 0x7f050011 id/accessibility_custom_action_23
+      () (id)
+    resource 0x7f050012 id/accessibility_custom_action_24
+      () (id)
+    resource 0x7f050013 id/accessibility_custom_action_25
+      () (id)
+    resource 0x7f050014 id/accessibility_custom_action_26
+      () (id)
+    resource 0x7f050015 id/accessibility_custom_action_27
+      () (id)
+    resource 0x7f050016 id/accessibility_custom_action_28
+      () (id)
+    resource 0x7f050017 id/accessibility_custom_action_29
+      () (id)
+    resource 0x7f050018 id/accessibility_custom_action_3
+      () (id)
+    resource 0x7f050019 id/accessibility_custom_action_30
+      () (id)
+    resource 0x7f05001a id/accessibility_custom_action_31
+      () (id)
+    resource 0x7f05001b id/accessibility_custom_action_4
+      () (id)
+    resource 0x7f05001c id/accessibility_custom_action_5
+      () (id)
+    resource 0x7f05001d id/accessibility_custom_action_6
+      () (id)
+    resource 0x7f05001e id/accessibility_custom_action_7
+      () (id)
+    resource 0x7f05001f id/accessibility_custom_action_8
+      () (id)
+    resource 0x7f050020 id/accessibility_custom_action_9
+      () (id)
+    resource 0x7f050021 id/action_container
+      () (id)
+    resource 0x7f050022 id/action_divider
+      () (id)
+    resource 0x7f050023 id/action_image
+      () (id)
+    resource 0x7f050024 id/action_text
+      () (id)
+    resource 0x7f050025 id/actions
+      () (id)
+    resource 0x7f050026 id/adjust_height
+      () (id)
+    resource 0x7f050027 id/adjust_width
+      () (id)
+    resource 0x7f050028 id/all
+      () (id)
+    resource 0x7f050029 id/async
+      () (id)
+    resource 0x7f05002a id/auto
+      () (id)
+    resource 0x7f05002b id/blocking
+      () (id)
+    resource 0x7f05002c id/bottom
+      () (id)
+    resource 0x7f05002d id/center
+      () (id)
+    resource 0x7f05002e id/center_horizontal
+      () (id)
+    resource 0x7f05002f id/center_vertical
+      () (id)
+    resource 0x7f050030 id/chronometer
+      () (id)
+    resource 0x7f050031 id/clip_horizontal
+      () (id)
+    resource 0x7f050032 id/clip_vertical
+      () (id)
+    resource 0x7f050033 id/dark
+      () (id)
+    resource 0x7f050034 id/dialog_button
+      () (id)
+    resource 0x7f050035 id/end
+      () (id)
+    resource 0x7f050036 id/fill
+      () (id)
+    resource 0x7f050037 id/fill_horizontal
+      () (id)
+    resource 0x7f050038 id/fill_vertical
+      () (id)
+    resource 0x7f050039 id/forever
+      () (id)
+    resource 0x7f05003a id/icon
+      () (id)
+    resource 0x7f05003b id/icon_group
+      () (id)
+    resource 0x7f05003c id/icon_only
+      () (id)
+    resource 0x7f05003d id/info
+      () (id)
+    resource 0x7f05003e id/italic
+      () (id)
+    resource 0x7f05003f id/left
+      () (id)
+    resource 0x7f050040 id/light
+      () (id)
+    resource 0x7f050041 id/line1
+      () (id)
+    resource 0x7f050042 id/line3
+      () (id)
+    resource 0x7f050043 id/none
+      () (id)
+    resource 0x7f050044 id/normal
+      () (id)
+    resource 0x7f050045 id/notification_background
+      () (id)
+    resource 0x7f050046 id/notification_main_column
+      () (id)
+    resource 0x7f050047 id/notification_main_column_container
+      () (id)
+    resource 0x7f050048 id/right
+      () (id)
+    resource 0x7f050049 id/right_icon
+      () (id)
+    resource 0x7f05004a id/right_side
+      () (id)
+    resource 0x7f05004b id/standard
+      () (id)
+    resource 0x7f05004c id/start
+      () (id)
+    resource 0x7f05004d id/tag_accessibility_actions
+      () (id)
+    resource 0x7f05004e id/tag_accessibility_clickable_spans
+      () (id)
+    resource 0x7f05004f id/tag_accessibility_heading
+      () (id)
+    resource 0x7f050050 id/tag_accessibility_pane_title
+      () (id)
+    resource 0x7f050051 id/tag_screen_reader_focusable
+      () (id)
+    resource 0x7f050052 id/tag_transition_group
+      () (id)
+    resource 0x7f050053 id/tag_unhandled_key_event_manager
+      () (id)
+    resource 0x7f050054 id/tag_unhandled_key_listeners
+      () (id)
+    resource 0x7f050055 id/text
+      () (id)
+    resource 0x7f050056 id/text2
+      () (id)
+    resource 0x7f050057 id/time
+      () (id)
+    resource 0x7f050058 id/title
+      () (id)
+    resource 0x7f050059 id/top
+      () (id)
+    resource 0x7f05005a id/wide
+      () (id)
+  type integer id=06 entryCount=1
+    resource 0x7f060000 integer/google_play_services_version
+      () 12451000
+  type layout id=07 entryCount=6
+    resource 0x7f070001 layout/notification_action
+      () (file) res/S8.xml type=XML
+    resource 0x7f070002 layout/notification_action_tombstone
+      () (file) res/a0.xml type=XML
+    resource 0x7f070003 layout/notification_template_custom_big
+      () (file) res/xN.xml type=XML
+    resource 0x7f070004 layout/notification_template_icon_group
+      () (file) res/iQ.xml type=XML
+    resource 0x7f070005 layout/notification_template_part_chronometer
+      () (file) res/lR.xml type=XML
+    resource 0x7f070006 layout/notification_template_part_time
+      () (file) res/cV.xml type=XML
+  type mipmap id=08 entryCount=1
+    resource 0x7f080000 mipmap/ic_launcher
+      (mdpi) (file) res/9w.png type=PNG
+      (hdpi) (file) res/yn.png type=PNG
+      (xhdpi) (file) res/FS.png type=PNG
+      (xxhdpi) (file) res/RJ.png type=PNG
+  type raw id=09 entryCount=1
+    resource 0x7f090000 raw/firebase_common_keep
+      () (file) res/qF.xml
+  type string id=0a entryCount=34
+    resource 0x7f0a0009 string/app_name
+      () "Yono Rummy"
+    resource 0x7f0a000a string/channel_description
+      () "Yono_push_des"
+    resource 0x7f0a000b string/channel_name
+      () "Yono_push"
+    resource 0x7f0a000c string/common_google_play_services_enable_button
+      () "Enable"
+      (ca) "Activa"
+      (da) "Aktivér"
+      (fa) "فعال کردن"
+      (ja) "有効にする"
+      (ka) "ჩართვა"
+      (pa) "ਚਾਲੂ ਕਰੋ"
+      (ta) "இயக்கு"
+      (nb) "Aktivér"
+      (be) "Уключыць"
+      (de) "Aktivieren"
+      (ne) "अन गर्नुहोस्"
+      (te) "ప్రారంభించు"
+      (af) "Aktiveer"
+      (bg) "Активиране"
+      (th) "เปิดใช้"
+      (fi) "Ota käyttöön"
+      (hi) "चालू करें"
+      (si) "සබල කරන්න"
+      (vi) "Bật"
+      (kk) "Қосу"
+      (mk) "Овозможи"
+      (sk) "Povoliť"
+      (uk) "Увімкнути"
+      (el) "Ενεργοποίηση"
+      (gl) "Activar"
+      (ml) "പ്രവർത്തനക്ഷമമാക്കുക"
+      (nl) "Aanzetten"
+      (pl) "Włącz"
+      (sl) "Omogoči"
+      (tl) "I-enable"
+      (am) "አንቃ"
+      (km) "បើក"
+      (bn) "সক্ষম করুন"
+      (in) "Aktifkan"
+      (kn) "ಸಕ್ರಿಯಗೊಳಿಸು"
+      (mn) "Идэвхжүүлэх"
+      (ko) "사용 설정"
+      (lo) "ເປີດນຳໃຊ້"
+      (ro) "Activați"
+      (sq) "Aktivizo"
+      (ar) "تفعيل"
+      (fr) "Activer"
+      (hr) "Omogući"
+      (mr) "सुरू करा"
+      (or) "ସକ୍ଷମ କରନ୍ତୁ"
+      (sr) "Омогући"
+      (b+sr+Latn) "Omogući"
+      (tr) "Etkinleştir"
+      (ur) "فعال کریں"
+      (as) "সক্ষম কৰক"
+      (bs) "Omogući"
+      (cs) "Povolit"
+      (es) "Habilitar"
+      (is) "Kveikja"
+      (ms) "Dayakan"
+      (et) "Luba"
+      (it) "Attiva"
+      (lt) "Įgalinti"
+      (eu) "Gaitu"
+      (gu) "સક્ષમ કરો"
+      (hu) "Engedélyezés"
+      (ru) "Включить"
+      (zu) "Nika amandla"
+      (lv) "Iespējot"
+      (sv) "Aktivera"
+      (iw) "הפעל"
+      (sw) "Washa"
+      (hy) "Միացնել"
+      (ky) "Иштетүү"
+      (my) "ဖွင့်ရန်"
+      (az) "Aktiv edin"
+      (uz) "Yoqish"
+      (fr-rCA) "Activer"
+      (en-rGB) "Enable"
+      (zh-rHK) "啟用"
+      (zh-rCN) "启用"
+      (pt-rBR) "Ativar"
+      (es-rUS) "Habilitar"
+      (pt-rPT) "Ativar"
+      (zh-rTW) "啟用"
+    resource 0x7f0a000d string/common_google_play_services_enable_text
+      () "%1$s won't work unless you enable Google Play services."
+      (ca) "%1$s no funcionarà si no actives Serveis de Google Play."
+      (da) "Du skal aktivere Google Play-tjenester, for at %1$s kan fungere."
+      (fa) "‏تا وقتی «خدمات Google Play» را فعال نکنید، %1$s کار نمی‌کند."
+      (ja) "%1$sの実行には、Google Play開発者サービスの有効化が必要です。"
+      (ka) "%1$s ვერ იმუშავებს Google Play Services-ის ჩართვამდე."
+      (pa) "%1$s ਕੰਮ ਨਹੀਂ ਕਰੇਗਾ ਜਦੋਂ ਤੱਕ ਤੁਸੀਂ Google Play ਸੇਵਾਵਾਂ ਨੂੰ ਚਾਲੂ ਨਹੀਂ ਕਰਦੇ ਹੋ।"
+      (ta) "Google Play சேவைகளை இயக்கினால் மட்டுமே, %1$s செயல்படும்."
+      (nb) "%1$s fungerer ikke med mindre du slår på Google Play-tjenester."
+      (be) "%1$s не будзе працаваць, пакуль вы не ўключыце службы Google Play."
+      (de) "%1$s funktioniert erst nach der Aktivierung der Google Play-Dienste."
+      (ne) "%1$s ले तपाईँले Google Play सेवाहरू सक्षम नगरेसम्म काम गर्दैन।"
+      (te) "మీరు Google Play సేవలను ప్రారంభిస్తే మినహా %1$s పని చేయదు."
+      (af) "%1$s sal nie werk nie tensy jy Google Play Dienste aktiveer."
+      (bg) "%1$s няма да работи, освен ако не активирате услугите за Google Play."
+      (th) "%1$s จะไม่ทำงานจนกว่าคุณจะเปิดใช้บริการ Google Play"
+      (fi) "%1$s ei toimi, ellet ota Google Play Palveluita käyttöön."
+      (hi) "जब तक आप Google Play सेवाएं चालू नहीं करते, %1$s काम नहीं करेगा."
+      (si) "ඔබ Google Play සේවා සබල කරන්නේ නම් මිස %1$s වැඩ නොකරනු ඇත."
+      (vi) "%1$s sẽ không hoạt động nếu bạn không bật dịch vụ của Google Play."
+      (kk) "Google Play қызметтерін қоспасаңыз, %1$s жұмыс істемейді."
+      (mk) "%1$s нема да се извршува ако не овозможите услуги на Google Play."
+      (sk) "Aplikácia %1$s bude fungovať až po povolení služieb Google Play."
+      (uk) "Додаток %1$s не працюватиме, якщо не ввімкнути сервіси Google Play."
+      (el) "Η εφαρμογή %1$s δεν θα λειτουργήσει εάν δεν έχετε ενεργοποιήσει τις υπηρεσίες Google Play."
+      (gl) "%1$s non funcionará a menos que actives os servizos de Google Play."
+      (ml) "നിങ്ങൾ Google Play സേവനങ്ങൾ പ്രവർത്തനക്ഷമമാക്കുന്നില്ലെങ്കിൽ %1$s പ്രവർത്തിക്കില്ല."
+      (nl) "%1$s werkt niet, tenzij je Google Play-services aanzet."
+      (pl) "Aplikacja %1$s nie będzie działać, jeśli nie włączysz Usług Google Play."
+      (sl) "Aplikacija %1$s ne bo delovala, če ne omogočite storitev Google Play."
+      (tl) "Hindi gagana ang %1$s maliban kung ie-enable mo ang mga serbisyo ng Google Play."
+      (am) "Google Play አገልግሎቶችን ካላነቁ በስተቀር %1$s አይሰራም።"
+      (km) "%1$s នឹងមិនដំណើរការទេ លុះត្រាតែអ្នកបើកសេវាកម្ម Google Play។"
+      (bn) "আপনি Google Play পরিষেবা সক্ষম না করা পর্যন্ত %1$s কাজ করবে না।"
+      (in) "%1$s tidak akan berfungsi jika layanan Google Play tidak diaktifkan."
+      (kn) "Google Play ಸೇವೆಗಳನ್ನು ನೀವು ಸಕ್ರಿಯಗೊಳಿಸದ ಹೊರತು %1$s ಕಾರ್ಯನಿರ್ವಹಿಸುವುದಿಲ್ಲ."
+      (mn) "%1$s нь Google Play үйлчилгээг идэвхжүүлэх хүртэл ажиллахгүй."
+      (ko) "Google Play 서비스를 사용하도록 설정해야 %1$s이(가) 작동합니다."
+      (lo) "%1$s ຈະບໍ່ສາມາດໃຊ້ງານໄດ້ຈົນກວ່າທ່ານຈະເປີດໃຊ້ງານ​ການ​ບໍ​ລິ​ການ Google Play."
+      (ro) "%1$s nu va funcționa decât dacă activați serviciile Google Play."
+      (sq) "%1$s nuk do të funksionojë nëse nuk aktivizon shërbimet e "Luaj me Google"."
+      (ar) "‏لن يعمل %1$s ما لم يتم تفعيل خدمات Google Play."
+      (fr) "%1$s ne fonctionnera pas tant que vous n'aurez pas activé les services Google Play."
+      (hr) "%1$s neće funkcionirati ako ne omogućite usluge Google Playa."
+      (mr) "तुम्ही Google Play सेवा सक्षम केल्याशिवाय %1$s हा अ‍ॅप कार्य करणार नाही."
+      (or) "ଆପଣ Google Play ସେବା ସକ୍ଷମ ନ କରିବା ପର୍ଯ୍ୟନ୍ତ %1$s କାମ କରିବ ନାହିଁ।"
+      (sr) "%1$s неће функционисати ако не омогућите Google Play услуге."
+      (b+sr+Latn) "%1$s neće funkcionisati ako ne omogućite Google Play usluge."
+      (tr) "Google Play hizmetlerini etkinleştirmezseniz %1$s çalışmaz."
+      (ur) "‏جب تک آپ Google Play سروسز فعال نہیں کر لیتے، %1$s کام نہیں کرے گی۔"
+      (as) "আপুনি Google Play সেৱাবোৰ সক্ষম নকৰালৈকে %1$sএ কাম নকৰিব।"
+      (bs) "Aplikacija %1$s neće raditi ako ne omogućite Google Play usluge."
+      (cs) "Ke spuštění aplikace %1$s je třeba aktivovat služby Google Play."
+      (es) "%1$s no funcionará hasta que no habilites Servicios de Google Play."
+      (is) "%1$s virkar ekki nema þú gerir þjónustu Google Play virka."
+      (ms) "%1$s tidak akan berfungsi melainkan anda mendayakan perkhidmatan Google Play."
+      (et) "Rakendus %1$s töötab ainult siis, kui lubate Google Play teenused."
+      (it) "%1$s non funzionerà se non attivi Google Play Services."
+      (lt) "„%1$s“ neveiks, jei neįgalinsite „Google Play“ paslaugų."
+      (eu) "%1$s aplikazioak ez du funtzionatuko Google Play Services gaitzen ez baduzu."
+      (gu) "તમે Google Play સેવાઓ સક્ષમ કરશો નહીં ત્યાં સુધી %1$s કાર્ય કરશે નહીં."
+      (hu) "A(z) %1$s alkalmazás csak akkor működik, ha engedélyezi a Google Play-szolgáltatásokat."
+      (ru) "Для работы приложения "%1$s" требуется включить сервисы Google Play."
+      (zu) "I-%1$s ngeke isebenze ngaphandle kokuthi unike amandla amasevisi we-Google Play."
+      (lv) "Lai lietotne %1$s darbotos, ir jāiespējo Google Play pakalpojumi."
+      (sv) "%1$s fungerar inte om du inte aktiverar Google Play-tjänster."
+      (iw) "‏האפליקציה %1$s לא תפעל אם לא תפעיל את שירותי Google Play."
+      (sw) "%1$s haitafanya kazi isipokuwa uwashe huduma za Google Play."
+      (hy) "%1$s հավելվածը չի աշխատի մինչև չմիացնեք Google Play ծառայությունները:"
+      (ky) "Google Play кызматтарын иштетмейиңизче %1$s иштебейт."
+      (my) "Google Play ဝန်ဆောင်မှုများကို မဖွင့်သ၍ %1$s သည်အလုပ်လုပ်မည်မဟုတ်ပါ။"
+      (az) "%1$s Google Play xidmətlərini aktiv edənə kimi işləməyəcək."
+      (uz) "Google Play xizmatlari yoqilmaguncha, %1$s ishlamaydi."
+      (fr-rCA) "%1$s ne fonctionnera pas tant que vous n'aurez pas activé les services Google Play."
+      (en-rGB) "%1$s won't work unless you enable Google Play services."
+      (zh-rHK) "您必須啟用 Google Play 服務，方可執行「%1$s」。"
+      (zh-rCN) "您必须先启用 Google Play 服务，然后才能运行%1$s。"
+      (pt-rBR) "%1$s só funciona com o Google Play Services ativado."
+      (es-rUS) "%1$s no funcionará a menos que habilites los servicios de Google Play."
+      (pt-rPT) "O %1$s não funciona enquanto não ativar os serviços do Google Play."
+      (zh-rTW) "您必須啟用 Google Play 服務，才能執行「%1$s」。"
+    resource 0x7f0a000e string/common_google_play_services_enable_title
+      () "Enable Google Play services"
+      (ca) "Activa Serveis de Google Play"
+      (da) "Aktivér Google Play-tjenester"
+      (fa) "‏‫فعال کردن «خدمات Google Play»"
+      (ja) "Google Play開発者サービスの有効化"
+      (ka) "Google Play Services-ის ჩართვა"
+      (pa) "Google Play ਸੇਵਾਵਾਂ ਨੂੰ ਚਾਲੂ ਕਰੋ"
+      (ta) "Google Play சேவைகளை இயக்கவும்"
+      (nb) "Slå på Google Play-tjenester"
+      (be) "Уключыць службы Google Play"
+      (de) "Google Play-Dienste aktivieren"
+      (ne) "Google Play सेवाहरू सक्षम पार्नुहोस्"
+      (te) "Google Play సేవలను ప్రారంభించండి"
+      (af) "Aktiveer Google Play Dienste"
+      (bg) "Активиране на услугите за Google Play"
+      (th) "เปิดใช้บริการ Google Play"
+      (fi) "Ota Google Play Palvelut käyttöön"
+      (hi) "Google Play सेवाएं चालू करें"
+      (si) "Google Play සේවා සබල කරන්න"
+      (vi) "Bật dịch vụ của Google Play"
+      (kk) "Google Play қызметтерін қосу"
+      (mk) "Овозможи ги услугите на Google Play"
+      (sk) "Povoliť služby Google Play"
+      (uk) "Увімкнути сервіси Google Play"
+      (el) "Ενεργοποίηση υπηρεσιών Google Play"
+      (gl) "Activar servizos de Google Play"
+      (ml) "Google Play സേവനങ്ങൾ പ്രവർത്തനക്ഷമമാക്കുക"
+      (nl) "Google Play-services aanzetten"
+      (pl) "Włącz Usługi Google Play"
+      (sl) "Omogočanje storitev Google Play"
+      (tl) "I-enable ang mga serbisyo ng Google Play"
+      (am) "Google Play አገልግሎቶችን ያንቁ"
+      (km) "បើកសេវាកម្ម Google Play"
+      (bn) "Google Play পরিষেবা সক্ষম করুন"
+      (in) "Aktifkan layanan Google Play"
+      (kn) "Google Play ಸೇವೆಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"
+      (mn) "Google Play үйлчилгээг идэвхжүүлэх"
+      (ko) "Google Play 서비스 사용"
+      (lo) "ເປີດໃຊ້ການ​ບໍ​ລິ​ການ Google Play"
+      (ro) "Activați serviciile Google Play"
+      (sq) "Aktivizo shërbimet e "Luaj me Google""
+      (ar) "‏تفعيل خدمات Google Play"
+      (fr) "Activer les services Google Play"
+      (hr) "Omogućivanje usluga Google Playa"
+      (mr) "Google Play सेवा सुरू करा"
+      (or) "Google Play ସେବାଗୁଡ଼ିକ ସକ୍ଷମ କରନ୍ତୁ"
+      (sr) "Омогућите Google Play услуге"
+      (b+sr+Latn) "Omogućite Google Play usluge"
+      (tr) "Google Play hizmetlerini etkinleştirin"
+      (ur) "‏Google Play سروسز فعال کریں"
+      (as) "Google প্লে সেৱাসক্ষম কৰক"
+      (bs) "Omogućite Google Play usluge"
+      (cs) "Aktivace služeb Google Play"
+      (es) "Habilita Servicios de Google Play"
+      (is) "Virkja þjónustu Google Play"
+      (ms) "Dayakan perkhidmatan Google Play"
+      (et) "Google Play teenuste lubamine"
+      (it) "Attiva Google Play Services"
+      (lt) "Įgalinkite „Google Play“ paslaugas"
+      (eu) "Gaitu Google Play Services"
+      (gu) "Google Play સેવાઓ સક્ષમ કરો"
+      (hu) "Google Play-szolgáltatások engedélyezése"
+      (ru) "Включите сервисы Google Play"
+      (zu) "Nika amandla amasevisi we-Google Play"
+      (lv) "Google Play pakalpojumu iespējošana"
+      (sv) "Aktivera Google Play-tjänster"
+      (iw) "‏הפעל את שירותי Google Play"
+      (sw) "Washa huduma za Google Play"
+      (hy) "Միացնել Google Play ծառայությունները"
+      (ky) "Google Play кызматтарын иштетүү"
+      (my) "Google Play ဝန်ဆောင်မှုများ ဖွင့်ရန်"
+      (az) "Google Play xidmətlərini aktiv edin"
+      (uz) "Google Play xizmatlarini yoqish"
+      (fr-rCA) "Activer les services Google Play"
+      (en-rGB) "Enable Google Play services"
+      (zh-rHK) "啟用 Google Play 服務"
+      (zh-rCN) "启用 Google Play 服务"
+      (pt-rBR) "Ativar o Google Play Services"
+      (es-rUS) "Habilitar servicios de Google Play"
+      (pt-rPT) "Ativar serviços do Google Play"
+      (zh-rTW) "啟用 Google Play 服務"
+    resource 0x7f0a000f string/common_google_play_services_install_button
+      () "Install"
+      (ca) "Instal·la"
+      (da) "Installer"
+      (fa) "نصب"
+      (ja) "インストール"
+      (ka) "ინსტალაცია"
+      (pa) "ਸਥਾਪਤ ਕਰੋ"
+      (ta) "நிறுவு"
+      (nb) "Installer"
+      (be) "Усталяваць"
+      (de) "Installieren"
+      (ne) "स्थापना गर्नुहोस्"
+      (te) "ఇన్‌స్టాల్ చేయి"
+      (af) "Installeer"
+      (bg) "Инсталиране"
+      (th) "ติดตั้ง"
+      (fi) "Asenna"
+      (hi) "इंस्टॉल करें"
+      (si) "ස්ථාපනය කරන්න"
+      (vi) "Cài đặt"
+      (kk) "Орнату"
+      (mk) "Инсталирај"
+      (sk) "Inštalovať"
+      (uk) "Установити"
+      (el) "Εγκατάσταση"
+      (gl) "Instalar"
+      (ml) "ഇന്‍സ്റ്റാള്‍ ചെയ്യുക"
+      (nl) "Installeren"
+      (pl) "Zainstaluj"
+      (sl) "Namesti"
+      (tl) "I-install"
+      (am) "ጫን"
+      (km) "ដំឡើង"
+      (bn) "ইনস্টল করুন"
+      (in) "Instal"
+      (kn) "ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ"
+      (mn) "Суулгах"
+      (ko) "설치"
+      (lo) "ຕິດຕັ້ງ"
+      (ro) "Instalați"
+      (sq) "Instalo"
+      (ar) "تثبيت"
+      (fr) "Installer"
+      (hr) "Instaliraj"
+      (mr) "स्‍थापित करा"
+      (or) "ଇନ୍‍ଷ୍ଟଲ୍‍ କରନ୍ତୁ"
+      (sr) "Инсталирај"
+      (b+sr+Latn) "Instaliraj"
+      (tr) "Yükle"
+      (ur) "انسٹال کریں"
+      (as) "ইনষ্টল কৰক"
+      (bs) "Instaliraj"
+      (cs) "Instalovat"
+      (es) "Instalar"
+      (is) "Setja upp"
+      (ms) "Pasang"
+      (et) "Installi"
+      (it) "Installa"
+      (lt) "Įdiegti"
+      (eu) "Instalatu"
+      (gu) "ઇન્સ્ટૉલ કરો"
+      (hu) "Telepítés"
+      (ru) "Установить"
+      (zu) "Faka"
+      (lv) "Instalēt"
+      (sv) "Installera"
+      (iw) "התקן"
+      (sw) "Sakinisha"
+      (hy) "Տեղադրել"
+      (ky) "Орнотуу"
+      (my) "ထည့်သွင်းပါ"
+      (az) "Quraşdırın"
+      (uz) "O‘rnatish"
+      (fr-rCA) "Installer"
+      (en-rGB) "Install"
+      (zh-rHK) "安裝"
+      (zh-rCN) "安装"
+      (pt-rBR) "Instalar"
+      (es-rUS) "Instalar"
+      (pt-rPT) "Instalar"
+      (zh-rTW) "安裝"
+    resource 0x7f0a0010 string/common_google_play_services_install_text
+      () "%1$s won't run without Google Play services, which are missing from your device."
+      (ca) "%1$s no s'executarà si Serveis de Google Play no està instal·lat al dispositiu."
+      (da) "Du skal installere Google Play-tjenester, før %1$s kan køre på din enhed."
+      (fa) "‏%1$s بدون خدمات Google Play که در دستگاه شما وجود ندارد اجرا نمی‌شود."
+      (ja) "「%1$s」の実行には Google Play 開発者サービスが必要ですが、お使いのデバイスにはインストールされていません。"
+      (ka) "%1$s ვერ გაეშვება Google Play Services-ის გარეშე, რომელიც აკლია თქვენს მოწყობილობას."
+      (pa) "%1$s Google Play ਸੇਵਾਵਾਂ ਤੋਂ ਬਿਨਾਂ ਨਹੀਂ ਚੱਲੇਗੀ, ਜੋ ਤੁਹਾਡੇ ਡੀਵਾਈਸ ਤੋਂ ਗੁੰਮ ਹਨ।"
+      (ta) "Google Play சேவைகள் இருந்தால் மட்டுமே, %1$s இயங்கும். அவை உங்கள் சாதனத்தில் இல்லை."
+      (nb) "%1$s kan ikke kjøre uten Google Play-tjenester, som ikke er installert på enheten din."
+      (be) "%1$s не будзе працаваць без службаў Google Play, якія адсутнічаюць на вашай прыладзе."
+      (de) "Zur Nutzung von %1$s sind die Google Play-Dienste erforderlich, die auf deinem Gerät nicht installiert sind."
+      (ne) "%1$s Google Play services बिना सञ्चालन हुने छैन र तपाईँको यन्त्रमा Google Play services उपलब्ध छैनन्।"
+      (te) "%1$s Google Play సేవలు లేకుండా అమలు కాదు, ఆ సేవలు మీ పరికరంలో లేవు."
+      (af) "%1$s sal nie sonder Google Play Dienste werk nie, wat nie op jou toestel is nie."
+      (bg) "%1$s няма да се изпълнява, тъй като услугите за Google Play не са инсталирани на устройството ви."
+      (th) "%1$s จะไม่ทำงานหากไม่มีบริการ Google Play ซี่งไม่มีในอุปกรณ์ของคุณ"
+      (fi) "%1$s ei toimi ilman Google Play Palveluita, jotka puuttuvat laitteeltasi."
+      (hi) "%1$s उन Google Play सेवाओं के बिना नहीं चलेगा जो आपके डिवाइस में उपलब्ध नहीं हैं."
+      (si) "ඔබගේ ටැබ්ලට් පරිගණකයේ නැති Google Play සේවා නොමැතිව %1$s ධාවනය නොවනු ඇත."
+      (vi) "%1$s sẽ không chạy nếu không có dịch vụ của Google Play. Thiết bị của bạn bị thiếu dịch vụ này."
+      (kk) "Google Play қызметтері құрылғыда болмағандықтан, %1$s іске қосылмайды."
+      (mk) "%1$s нема да се извршува без услугите на Google Play што ги нема на уредот."
+      (sk) "Na spustenie aplikácie %1$s sa vyžadujú služby Google Play, ktoré na zariadení nemáte."
+      (uk) "Додаток %1$s не працюватиме без сервісів Google Play, яких немає на вашому пристрої."
+      (el) "Η εφαρμογή %1$s δεν μπορεί να εκτελεστεί χωρίς τις υπηρεσίες Google Play, οι οποίες λείπουν από τη συσκευή σας."
+      (gl) "%1$s non se executará se o teu dispositivo non ten instalados os servizos de Google Play."
+      (ml) "Google Play സേവനങ്ങളില്ലാതെ %1$s പ്രവർത്തിക്കില്ല, ഈ സേവനങ്ങളാകട്ടെ നിങ്ങളുടെ ഉപകരണത്തിൽ ഇല്ല."
+      (nl) "%1$s kan niet worden uitgevoerd zonder Google Play-services, die je nog niet op je apparaat hebt."
+      (pl) "%1$s nie będzie działać, jeśli nie zainstalujesz na urządzeniu Usług Google Play."
+      (sl) "Aplikacija %1$s ne deluje brez storitev Google Play, vendar teh ni v napravi."
+      (tl) "Hindi gagana ang %1$s nang wala ang mga serbisyo ng Google Play na wala sa iyong device."
+      (am) "%1$s ያለ Google Play አገልግሎቶች አይሰራም፣ እነሱ ደግሞ በመሣሪያዎ ላይ የሉም።"
+      (km) "%1$s នឹងមិនដំណើរការទេ ប្រសិនបើមិនមានសេវាកម្មនានារបស់ Google Play ដែលបានបាត់ពីឧបករណ៍របស់អ្នក។"
+      (bn) "Google Play পরিষেবা ছাড়া %1$s চলবে না, যা আপনার ডিভাইসে অনুপস্থিত।"
+      (in) "%1$s tidak akan berjalan tanpa layanan Google Play, yang tidak ada di perangkat Anda."
+      (kn) "ನಿಮ್ಮ ಸಾಧನದಿಂದ ಕಾಣೆಯಾಗಿರುವ %1$s, Google Play ಸೇವೆಗಳಿಲ್ಲದೆ ರನ್ ಆಗುವುದಿಲ್ಲ."
+      (mn) "Таны төхөөрөмжид Google Play үйлчилгээ байхгүй тул %1$s ажиллахгүй."
+      (ko) "기기에 Google Play 서비스가 설치되어 있어야 %1$s이(가) 실행됩니다."
+      (lo) "%1$s ຈະບໍ່ສາມາດເປີດໃຊ້ໄດ້ຫາກບໍ່ມີການບໍລິການ Google Play ເຊິ່ງແທັບເລັດຂອງທ່ານບໍ່ມີ."
+      (ro) "%1$s nu va rula fără serviciile Google Play, care lipsesc de pe dispozitivul dvs."
+      (sq) "%1$s nuk do të funksionojë pa shërbimet e Google Play, të cilat mungojnë në pajisjen tënde."
+      (ar) "‏لن يتم تشغيل %1$s بدون خدمات Google Play، والتي لا تتوفر على جهازك."
+      (fr) "%1$s ne fonctionnera pas sans les services Google Play, qui ne sont pas installés sur votre appareil."
+      (hr) "%1$s neće funkcionirati bez usluga Google Playa koje nisu instalirane na vašem uređaju."
+      (mr) "Google Play सेवा आपल्या डिव्हाइसवर उपलब्ध नाही, त्याशिवाय %1$s चालणार नाही."
+      (or) "%1$s ଏହି Google Play ସେବାଗୁଡ଼ିକ ବିନା ଚାଲେ ନାହିଁ, ଏବଂ ସେଗୁଡ଼ିକ ଆପଣଙ୍କ ଡିଭାଇସ୍‌ରେ ନାହିଁ।"
+      (sr) "%1$s не може да се покрене без Google Play услуга, које нису инсталиране на уређају."
+      (b+sr+Latn) "%1$s ne može da se pokrene bez Google Play usluga, koje nisu instalirane na uređaju."
+      (tr) "%1$s, şu anda cihazınızda bulunmayan Google Play hizmetleri olmadan çalışmaz."
+      (ur) "‏%1$s Google Play سروسز کے بغیر نہیں چلے گی، جو آپ کے آلہ سے غائب ہیں۔"
+      (as) "%1$s Google প্লে সেৱাৰ অবিহনে নচলে, যিটো আপোনাৰ ডিভাইচত নাই।"
+      (bs) "Aplikacija %1$s neće raditi bez Google Play usluga, kojih na vašem uređaju nema."
+      (cs) "Ke spuštění aplikace %1$s jsou potřeba služby Google Play, které v zařízení nemáte."
+      (es) "%1$s no se ejecutará si los Servicios de Google Play no están instalados en tu dispositivo."
+      (is) "%1$s getur ekki keyrt án þjónustu Google Play, sem vantar í tækið þitt."
+      (ms) "%1$s tidak akan berfungsi tanpa perkhidmatan Google Play dan perkhidmatan ini tiada pada peranti anda."
+      (et) "Rakendus %1$s töötab ainult koos Google Play teenustega, mida teie seadmes pole."
+      (it) "L'app %1$s non funzionerà senza Google Play Services, non presente sul tuo dispositivo."
+      (lt) "Programa „%1$s“ nebus paleidžiama be „Google Play“ paslaugų, kurių nėra įrenginyje."
+      (eu) "%1$s ez da exekutatuko Google Play Services gabe, baina ez dago halakorik gailuan."
+      (gu) "%1$s, Google Play સેવાઓ વગર ચાલશે નહીં, જે તમારા ઉપકરણમાંથી ખૂટે છે."
+      (hu) "A(z) %1$s alkalmazás nem fut a Google Play-szolgáltatások nélkül, amelyek hiányoznak az eszközről."
+      (ru) "Для работы приложения "%1$s" требуется установить сервисы Google Play."
+      (zu) "I-%1$s ngeke ize iqalise ngaphandle kwamasevisi we-Google Play, angekho kusukela kudivayisi yakho."
+      (lv) "Lai lietotne %1$s darbotos, ierīcē ir jāinstalē Google Play pakalpojumi."
+      (sv) "%1$s kan inte köras utan Google Play-tjänsterna, som saknas på enheten."
+      (iw) "‏האפליקציה %1$s לא תפעל ללא שירותי Google Play, שאינם מותקנים במכשיר."
+      (sw) "%1$s haitafanya kazi bila huduma za Google Play. Huduma hizi hazipatikani kwenye kifaa chako."
+      (hy) "%1$s հավելվածը չի աշխատի առանց Google Play ծառայությունների, որոնք չկան ձեր սարքում:"
+      (ky) "Google Play кызматтарысыз %1$s иштебейт. Алар түзмөгүңүздө жок болуп жатат."
+      (my) "သင့်တက်ဘလက်တွင် Google Play ဝန်ဆောင်မှုများမရှိသောကြောင့် %1$s ကိုဖွင့်၍မရပါ။"
+      (az) "%1$s cihazınızda mövcud olmayan Google Play xidmətləri olmadan çalışmayacaq."
+      (uz) "%1$s ishlashi uchun qurilmangizda Google Play xizmatlarini o‘rnatish lozim."
+      (fr-rCA) "%1$s ne fonctionnera pas sans les services Google Play, qui ne sont pas installés sur votre appareil."
+      (en-rGB) "%1$s won't run without Google Play services, which are missing from your device."
+      (zh-rHK) "您的裝置尚未安裝 Google Play 服務，因此無法執行「%1$s」。"
+      (zh-rCN) "您的设备没有安装 Google Play 服务，因此无法运行%1$s。"
+      (pt-rBR) "O app %1$s não funciona sem o Google Play Services, o qual não está instalado no seu dispositivo."
+      (es-rUS) "%1$s no se ejecutará si los Servicios de Google Play no están instalados en tu dispositivo."
+      (pt-rPT) "O %1$s não é executado sem os Serviços do Google Play, os quais estão em falta no seu dispositivo."
+      (zh-rTW) "您的裝置並未安裝 Google Play 服務，因此無法執行「%1$s」。"
+    resource 0x7f0a0011 string/common_google_play_services_install_title
+      () "Get Google Play services"
+      (ca) "Obtén Serveis de Google Play"
+      (da) "Hent Google Play-tjenester"
+      (fa) "‏دریافت «خدمات Google Play»"
+      (ja) "Google Play開発者サービスの入手"
+      (ka) "Google Play Services-ის ჩამოტვირთვა"
+      (pa) "Google Play ਸੇਵਾਵਾਂ ਪ੍ਰਾਪਤ ਕਰੋ"
+      (ta) "Google Play சேவைகளைப் பெறவும்"
+      (nb) "Installer Google Play-tjenester"
+      (be) "Атрымаць службы Google Play"
+      (de) "Google Play-Dienste installieren"
+      (ne) "Google Play सेवाहरू प्राप्त गर्नुहोस्"
+      (te) "Google Play సేవలను పొందండి"
+      (af) "Kry Google Play Dienste"
+      (bg) "Изтегляне на услугите за Google Play"
+      (th) "ติดตั้งบริการ Google Play"
+      (fi) "Asenna Google Play Palvelut"
+      (hi) "Google Play सेवाएं इंस्टॉल करें"
+      (si) "Google Play සේවා ලබා ගන්න"
+      (vi) "Cài đặt dịch vụ của Google Play"
+      (kk) "Google Play қызметтерін алу"
+      (mk) "Преземи ги услугите на Google Play"
+      (sk) "Inštalovať služby Google Play"
+      (uk) "Установити сервіси Google Play"
+      (el) "Λήψη υπηρεσιών Google Play"
+      (gl) "Descargar servizos de Google Play"
+      (ml) "Google Play സേവനങ്ങൾ നേടുക"
+      (nl) "Google Play-services ophalen"
+      (pl) "Pobierz Usługi Google Play"
+      (sl) "Namestitev storitev Google Play"
+      (tl) "Kunin ang mga serbisyo ng Google Play"
+      (am) "Google Play አገልግሎቶችን ያግኙ"
+      (km) "ទាញយកសេវាកម្ម Google Play"
+      (bn) "Google Play পরিষেবা পান"
+      (in) "Dapatkan layanan Google Play"
+      (kn) "Google Play ಸೇವೆಗಳನ್ನು ಪಡೆಯಿರಿ"
+      (mn) "Google Play үйлчилгээг авах"
+      (ko) "Google Play 서비스 설치"
+      (lo) "ຕິດຕັ້ງບໍລິການ Google Play"
+      (ro) "Descărcați serviciile Google Play"
+      (sq) "Merr shërbimet e "Luaj me Google""
+      (ar) "‏الحصول على خدمات Google Play"
+      (fr) "Installer les services Google Play"
+      (hr) "Preuzimanje usluga Google Playa"
+      (mr) "Google Play सेवा मिळवा"
+      (or) "Google Play ସେବାଗୁଡ଼ିକ ପ୍ରାପ୍ତ କରନ୍ତୁ"
+      (sr) "Преузмите Google Play услуге"
+      (b+sr+Latn) "Preuzmite Google Play usluge"
+      (tr) "Google Play hizmetlerini edinin"
+      (ur) "‏Google Play سروسز حاصل کریں"
+      (as) "Google প্লে সেৱালাভ কৰক"
+      (bs) "Nabavite Google Play usluge"
+      (cs) "Instalace služeb Google Play"
+      (es) "Descargar Servicios de Google Play"
+      (is) "Sækja þjónustu Google Play"
+      (ms) "Dapatkan perkhidmatan Google Play"
+      (et) "Google Play teenuste hankimine"
+      (it) "Installa Google Play Services"
+      (lt) "Gaukite „Google Play“ paslaugas"
+      (eu) "Lortu Google Play Services"
+      (gu) "Google Play સેવાઓ મેળવો"
+      (hu) "A Google Play-szolgáltatások beszerzése"
+      (ru) "Установите сервисы Google Play"
+      (zu) "Thola amasevisi we-Google Play"
+      (lv) "Google Play pakalpojumu iegūšana"
+      (sv) "Hämta Google Play-tjänster"
+      (iw) "‏קבל את שירותי Google Play"
+      (sw) "Pata huduma za Google Play"
+      (hy) "Տեղադրել Google Play ծառայությունները"
+      (ky) "Google Play кызматтарын алуу"
+      (my) "Google Play ဝန်ဆောင်မှုများရယူရန်"
+      (az) "Google Play xidmətlərini əldə edin"
+      (uz) "Google Play xizmatlarini o‘rnatish"
+      (fr-rCA) "Installer les services Google Play"
+      (en-rGB) "Get Google Play services"
+      (zh-rHK) "安裝 Google Play 服務"
+      (zh-rCN) "获取 Google Play 服务"
+      (pt-rBR) "Instalar o Google Play Services"
+      (es-rUS) "Obtener servicios de Google Play"
+      (pt-rPT) "Obter serviços do Google Play"
+      (zh-rTW) "取得 Google Play 服務"
+    resource 0x7f0a0012 string/common_google_play_services_notification_channel_name
+      () "Google Play services availability"
+      (ca) "Disponibilitat de serveis de Google Play"
+      (da) "Google Play-tjenesters tilgængelighed"
+      (fa) "‏دردسترس بودن خدمات Google Play"
+      (ja) "Google Play 開発者サービスの利用"
+      (ka) "Google Play services-ის ხელმისაწვდომობა"
+      (pa) "Google Play ਸੇਵਾਵਾਂ ਦੀ ਉਪਲਬਧਤਾ"
+      (ta) "கிடைக்கும் Google Play சேவைகள்"
+      (nb) "Google Play Tjenester-tilgjengelighet"
+      (be) "Даступнасць сэрвісаў Google Play"
+      (de) "Verfügbarkeit von Google Play-Diensten"
+      (ne) "Google Play सेवाको उपलब्धता"
+      (te) "Google Play సేవల లభ్యత"
+      (af) "Beskikbaarheid van Google Play Dienste"
+      (bg) "Наличност на услугите за Google Play"
+      (th) "ความพร้อมใช้งานของบริการ Google Play"
+      (fi) "Google Play Palveluiden saatavuus"
+      (hi) "Google Play सेवाएं उपलब्ध हैं"
+      (si) "Google Play සේවාවල ලබා ගත හැකි බව"
+      (vi) "Phạm vi cung cấp Dịch vụ Google Play"
+      (kk) "Google Play қызметтерінің қолжетімділігі"
+      (mk) "Достапност на услугите на Google Play"
+      (sk) "Dostupnosť služieb Google Play"
+      (uk) "Доступність сервісів Google Play"
+      (el) "Διαθεσιμότητα υπηρεσιών Google Play"
+      (gl) "Dispoñibilidade dos servizos de Play"
+      (ml) "Google Play സേവന ലഭ്യത"
+      (nl) "Beschikbaarheid van Google Play-services"
+      (pl) "Dostępność Usług Google Play"
+      (sl) "Dostopnost storitev Google Play"
+      (tl) "Availability ng serbisyo ng Google Play"
+      (am) "Google Play አገልግሎቶች ተገኝነት"
+      (km) "លទ្ធភាព​ប្រើប្រាស់សេវាកម្ម Google Play"
+      (bn) "Google Play পরিষেবার উপলভ্যতা"
+      (in) "Ketersediaan layanan Google Play"
+      (kn) "Google Play ಸೇವೆಗಳ ಲಭ್ಯತೆ"
+      (mn) "Google Play-н үйлчилгээнүүдийн боломжит байдал"
+      (ko) "Google Play 서비스 사용 가능 여부"
+      (lo) "ສະຖານະບໍລິການ Google Play"
+      (ro) "Disponibilitatea serviciilor Google Play"
+      (sq) "Disponueshmëria e shërbimeve të Google Play"
+      (ar) "‏مدى توفّر خدمات Google Play"
+      (fr) "Disponibilité des services Google Play"
+      (hr) "Dostupnost usluga za Google Play"
+      (mr) "Google Play सेवा उपलब्धता"
+      (or) "Google Play ସେବାଗୁଡ଼ିକର ଉପଲବ୍ଧତା"
+      (sr) "Доступност Google Play услуга"
+      (b+sr+Latn) "Dostupnost Google Play usluga"
+      (tr) "Google Play hizmetlerinin kullanılabilirliği"
+      (ur) "‏Google Play سروسز کی دستیابی"
+      (as) "Google প্লে সেৱাসমূহৰ উপলব্ধতা"
+      (bs) "Dostupnost Google Play usluga"
+      (cs) "Dostupnost služeb Google Play"
+      (es) "Disponibilidad Servicios de Google Play"
+      (is) "Staða þjónustu Google Play"
+      (ms) "Ketersediaan perkhidmatan Google Play"
+      (et) "Google Play teenuste saadavalolek"
+      (it) "Disponibilità di Google Play Services"
+      (lt) "„Google Play“ paslaugų pasiekiamumas"
+      (eu) "Google Play Services-en erabilgarritasuna"
+      (gu) "Google Play સેવાઓની ઉપલબ્ધતા"
+      (hu) "Google Play-szolgáltatások elérhetősége"
+      (ru) "Доступность сервисов Google Play"
+      (zu) "Ukungatholakali kwamasevisi e-Google Play"
+      (lv) "Google Play pakalpojumu pieejamība"
+      (sv) "Tillgänglighet för Google Plays tjänster"
+      (iw) "‏זמינות של שירותי Google Play"
+      (sw) "Upatikanaji wa huduma za Google Play"
+      (hy) "Google Play ծառայությունների հասանելիություն"
+      (ky) "Google Play кызматтарынын иштеши"
+      (my) "Google Play ဝန်ဆောင်မှုများ ရရှိနိုင်သည်"
+      (az) "Google Play xidmətlərinin əlçatanlığı"
+      (uz) "Google Play xizmatlarining mavjudligi"
+      (fr-rCA) "Disponibilité des services Google Play"
+      (en-rGB) "Google Play services availability"
+      (zh-rHK) "Google Play 服務的適用範圍"
+      (zh-rCN) "Google Play 服务的适用范围"
+      (pt-rBR) "Disponibilidade do Google Play Services"
+      (es-rUS) "Disp. de los Servicios de Google‌‌‌ Play"
+      (pt-rPT) "Disponibilidade Serviços do Google Play"
+      (zh-rTW) "Google Play 服務可用性"
+    resource 0x7f0a0013 string/common_google_play_services_notification_ticker
+      () "Google Play services error"
+      (ca) "Error de Serveis de Google Play"
+      (da) "Fejl i Google Play-tjenester"
+      (fa) "‏خطا در خدمات Google Play"
+      (ja) "Google Play開発者サービスのエラー"
+      (ka) "Google Play Services-ის შეცდომა"
+      (pa) "Google Play ਸੇਵਾਵਾਂ ਅਸ਼ੁੱਧੀ"
+      (ta) "Google Play சேவைகள் பிழை"
+      (nb) "Google Play Tjenester-feil"
+      (be) "Памылка службаў Google Play"
+      (de) "Fehler bei Zugriff auf Google Play-Dienste"
+      (ne) "Google Play सेवाहरूका त्रुटि"
+      (te) "Google Play సేవల ఎర్రర్"
+      (af) "Google Play Services-fout"
+      (bg) "Грешка в услугите за Google Play"
+      (th) "ข้อผิดพลาดของบริการ Google Play"
+      (fi) "Virhe Google Play -palveluissa"
+      (hi) "Google Play सेवाओं से जुड़ी गड़बड़ी"
+      (si) "Google Play සේවා දෝෂය"
+      (vi) "Lỗi dịch vụ của Google Play"
+      (kk) "Google Play қызметтерінің қатесі"
+      (mk) "Грешка на услугите на Google Play"
+      (sk) "Chyba služieb Google Play"
+      (uk) "Помилка сервісів Google Play"
+      (el) "Σφάλμα Υπηρεσιών Google Play"
+      (gl) "Erro nos servizos de Google Play"
+      (ml) "Google Play സേവനങ്ങളിലെ പിശക്"
+      (nl) "Fout met Google Play-services"
+      (pl) "Błąd Usług Google Play"
+      (sl) "Napaka storitev Google Play"
+      (tl) "Error sa Mga Serbisyo ng Google Play"
+      (am) "የGoogle Play አገልግሎቶች ስህተት"
+      (km) "កំហុស​​សេវាកម្ម​ Google កម្សាន្ត"
+      (bn) "Google Play পরিষেবার ত্রুটি"
+      (in) "Kesalahan layanan Google Play"
+      (kn) "Google Play ಸೇವೆಗಳ ದೋಷ"
+      (mn) "Google Наадаан үйлчилгээний алдаа"
+      (ko) "Google Play 서비스 오류"
+      (lo) "Google Play Services ​ເກີດ​ຄວາມ​ຜິດ​ພາດ"
+      (ro) "Eroare a serviciilor Google Play"
+      (sq) "Gabim në shërbimet e "Luaj me Google""
+      (ar) "‏خطأ في خدمات Google Play"
+      (fr) "Erreur liée aux services Google Play"
+      (hr) "Pogreška Usluga za Google Play"
+      (mr) "Google Play सेवा एरर"
+      (or) "Google Play ସେବା ସମ୍ପର୍କିତ ସମସ୍ୟା"
+      (sr) "Грешка Google Play услуга"
+      (b+sr+Latn) "Greška Google Play usluga"
+      (tr) "Google Play Hizmetleri hatası"
+      (ur) "‏Google Play سروسز کی خرابی"
+      (as) "Google Playৰ সেৱা সম্পৰ্কীয় আসোঁৱাহ"
+      (bs) "Greška Google Play usluge"
+      (cs) "Chyba služeb Google Play"
+      (es) "Error de Servicios de Google Play"
+      (is) "Villa í þjónustu Google Play"
+      (ms) "Ralat perkhidmatan Google Play"
+      (et) "Viga Google Play teenustes"
+      (it) "Errore Google Play Services"
+      (lt) "„Google Play“ paslaugų klaida"
+      (eu) "Google Play Services-en errorea"
+      (gu) "Google Play સેવાઓની ભૂલ"
+      (hu) "Google Play-szolgáltatások – hiba"
+      (ru) "Ошибка сервисов Google Play"
+      (zu) "Iphutha lamasevisi we-Google Play"
+      (lv) "Google Play pakalpojumu kļūda"
+      (sv) "Fel på Google Play-tjänster"
+      (iw) "‏שגיאה בשירותי Google Play"
+      (sw) "Hitilafu kwenye huduma za Google Play"
+      (hy) "Google Play ծառայությունների սխալ կա"
+      (ky) "Google Play кызматтарынын катасы"
+      (my) "Google Play ဝန်ဆောင်မှုများ အမှား"
+      (az) "Google Play xidmətləri xətası"
+      (uz) "Google Play xizmatlari xatosi"
+      (fr-rCA) "Erreur liée aux services Google Play"
+      (en-rGB) "Google Play services error"
+      (zh-rHK) "Google Play 服務錯誤"
+      (zh-rCN) "Google Play服务出错"
+      (pt-rBR) "Erro do Google Play Services"
+      (es-rUS) "Error de Google Play Services"
+      (pt-rPT) "Erro dos Serviços do Google Play"
+      (zh-rTW) "Google Play 服務發生錯誤"
+    resource 0x7f0a0014 string/common_google_play_services_unknown_issue
+      () "%1$s is having trouble with Google Play services. Please try again."
+      (ca) "%1$s té problemes amb Serveis de Google Play. Torna-ho a provar."
+      (da) "%1$s har problemer med Google Play-tjenester. Prøv igen."
+      (fa) "‏%1$s برای استفاده از خدمات Google Play با مشکل روبرو است. لطفاً دوباره امتحان کنید."
+      (ja) "「%1$s」で Google Play 開発者サービスに問題が発生しています。もう一度お試しください。"
+      (ka) "%1$s-ს Google Play Services-თან პრობლემა შეექმნა. გთხოვთ, ცადოთ ხელახლა."
+      (pa) "%1$s ਨੂੰ Google Play ਸੇਵਾਵਾਂ ਨਾਲ ਸਮੱਸਿਆ ਆ ਰਹੀ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+      (ta) "Google Play சேவைகளில் சிக்கல் ஏற்பட்டதால், %1$s ஆப்ஸை அணுக முடியவில்லை. மீண்டும் முயலவும்."
+      (nb) "%1$s har problemer med Google Play-tjenester. Prøv på nytt."
+      (be) "У праграмы %1$s узніклі праблемы са службамі Google Play. Паўтарыце спробу."
+      (de) "%1$s hat Probleme mit Google Play-Diensten. Bitte versuche es noch einmal."
+      (ne) "%1$s लाई Google Play services सँग सहकार्य गर्न समस्या भइरहेको छ। कृपया फेरि प्रयास गर्नुहोस्।"
+      (te) "%1$s Google Play సేవలతో సమస్య కలిగి ఉంది. దయచేసి మళ్లీ ప్రయత్నించండి."
+      (af) "%1$s ondervind probleme met Google Play Dienste. Probeer asseblief weer."
+      (bg) "%1$s има проблеми с услугите за Google Play. Моля, опитайте отново."
+      (th) "%1$s มีปัญหาเกี่ยวกับบริการของ Google Play โปรดลองอีกครั้ง"
+      (fi) "Sovelluksella %1$s on ongelmia Google Play Palveluiden kanssa. Yritä uudelleen."
+      (hi) "%1$s को Google Play सेवाओं के साथ समस्या आ रही है. कृपया फिर से कोशिश करें."
+      (si) "%1$s හට Google Play සේවා සමගින් ගැටලු ඇත. කරුණාකර නැවත උත්සාහ කරන්න."
+      (vi) "%1$s đang gặp sự cố với Dịch vụ Google Play. Hãy thử lại."
+      (kk) "%1$s қолданбасында Google Play қызметіне байланысты белгісіз қате шықты. Әрекетті қайталаңыз."
+      (mk) "%1$s има проблеми со услугите на Google Play. Обидете се повторно."
+      (sk) "Aplikácia %1$s má problémy so službami Google Play. Skúste to znova."
+      (uk) "У додатку %1$s виникла проблема із сервісами Google Play. Повторіть спробу."
+      (el) "Η εφαρμογή %1$s αντιμετωπίζει κάποιο πρόβλημα με τις υπηρεσίες Google Play. Προσπαθήστε ξανά."
+      (gl) "%1$s ten problemas cos servizos de Google Play. Téntao de novo."
+      (ml) "Google Play സേവനങ്ങളുമായി ബന്ധപ്പെട്ട് %1$s ആപ്പിനെന്തോ പ്രശ്നമുണ്ട്. വീണ്ടും ശ്രമിക്കുക."
+      (nl) "%1$s ondervindt problemen met Google Play-services. Probeer het opnieuw."
+      (pl) "%1$s ma problem z dostępem do Usług Google Play. Spróbuj jeszcze raz."
+      (sl) "Aplikacija %1$s ima težave s storitvami Google Play. Poskusite znova."
+      (tl) "Nagkakaproblema ang %1$s sa mga serbisyo ng Google Play. Pakisubukan ulit."
+      (am) "%1$s በGoogle Play አገልግሎቶች ላይ ችግሮች እያጋጠሙት ነው። እባክዎ እንደገና ይሞክሩ።"
+      (km) "%1$s កំពុងមានបញ្ហាជាមួយសេវាកម្មរបស់ Google Play ។ សូមព្យាយាមម្តងទៀតនៅពេលក្រោយ។"
+      (bn) "Google Play পরিষেবাগুলির সাথে %1$s এর সমস্যা হচ্ছে৷ অনুগ্রহ করে আবার চেষ্টা করুন৷"
+      (in) "%1$s mengalami masalah dengan layanan Google Play. Coba lagi."
+      (kn) "Google Play ಸೇವೆಗಳಲ್ಲಿ %1$s ಸಮಸ್ಯೆಯನ್ನು ಹೊಂದಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+      (mn) "%1$s-г Google Play-н үйлчилгээгээр ашиглахад асуудал гарлаа. Дахин оролдоно уу."
+      (ko) "%1$s에서 Google Play 서비스를 사용하는 데 문제가 있습니다. 다시 시도하세요."
+      (lo) "%1$s ກຳລັງມີບັນຫາກັບບໍລິການ Google Play. ກະລຸນາລອງໃໝ່ອີກຄັ້ງ."
+      (ro) "%1$s întâmpină probleme privind serviciile Google Play. Încercați din nou."
+      (sq) "%1$s ka probleme me shërbimet e Google Play. Provo sërish."
+      (ar) "‏لدى %1$s مشكلة في خدمات Google Play. يُرجى إعادة المحاولة."
+      (fr) "L'application %1$s rencontre des problèmes avec les services Google Play. Veuillez réessayer."
+      (hr) "%1$s ima poteškoća s uslugama Google Playa. Pokušajte ponovo."
+      (mr) "%1$s ला Google Play सेवांमध्ये समस्या येत आहे. कृपया पुन्हा प्रयत्न करा."
+      (or) "%1$sର Google Play ସେବା ସହ ଏକ ସମସ୍ୟା ରହିଛି। ଦୟାକରି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ।"
+      (sr) "%1$s има проблема са Google Play услугама. Пробајте поново."
+      (b+sr+Latn) "%1$s ima problema sa Google Play uslugama. Probajte ponovo."
+      (tr) "%1$s, Google Play hizmetleriyle ilgili sorun yaşıyor. Lütfen tekrar deneyin."
+      (ur) "‏%1$s کو Google Play سروسز کے ساتھ مسئلہ پیش آ رہا ہے۔ براہ کرم دوبارہ کوشش کریں۔"
+      (as) "Google প্লে সেৱাত %1$s ত সমস্যা হৈ আছে। আকৌ চেষ্টা কৰক।"
+      (bs) "Aplikacija %1$s ima problema s Google Play uslugama. Pokušajte ponovo."
+      (cs) "Aplikace %1$s má potíže se službami Google Play. Zkuste to prosím znovu."
+      (es) "La aplicación %1$s tiene problemas con los Servicios de Google Play. Vuelve a intentarlo."
+      (is) "%1$s á í vandræðum með þjónustu Google Play. Reyndu aftur."
+      (ms) "%1$s menghadapi masalah berhubung perkhidmatan Google Play. Sila cuba lagi."
+      (et) "Rakendusel %1$s on probleeme Google Play teenustega. Proovige uuesti."
+      (it) "%1$s sta riscontrando problemi con Google Play Services. Riprova."
+      (lt) "Naudojant programą „%1$s“ kilo problemų dėl „Google Play“ paslaugų. Bandykite dar kartą."
+      (eu) "%1$s aplikazioak arazoak ditu Google Play Services-ekin. Saiatu berriro."
+      (gu) "%1$s ને Google Play સેવાઓમાં મુશ્કેલી આવી રહી છે. કૃપા કરીને ફરી પ્રયાસ કરો."
+      (hu) "A(z) %1$s alkalmazás problémába ütközött a Google Play-szolgáltatások használata során. Próbálkozzon újra."
+      (ru) "Приложению "%1$s" не удается подключиться к сервисам Google Play. Повторите попытку."
+      (zu) "%1$s inenkinga ngamasevisi e-Google Play. Sicela uzame futhi."
+      (lv) "Lietotnē %1$s ir radusies problēma ar Google Play pakalpojumu darbību. Lūdzu, mēģiniet vēlreiz."
+      (sv) "Det har uppstått ett fel mellan %1$s och Google Play-tjänsterna. Försök igen."
+      (iw) "‏%1$s נתקלה בבעיה בשירותי Google Play. נסה שוב."
+      (sw) "%1$s inakumbwa na hitilafu ya huduma za Google Play. Tafadhali jaribu tena."
+      (hy) "%1$s հավելվածը Google Play ծառայությունների հետ կապված խնդիր ունի: Փորձեք նորից:"
+      (ky) "%1$s колдонмосунун Google Play кызматтары менен иштөөдө көйгөй чыкты. Кайталап көрүңүз."
+      (my) "%1$s သည် Google Play ဝန်ဆောင်မှုများနှင့် ပြဿနာအနည်းငယ် ရှိနေပါသည်။ ထပ်လုပ်ကြည့်ပါ။"
+      (az) "%1$s tətbiqi ilə Google Play xidmətləri arasında problem var. Daha sonra yenidən cəhd edin."
+      (uz) "%1$s ilovasini Google Play xizmatlariga ulab bo‘lmadi. Qaytadan urinib ko‘ring."
+      (fr-rCA) "L'application %1$s éprouve un problème avec les services Google Play. Veuillez réessayer."
+      (en-rGB) "%1$s is having trouble with Google Play services. Please try again."
+      (zh-rHK) "「%1$s」存取 Google Play 服務時發生問題。請稍後再試一次。"
+      (zh-rCN) "%1$s无法访问 Google Play 服务，请重试。"
+      (pt-rBR) "O app %1$s está com problemas com o Google Play Services. Tente novamente."
+      (es-rUS) "%1$s tiene problemas con los servicios de Google Play. Vuelve a intentarlo."
+      (pt-rPT) "%1$s está a ter problemas com os Serviços do Google Play. Tente novamente."
+      (zh-rTW) "「%1$s」無法存取 Google Play 服務，請再試一次。"
+    resource 0x7f0a0015 string/common_google_play_services_unsupported_text
+      () "%1$s won't run without Google Play services, which are not supported by your device."
+      (ca) "%1$s no es pot executar sense Serveis de Google Play, que no és compatible amb el teu dispositiu."
+      (da) "%1$s fungerer ikke uden Google Play-tjenester, som ikke understøttes på din enhed."
+      (fa) "‏%1$s بدون خدمات Google Play که در دستگاه شما پشتیبانی نمی‌شود، اجرا نخواهد شد."
+      (ja) "「%1$s」の実行には Google Play 開発者サービスが必要ですが、お使いのデバイスではサポートされていません。"
+      (ka) "%1$s ვერ გაეშვება Google Play Services-ის გარეშე, რომლებიც მხარდაუჭერელია თქვენი მოწყობილობის მიერ."
+      (pa) "%1$s Google Play ਸੇਵਾਵਾਂ ਤੋਂ ਬਿਨਾਂ ਨਹੀਂ ਚੱਲ ਸਕੇਗੀ, ਜੋ ਤੁਹਾਡੇ ਡੀਵਾਈਸ 'ਤੇ ਸਮਰਥਿਤ ਨਹੀਂ ਹਨ।"
+      (ta) "Google Play சேவைகள் இருந்தால் மட்டுமே %1$s ஆப்ஸ் இயங்கும். ஆனால், உங்கள் சாதனத்தில் அவை ஆதரிக்கப்படவில்லை."
+      (nb) "%1$s kan ikke kjøre uten Google Play-tjenester, som ikke støttes av enheten din."
+      (be) "%1$s не будзе працаваць без службаў Google Play, якія не падтрымліваюцца вашай прыладай."
+      (de) "Zur Nutzung von %1$s sind Google Play-Dienste erforderlich, die auf deinem Gerät nicht unterstützt werden."
+      (ne) "%1$s Google Play services बिना सञ्चालन हुने छैन र तपाईँको यन्त्रले Google Play services लाई समर्थन गर्दैन।"
+      (te) "%1$s Google Play సేవలు లేకుండా అమలు కాదు, ఈ సేవలకు మీ పరికరంలో మద్దతు లేదు."
+      (af) "%1$s sal nie werk sonder Google Play Dienste nie, wat nie deur jou toestel gesteun word nie."
+      (bg) "%1$s няма да се изпълнява, тъй като услугите за Google Play не се поддържат от устройството ви."
+      (th) "%1$s จะไม่ทำงานหากไม่มีบริการ Google Play ซึ่งอุปกรณ์ของคุณไม่สนับสนุน"
+      (fi) "%1$s ei toimi ilman Google Play Palveluita, joita laitteesi ei tue."
+      (hi) "%1$s उन Google Play सेवाओं के बिना नहीं चलेगा, जो आपके डिवाइस पर काम नहीं करती हैं."
+      (si) "ඔබගේ උපාංගය මගින් සහාය නොදක්වන, Google Play සේවා නොමැතිව %1$s ධාවනය නොවනු ඇත."
+      (vi) "%1$s sẽ không chạy nếu không có Dịch vụ Google Play. Thiết bị của bạn không hỗ trợ các dịch vụ này."
+      (kk) "%1$s қолданбасы құрылғыңызда қолдау көрсетілмейтін Google Play қызметінсіз жұмыс істемейді."
+      (mk) "%1$s нема да се извршува без услугите на Google Play, што не се подржани од уредов."
+      (sk) "Aplikáciu %1$s nebude možné spustiť bez služieb Google Play, ktoré vaše zariadenie nepodporuje."
+      (uk) "Додаток %1$s не працюватиме без сервісів Google Play, які не підтримуються на вашому пристрої."
+      (el) "Η εφαρμογή %1$s δεν θα εκτελεστεί χωρίς τις υπηρεσίες Google Play, οι οποίες δεν υποστηρίζονται από τη συσκευή σας."
+      (gl) "%1$s non se executará sen os servizos de Google Play, que non son compatibles co teu dispositivo."
+      (ml) "Google Play സേവനങ്ങളില്ലാതെ %1$s പ്രവർത്തിക്കില്ല, സേവനങ്ങളെയാകട്ടെ നിങ്ങളുടെ ഉപകരണം പിന്തുണയ്ക്കുന്നുമില്ല."
+      (nl) "%1$s kan niet worden uitgevoerd zonder Google Play-services, die niet worden ondersteund op je apparaat."
+      (pl) "%1$s nie będzie działać bez Usług Google Play, które nie są obecnie obsługiwane przez urządzenie."
+      (sl) "Aplikacija %1$s ne deluje brez storitev Google Play, ki jih vaša naprava ne podpira."
+      (tl) "Hindi gagana ang %1$s nang wala ang mga serbisyo ng Google Play, na hindi nasusuportahan ng iyong device."
+      (am) "%1$s ያለGoogle Play አገልግሎቶች አይሄድም፣ እነዚህም በመሣሪያዎ አይደገፉም።"
+      (km) "%1$s នឹងមិនដំណើរការដោយគ្មានសេវាកម្មរបស់ Google Play ដែលឧបករណ៍របស់អ្នកមិនគាំទ្រនោះទេ។"
+      (bn) "Google Play পরিষেবা ছাড়া %1$s চলবে না, যেটি আপনার ডিভাইসে সমর্থিত নয়৷"
+      (in) "%1$s tidak akan berjalan tanpa layanan Google Play, yang tidak didukung oleh perangkat Anda."
+      (kn) "ನಿಮ್ಮ ಸಾಧನದ ಮೂಲಕ ಬೆಂಬಲಿಸದಿರುವ Google Play ಸೇವೆಗಳಿಲ್ಲದೆ %1$s ರನ್‌ ಆಗುವುದಿಲ್ಲ."
+      (mn) "Таны төхөөрөмж Google Play үйлчилгээг дэмждэггүй учир %1$s ажиллахгүй."
+      (ko) "%1$s은(는) Google Play 서비스 없이는 실행되지 않으나, 기기에서 Google Play 서비스를 지원하지 않습니다."
+      (lo) "%1$s ຈະບໍ່ສາມາດໃຊ້ໄດ້ຫາກບໍ່ມີບໍລິການ Google Play ເຊິ່ງອຸປະກອນຂອງທ່ານບໍ່ຮອງຮັບ."
+      (ro) "%1$s nu va rula fără serviciile Google Play, care nu sunt acceptate de dispozitivul dvs."
+      (sq) "%1$s nuk do të funksionojë pa shërbimet e Google Play, të cilat nuk mbështeten nga pajisja jote."
+      (ar) "‏لن يتم تشغيل %1$s بدون خدمات Google Play التي لا يوفرها جهازك."
+      (fr) "%1$s ne fonctionnera pas sans les services Google Play, qui ne sont pas compatibles avec votre appareil."
+      (hr) "%1$s neće funkcionirati bez usluga Google Playa koje vaš uređaj ne podržava."
+      (mr) "तुमचे डिव्हाइस सपोर्ट करत नसलेल्या, Google Play सेवांशिवाय %1$s चालणार नाही."
+      (or) "%1$s ଏହି Google Play ସେବାଗୁଡ଼ିକ ବିନା ଚାଲେ ନାହିଁ, ଏବଂ ସେଗୁଡ଼ିକ ଆପଣଙ୍କ ଡିଭାଇସ୍‌ରେ କାମ କରେ ନାହିଁ।"
+      (sr) "%1$s не може да се покрене без Google Play услуга, које уређај не подржава."
+      (b+sr+Latn) "%1$s ne može da se pokrene bez Google Play usluga, koje uređaj ne podržava."
+      (tr) "%1$s, Google Play hizmetleri olmadan çalışmaz ve bu hizmetler cihazınız tarafından desteklenmiyor."
+      (ur) "‏%1$s Google Play سروسز کے بغیر نہیں چلے گی، جن کی آپ کا آلہ معاونت نہیں کرتا۔"
+      (as) "%1$s Google প্লে সেৱাৰ অবিহনে নচলে, যিবোৰ আপোনাৰ ডিভাইচত চলিব নোৱাৰে।"
+      (bs) "Aplikacija %1$s neće raditi bez Google Play usluga, koje vaš uređaj ne podržava."
+      (cs) "Ke spuštění aplikace %1$s jsou potřeba služby Google Play, které v tomto zařízení nejsou podporovány."
+      (es) "No es posible ejecutar la aplicación %1$s sin los Servicios de Google Play, que no son compatibles con tu dispositivo."
+      (is) "%1$s getur ekki keyrt án þjónustu Google Play, sem er ekki studd af tækinu þínu."
+      (ms) "%1$s tidak akan berfungsi tanpa perkhidmatan Google Play dan perkhidmatan ini tidak disokong oleh peranti anda."
+      (et) "Rakendus %1$s töötab ainult koos Google Play teenustega, mida teie seadmes ei toetata."
+      (it) "%1$s non funzionerà senza Google Play Services, non supportati dal tuo dispositivo."
+      (lt) "Programa „%1$s“ nebus paleidžiama be „Google Play“ paslaugų, kurių jūsų įrenginys nepalaiko."
+      (eu) "%1$s aplikazioa ezin da erabili Google Play Services gabe, baina zure gailua ez da harekin bateragarria."
+      (gu) "%1$s, Google Play સેવાઓ વગર ચાલશે નહીં, જે તમારા ઉપકરણ દ્વારા સમર્થિત નથી."
+      (hu) "A(z) %1$s alkalmazás nem fut a Google Play-szolgáltatások nélkül, amelyeket eszköze nem támogat."
+      (ru) "Для работы с приложением "%1$s" требуются сервисы Google Play. Они не поддерживаются на вашем устройстве."
+      (zu) "%1$s ngeke isebenze ngaphandle kwamasevisi e-Google Play, angasekelwa idivayisi yakho."
+      (lv) "Lai lietotne %1$s darbotos, ir nepieciešami Google Play pakalpojumi, taču jūsu ierīce tos neatbalsta."
+      (sv) "%1$s fungerar inte utan Google Play-tjänsterna, som inte stöds på enheten."
+      (iw) "‏%1$s לא תפעל ללא שירותי Google Play, שאינם נתמכים במכשיר שלך."
+      (sw) "%1$s haitafanya kazi bila huduma za Google Play. Huduma hizi hazitumiki kwenye kifaa chako."
+      (hy) "%1$s հավելվածը չի աշխատի առանց Google Play ծառայությունների, որոնք ձեր սարքում չեն աջակցվում:"
+      (ky) "%1$s колдонмосу сиздин түзмөгүңүздө колдоого алынбаган Google Play кызматтары болбосо иштебейт."
+      (my) "Google Play ဝန်ဆောင်မှုများကို သင့်စက်ပစ္စည်းတွင် ပံ့ပိုးမထားသည့်အတွက် ၎င်းမရှိဘဲ %1$s ကို ဖွင့်၍မရပါ။"
+      (az) "Cihazınız tərəfindən dəstəklənməyən Google Play xidmətləri olmadan %1$s tətbiqi işləməyəcək."
+      (uz) "%1$s ilovasi Google Play xizmatlarisiz ishlamaydi, biroq qurilmangiz ularni qo‘llab-quvvatlamaydi."
+      (fr-rCA) "L'application %1$s ne fonctionnera pas sans les services Google Play, qui ne sont pas pris en charge par votre appareil."
+      (en-rGB) "%1$s won't run without Google Play services, which are not supported by your device."
+      (zh-rHK) "您的裝置不支援 Google Play 服務，因此無法執行「%1$s」。"
+      (zh-rCN) "您的设备不支持 Google Play 服务，因此无法运行%1$s。"
+      (pt-rBR) "O app %1$s não funciona sem o Google Play Services, o qual não é compatível com seu dispositivo."
+      (es-rUS) "%1$s no se ejecutará sin los servicios de Google Play, que no son compatibles con tu dispositivo."
+      (pt-rPT) "Não é possível executar o %1$s sem os Serviços do Google Play, os quais não são compatíveis com o seu dispositivo."
+      (zh-rTW) "您的裝置不支援 Google Play 服務，因此無法執行「%1$s」。"
+    resource 0x7f0a0016 string/common_google_play_services_update_button
+      () "Update"
+      (ca) "Actualitza"
+      (da) "Opdater"
+      (fa) "به‌روزرسانی"
+      (ja) "更新"
+      (ka) "განახლება"
+      (pa) "ਅੱਪਡੇਟ ਕਰੋ"
+      (ta) "புதுப்பி"
+      (nb) "Oppdater"
+      (be) "Абнавіць"
+      (de) "Aktualisieren"
+      (ne) "अपडेट गर्नुहोस्"
+      (te) "అప్‌డేట్ చేయి"
+      (af) "Dateer op"
+      (bg) "Актуализиране"
+      (th) "อัปเดต"
+      (fi) "Päivitä"
+      (hi) "अपडेट करें"
+      (si) "යාවත්කාලීන කරන්න"
+      (vi) "Cập nhật"
+      (kk) "Жаңарту"
+      (mk) "Ажурирај"
+      (sk) "Aktualizovať"
+      (uk) "Оновити"
+      (el) "Ενημέρωση"
+      (gl) "Actualizar"
+      (ml) "അപ്‌ഡേറ്റുചെയ്യുക"
+      (nl) "Updaten"
+      (pl) "Aktualizuj"
+      (sl) "Posodobi"
+      (tl) "I-update"
+      (am) "ያዘምኑ"
+      (km) "ធ្វើបច្ចុប្បន្នភាព"
+      (bn) "আপডেট করুন"
+      (in) "Update"
+      (kn) "ಅಪ್‌ಡೇಟ್‌ ಮಾಡಿ"
+      (mn) "Шинэчлэх"
+      (ko) "업데이트"
+      (lo) "ອັບເດດ"
+      (ro) "Actualizați"
+      (sq) "Përditëso"
+      (ar) "تحديث"
+      (fr) "Mettre à jour"
+      (hr) "Ažuriraj"
+      (mr) "अपडेट करा"
+      (or) "ଅପଡେଟ୍‍ କରନ୍ତୁ"
+      (sr) "Ажурирај"
+      (b+sr+Latn) "Ažuriraj"
+      (tr) "Güncelle"
+      (ur) "اپ ڈیٹ کریں"
+      (as) "আপডে’ট কৰক"
+      (bs) "Ažuriraj"
+      (cs) "Aktualizovat"
+      (es) "Actualizar"
+      (is) "Uppfæra"
+      (ms) "Kemas kini"
+      (et) "Värskenda"
+      (it) "Aggiorna"
+      (lt) "Atnaujinti"
+      (eu) "Eguneratu"
+      (gu) "અપડેટ કરો"
+      (hu) "Frissítés"
+      (ru) "Обновить"
+      (zu) "Isibuyekezo"
+      (lv) "Atjaunināt"
+      (sv) "Uppdatera"
+      (iw) "עדכון"
+      (sw) "Sasisha"
+      (hy) "Թարմացնել"
+      (ky) "Жаңыртуу"
+      (my) "အပ်ဒိတ်"
+      (az) "Güncəlləyin"
+      (uz) "Yangilash"
+      (fr-rCA) "Mettre à jour"
+      (en-rGB) "Update"
+      (zh-rHK) "更新"
+      (zh-rCN) "更新"
+      (pt-rBR) "Atualizar"
+      (es-rUS) "Actualizar"
+      (pt-rPT) "Atualizar"
+      (zh-rTW) "更新"
+    resource 0x7f0a0017 string/common_google_play_services_update_text
+      () "%1$s won't run unless you update Google Play services."
+      (ca) "%1$s no s'executarà si no actualitzes Serveis de Google Play."
+      (da) "%1$s kan ikke køre, medmindre du opdaterer Google Play-tjenester."
+      (fa) "‏تاز مانی که «خدمات Google Play» را به‌روزرسانی نکنید، %1$s اجرا نمی‌شود."
+      (ja) "%1$sの実行にはGoogle Play開発者サービスの更新が必要です。"
+      (ka) "%1$s ვერ გაეშვება, თუ Google Play სერვისებს არ განაახლებთ."
+      (pa) "%1$s ਨਹੀਂ ਚੱਲੇਗਾ ਜਦੋਂ ਤੱਕ ਤੁਸੀਂ Google Play ਸੇਵਾਵਾਂ ਨੂੰ ਅੱਪਡੇਟ ਨਹੀਂ ਕਰਦੇ ਹੋ।"
+      (ta) "Google Play சேவைகளை இயக்கினால் மட்டுமே, %1$s செயல்படும்."
+      (nb) "%1$s kjører ikke med mindre du oppdaterer Google Play Tjenester."
+      (be) "%1$s не будзе працаваць, пакуль вы не абновіце службы Google Play."
+      (de) "%1$s wird nur ausgeführt, wenn du die Google Play-Dienste aktualisierst."
+      (ne) "%1$s तपाईंले Google प्ले सेवाहरू अद्यावधिक नगरेसम्म सञ्चालन हुँदैन।"
+      (te) "మీరు Google Play సేవలను నవీకరిస్తే మినహా %1$s అమలు కాదు."
+      (af) "%1$s sal nie werk nie tensy jy Google Play Dienste opdateer."
+      (bg) "%1$s няма да се изпълнява, освен ако не актуализирате услугите за Google Play."
+      (th) "%1$s จะไม่ทำงานจนกว่าคุณจะอัปเดตบริการ Google Play"
+      (fi) "%1$s ei toimi, ellet päivitä Google Play Palveluita."
+      (hi) "%1$s तब तक नहीं चलेगा जब तक आप Google Play सेवाओं को अपडेट नहीं करते."
+      (si) "Google Play සේවා යාවත්කාලීන කරන්නේ නොමැතිව %1$s ධාවනය නොවේ."
+      (vi) "%1$s sẽ không chạy trừ khi bạn cập nhật Dịch vụ Google Play."
+      (kk) "Google Play қызметтерін жаңартпасаңыз, %1$s іске қосылмайды."
+      (mk) "%1$s нема да се извршува ако не ги ажурирате услугите на Google Play."
+      (sk) "Aplikáciu %1$s bude možné spustiť až po aktualizácii služieb Google Play."
+      (uk) "Додаток %1$s не працюватиме, якщо не оновити сервіси Google Play."
+      (el) "Η εφαρμογή %1$s θα εκτελεστεί αφού ενημερώσετε τις Υπηρεσίες Google Play."
+      (gl) "%1$s non se executará a menos que actualices os servizos de Google Play."
+      (ml) "നിങ്ങൾ Google Play സേവനങ്ങൾ അപ്‌ഡേറ്റുചെയ്‌തില്ലെങ്കിൽ %1$s പ്രവർത്തിക്കില്ല."
+      (nl) "%1$s kan niet worden uitgevoerd, tenzij je Google Play-services updatet."
+      (pl) "Aplikacja %1$s nie będzie działać, jeśli nie zaktualizujesz Usług Google Play."
+      (sl) "Aplikacija %1$s ne bo delovala, če ne posodobite storitev Google Play."
+      (tl) "Hindi gagana ang %1$s maliban kung i-a-update mo ang mga serbisyo ng Google Play."
+      (am) "Google Play አገልግሎቶችን ካላዘመኑ በስተቀር ድረስ %1$s አይሰራም።"
+      (km) "%1$s នឹងមិនដំណើរការទេ លុះត្រាតែអ្នកធ្វើបច្ចុប្បន្នភាពសេវាកម្ម Google Play។"
+      (bn) "আপনি Google Play পরিষেবা আপডেট না করা পর্যন্ত %1$s চলবে না।"
+      (in) "%1$s tidak akan berjalan jika layanan Google Play tidak diperbarui."
+      (kn) "ನೀವು Google Play ಸೇವೆಗಳನ್ನು ಅಪ್‍ಡೇಟ್ ಮಾಡದ ಹೊರತು %1$s ರನ್ ಆಗುವುದಿಲ್ಲ."
+      (mn) "%1$s нь таныг Google Play үйлчилгээнүүдийг шинэчлэхээс нааш ажиллахгүй."
+      (ko) "Google Play 서비스를 업데이트해야 %1$s이(가) 실행됩니다."
+      (lo) "%1$s ຈະບໍ່ສາມາດເຮັດວຽກໄດ້ຈົນກວ່າທ່ານຈະອັບເດດການ​ບໍ​ລິ​ການ Google Play"
+      (ro) "%1$s nu va rula decât dacă actualizați serviciile Google Play."
+      (sq) "%1$s nuk do të funksionojë nëse nuk përditëson shërbimet e "Luaj me Google"."
+      (ar) "‏لن يتم تشغيل %1$s ما لم يتم تحديث خدمات Google Play."
+      (fr) "%1$s ne fonctionnera pas tant que vous n'aurez pas mis à jour les services Google Play."
+      (hr) "%1$s neće funkcionirati ako ne ažurirate Google Play usluge."
+      (mr) "तुम्ही Google Play सेवा अपडेट करेपर्यंत %1$s चालणार नाही."
+      (or) "ଆପଣ Google Play ସେବା ଅପଡେଟ୍‌ ନ କରିବା ପର୍ଯ୍ୟନ୍ତ %1$s ଚାଲିବ ନାହିଁ।"
+      (sr) "%1$s не може да се покрене ако не ажурирате Google Play услуге."
+      (b+sr+Latn) "%1$s ne može da se pokrene ako ne ažurirate Google Play usluge."
+      (tr) "Google Play hizmetlerini güncellemezseniz %1$s çalışmayacak."
+      (ur) "‏جب تک آپ Google Play سروسز اپ ڈیٹ نہیں کر لیتے ہیں %1$s تب تک نہیں چلے گی۔"
+      (as) "আপুনি Google Play সেৱাবোৰ আপডে’ট নকৰালৈকে %1$s নচলিব।"
+      (bs) "Aplikacija %1$s neće raditi ako ne ažurirate Google Play usluge."
+      (cs) "Ke spuštění aplikace %1$s je třeba aktualizovat služby Google Play."
+      (es) "%1$s no funcionará hasta que no actualices Servicios de Google Play."
+      (is) "%1$s getur ekki keyrt nema þú uppfærir þjónustu Google Play."
+      (ms) "%1$s tidak akan berfungsi kecuali anda mengemas kini perkhidmatan Google Play."
+      (et) "Rakenduse %1$s töötamiseks peate värskendama Google Play teenuseid."
+      (it) "%1$s non funzionerà se non aggiorni Google Play Services."
+      (lt) "„%1$s“ nebus paleidžiama, jei neatnaujinsite „Google Play“ paslaugų."
+      (eu) "%1$s ez da exekutatuko Google Play Services eguneratzen ez baduzu."
+      (gu) "તમે Google Play સેવાઓ અપડેટ કરશો નહીં ત્યાં સુધી %1$s શરૂ થશે નહીં."
+      (hu) "A(z) %1$s alkalmazás csak akkor fog működni, ha frissíti a Google Play-szolgáltatásokat."
+      (ru) "Чтобы запустить приложение "%1$s", обновите сервисы Google Play."
+      (zu) "I-%1$s ngeke ize iqalise ngaphandle kokuthi ubuyekeze i-Google Play."
+      (lv) "Lai lietotne %1$s darbotos, jums ir jāatjaunina Google Play pakalpojumi."
+      (sv) "%1$s kan inte köras om du inte uppdaterar Google Play-tjänsterna."
+      (iw) "‏%1$s לא יפעל אם לא תעדכן את שירותי Google Play."
+      (sw) "%1$s haitafanya kazi hadi usasishe huduma za Google Play."
+      (hy) "%1$s հավելվածը չի աշխատի մինչև չթարմացնեք Google Play ծառայությունները:"
+      (ky) "Google Play кызматтары жаңыртылмайынча %1$s иштебейт."
+      (my) "Google Play ဝန်ဆောင်မှုများအား အပ်ဒိတ်မလုပ်ပါက %1$s အလုပ်လုပ်မည် မဟုတ်ပါ။"
+      (az) "%1$s Google Play xidmətləri yeniləmə halda çalışmaz."
+      (uz) "Google Play xizmatlari yangilanmaguncha, %1$s ishga tushmaydi."
+      (fr-rCA) "%1$s ne fonctionnera pas tant que vous n'aurez pas mis à jour les services Google Play."
+      (en-rGB) "%1$s won't run unless you update Google Play services."
+      (zh-rHK) "您必須更新「Google Play 服務」，才能執行 %1$s。"
+      (zh-rCN) "您必须先更新 Google Play 服务，然后才能运行%1$s。"
+      (pt-rBR) "%1$s só funciona com uma versão atualizada do Google Play Services."
+      (es-rUS) "%1$s no se ejecutará a menos que actualices los servicios de Google Play."
+      (pt-rPT) "O %1$s não é executado enquanto não atualizar os serviços do Google Play."
+      (zh-rTW) "您必須更新 Google Play 服務，才能執行「%1$s」。"
+    resource 0x7f0a0018 string/common_google_play_services_update_title
+      () "Update Google Play services"
+      (ca) "Actualitza Serveis de Google Play"
+      (da) "Opdater Google Play-tjenester"
+      (fa) "‏‫به‌روزرسانی «خدمات Google Play»"
+      (ja) "Google Play開発者サービスの更新"
+      (ka) "განაახლეთ Google Play Services"
+      (pa) "Google Play ਸੇਵਾਵਾਂ ਨੂੰ ਅੱਪਡੇਟ ਕਰੋ"
+      (ta) "Google Play சேவைகளைப் புதுப்பிக்கவும்"
+      (nb) "Oppdater Google Play-tjenester"
+      (be) "Абнаўленне службаў Google Play"
+      (de) "Google Play-Dienste aktualisieren"
+      (ne) "Google Play सेवाहरू अपडेट गर्नुहोस्"
+      (te) "Google Play సేవలను అప్‌డేట్ చేయండి"
+      (af) "Dateer Google Play Dienste op"
+      (bg) "Актуализиране на услугите за Google Play"
+      (th) "อัปเดตบริการ Google Play"
+      (fi) "Päivitä Google Play Palvelut"
+      (hi) "Google Play सेवाओं को अपडेट करें"
+      (si) "Google Play සේවා යාවත්කාලීන කරන්න"
+      (vi) "Cập nhật dịch vụ của Google Play"
+      (kk) "Google Play қызметтерін жаңарту"
+      (mk) "Ажурирај ги услугите на Google Play"
+      (sk) "Aktualizácia služieb Google Play"
+      (uk) "Оновіть сервіси Google Play"
+      (el) "Ενημέρωση υπηρεσιών Google Play"
+      (gl) "Actualizar os servizos de Google Play"
+      (ml) "Google Play സേവനങ്ങൾ അപ്‌ഡേറ്റുചെയ്യുക"
+      (nl) "Google Play-services updaten"
+      (pl) "Zaktualizuj Usługi Google Play"
+      (sl) "Posodobitev storitev Google Play"
+      (tl) "I-update ang mga serbisyo ng Google Play"
+      (am) "Google Play አገልግሎቶችን ያዘምኑ"
+      (km) "អាប់ដេតសេវាកម្ម Google Play"
+      (bn) "Google Play পরিষেবা আপডেট করুন"
+      (in) "Perbarui layanan Google Play"
+      (kn) "Google ಪ್ಲೇ ಸೇವೆಗಳನ್ನು ಅಪ್‌ಡೇಟ್‌ ಮಾಡಿ"
+      (mn) "Google Play үйлчилгээг шинэчлэх"
+      (ko) "Google Play 서비스 업데이트"
+      (lo) "ອັບເດດການ​ບໍ​ລິ​ການ Google Play"
+      (ro) "Actualizați serviciile Google Play"
+      (sq) "Përditëso shërbimet e "Luaj me Google""
+      (ar) "‏تحديث خدمات Google Play"
+      (fr) "Mettre à jour les services Google Play"
+      (hr) "Ažuriranje usluga Google Playa"
+      (mr) "Google Play सेवा अपडेट करा"
+      (or) "Google Play ସେବାଗୁଡ଼ିକ ଅପଡେଟ୍ କରନ୍ତୁ"
+      (sr) "Ажурирајте Google Play услуге"
+      (b+sr+Latn) "Ažurirajte Google Play usluge"
+      (tr) "Google Play hizmetlerini güncelleyin"
+      (ur) "‏Google Play سروسز اپ ڈیٹ کریں"
+      (as) "Google Play সেৱা আপডে’ট কৰক"
+      (bs) "Ažuriranje Google Play usluga"
+      (cs) "Aktualizace služeb Google Play"
+      (es) "Actualiza Servicios de Google Play"
+      (is) "Uppfæra þjónustu Google Play"
+      (ms) "Kemaskinikan perkhidmatan Google Play"
+      (et) "Google Play teenuste värskendamine"
+      (it) "Aggiorna Google Play Services"
+      (lt) "Atnaujinkite „Google Play“ paslaugas"
+      (eu) "Eguneratu Google Play Services"
+      (gu) "Google Play સેવાઓ અપડેટ કરો"
+      (hu) "A Google Play-szolgáltatások frissítése"
+      (ru) "Обновите сервисы Google Play"
+      (zu) "Buyekeza amasevisi we-Google Play"
+      (lv) "Google Play pakalpojumu atjaunināšana"
+      (sv) "Uppdatera Google Play-tjänster"
+      (iw) "‏עדכון שירותי Google Play"
+      (sw) "Sasisha huduma za Google Play"
+      (hy) "Թարմացնել Google Play ծառայությունները"
+      (ky) "Google Play кызматтарын жаңыртуу"
+      (my) "Google Play ဝန်ဆောင်မှုများကို အပ်ဒိတ်လုပ်ရန်"
+      (az) "Google Play xidmətlərini güncəlləşdirin"
+      (uz) "Google Play xizmatlarini yangilash"
+      (fr-rCA) "Mettre à jour les services Google Play"
+      (en-rGB) "Update Google Play services"
+      (zh-rHK) "更新 Google Play 服務"
+      (zh-rCN) "更新 Google Play 服务"
+      (pt-rBR) "Atualizar o Google Play Services"
+      (es-rUS) "Actualizar servicios de Google Play"
+      (pt-rPT) "Atualizar serviços do Google Play"
+      (zh-rTW) "更新 Google Play 服務"
+    resource 0x7f0a0019 string/common_google_play_services_updating_text
+      () "%1$s won't run without Google Play services, which are currently updating."
+      (ca) "%1$s no s'executarà sense Serveis de Google Play, que s'està actualitzant en aquest moment."
+      (da) "%1$s kan ikke køre uden Google Play-tjenester, som i øjeblikket opdateres."
+      (fa) "‏%1$s بدون «خدمات Google Play» که درحال حاضر درحال به‌روزرسانی هستند، کار نمی‌کند."
+      (ja) "%1$sの実行にはGoogle Play開発者サービスが必要ですが、このサービスは現在更新中です。"
+      (ka) "%1$s ვერ გაეშვება Google Play Services-ის გარეშე, რომელთა განახლებაც ამჟამად მიმდინარეობს."
+      (pa) "%1$s Google Play ਸੇਵਾਵਾਂ ਤੋਂ ਬਿਨਾਂ ਨਹੀਂ ਚੱਲੇਗਾ, ਜੋ ਵਰਤਮਾਨ ਵਿੱਚ ਅੱਪਡੇਟ ਹੋ ਰਹੀਆਂ ਹਨ।"
+      (ta) "தற்போது புதுப்பிக்கப்படும், Google Play சேவைகள் இருந்தால் மட்டுமே, %1$s செயல்படும்."
+      (nb) "%1$s kjører ikke uten Google Play-tjenester, som oppdateres akkurat nå."
+      (be) "%1$s не будзе працаваць без службаў Google Play, якія ў цяперашні час абнаўляюцца."
+      (de) "Zur Nutzung von %1$s sind Google Play-Dienste erforderlich, die gerade aktualisiert werden."
+      (ne) "Google Play सेवाहरू %1$s बिना सञ्‍चालन हुँदैन, जुन हाल अद्यावधिक भइरहेका छन्।"
+      (te) "%1$s Google Play సేవలు లేకుండా అమలు కాదు, ఆ సేవలు ప్రస్తుతం నవీకరించబడుతున్నాయి."
+      (af) "%1$s sal nie sonder Google Play Dienste werk nie, wat tans opdateer."
+      (bg) "%1$s няма да се изпълнява без услугите за Google Play. Понастоящем те се актуализират."
+      (th) "%1$s จะไม่ทำงานหากไม่มีบริการ Google Play ซึ่งกำลังอัปเดตอยู่ในขณะนี้"
+      (fi) "%1$s ei toimi ilman Google Play Palveluita, joita päivitetään tällä hetkellä."
+      (hi) "%1$s उन Google Play सेवाओं के बिना नहीं चलेगा जो अभी अपडेट हो रही हैं."
+      (si) "දැනට යාවත්කාලීන කරමින් ඇති, Google Play සේවා නොමැතිව %1$s ධාවනය නොවනු ඇත."
+      (vi) "%1$s sẽ không chạy nếu không có dịch vụ của Google Play. Dịch vụ này hiện đang cập nhật."
+      (kk) "Қазіргі уақытта жаңартылып жатқан Google Play қызметтерінсіз %1$s іске қосылмайды."
+      (mk) "%1$s нема да се извршува без услугите на Google Play што се ажурираат во моментов."
+      (sk) "Na spustenie aplikácie %1$s sa vyžadujú služby Google Play, ktoré sa momentálne aktualizujú."
+      (uk) "Додаток %1$s не працюватиме без сервісів Google Play, які зараз оновлюються."
+      (el) "Η εφαρμογή %1$s δεν θα εκτελεστεί χωρίς τις υπηρεσίες Google Play, οι οποίες ενημερώνονται αυτήν τη στιγμή."
+      (gl) "%1$s non se executará sen os servizos de Google Play, que se están actualizando neste momento."
+      (ml) "നിലവിൽ അപ്‌ഡേറ്റുചെയ്യുന്ന Google Play സേവനങ്ങൾ ഇല്ലാതെ %1$s പ്രവർത്തിക്കില്ല."
+      (nl) "%1$s kan niet worden uitgevoerd zonder Google Play-services, die momenteel worden geüpdatet."
+      (pl) "Aplikacja %1$s nie będzie działać bez Usług Google Play, które są obecnie aktualizowane."
+      (sl) "Aplikacija %1$s ne deluje brez storitev Google Play, ki se trenutno posodabljajo."
+      (tl) "Hindi gagana ang %1$s nang wala ang mga serbisyo ng Google Play na kasalukuyang ina-update."
+      (am) "%1$s ያለ Google Play አገልግሎቶች አይሰራም፣ እነሱ ደግሞ በአሁኑ ጊዜ በመዘመን ላይ ናቸው።"
+      (km) "%1$s នឹងមិនដំណើរការទេ បើមិនមានសេវាកម្ម Google Play ដោយសារតែវាកំពុងអាប់ដេត។"
+      (bn) "Google Play পরিষেবা ছাড়া %1$s চলবে না যা বর্তমানে আপডেট হচ্ছে।"
+      (in) "%1$s tidak akan berjalan tanpa layanan Google Play, yang saat ini sedang diperbarui."
+      (kn) "Google Play ಸೇವೆಗಳಿಲ್ಲದೆ ಪ್ರಸ್ತುತ ಅಪ್‌ಡೇಟ್ ಆಗುತ್ತಿರುವ %1$s ರನ್ ಆಗುವುದಿಲ್ಲ."
+      (mn) "%1$s нь одоогоор шинэчилж буй Google Play үйлчилгээгүйгээр ажиллахгүй."
+      (ko) "현재 업데이트 중인 Google Play 서비스가 있어야 %1$s이(가) 실행됩니다."
+      (lo) "%1$s ຈະບໍ່ສາມາດໃຊ້ງານໄດ້ໂດຍທີ່ບໍ່ມີການ​ບໍ​ລິ​ການ Google Play, ເຊິ່ງ​ກຳ​ລັງ​ອັບ​ເດດ​ຢູ່​ໃນ​ປະ​ຈຸ​ບັນ."
+      (ro) "%1$s nu va rula fără serviciile Google Play, care momentan se actualizează."
+      (sq) "%1$s nuk do të funksionojë pa shërbimet e Google Play, të cilat po përditësohen aktualisht."
+      (ar) "‏لن يتم تشغيل %1$s بدون خدمات Google Play، والتي يتم تحديثها حاليًا."
+      (fr) "%1$s ne fonctionnera pas sans les services Google Play, qui sont en cours de mise à jour."
+      (hr) "%1$s neće se pokrenuti bez usluga Google Playa koje se trenutačno ažuriraju."
+      (mr) "सध्‍या अपडेट होत असलेल्‍या, Google Play सेवांशिवाय %1$s चालणार नाही."
+      (or) "Google Play ସେବାଗୁଡ଼ିକ ବିନା %1$s ଚାଲିବ ନାହିଁ, ଯେଉଁଗୁଡ଼ିକ ବର୍ତ୍ତମାନ ଅପଡେଟ୍‌ ହେଉଛି।"
+      (sr) "%1$s не може да се покрене без Google Play услуга, које се тренутно ажурирају."
+      (b+sr+Latn) "%1$s ne može da se pokrene bez Google Play usluga, koje se trenutno ažuriraju."
+      (tr) "%1$s, şu anda güncellenmekte olan Google Play hizmetleri olmadan çalışmaz."
+      (ur) "‏%1$s Google Play سروسز کے بغیر نہیں چلے گی، جو فی الحال اپ ڈیٹ ہو رہی ہیں۔"
+      (as) "বৰ্তমান আপডে’ট হৈ থকা Google Play সেৱাসমূহৰ অবিহনে %1$s নচলিব৷"
+      (bs) "Aplikacija %1$s neće raditi bez Google Play usluga, koje se trenutno ažuriraju."
+      (cs) "Ke spuštění aplikace %1$s jsou potřeba služby Google Play, které jsou právě aktualizovány."
+      (es) "%1$s no se ejecutará hasta que finalice la actualización en curso de Servicios de Google Play."
+      (is) "%1$s getur ekki keyrt án þjónustu Google Play, sem verið er að uppfæra."
+      (ms) "%1$s tidak akan berfungsi tanpa perkhidmatan Google Play dan perkhidmatan ini sedang dikemaskinikan."
+      (et) "Rakendus %1$s töötab ainult koos Google Play teenustega, mida praegu värskendatakse."
+      (it) "%1$s non funzionerà senza Google Play Services, attualmente in fase di aggiornamento."
+      (lt) "„%1$s“ nebus paleidžiama be „Google Play“ paslaugų, kurios šiuo metu atnaujinamos."
+      (eu) "%1$s ez da exekutatuko Google Play Services gabe; zerbitzu hori eguneratzen ari da."
+      (gu) "%1$s, Google Play સેવાઓ વગર શરૂ થશે નહીં, જે વર્તમાનમાં અપડેટ થઈ રહી છે."
+      (hu) "A(z) %1$s alkalmazás nem fut a Google Play-szolgáltatások nélkül, amelyek frissítése folyamatban van."
+      (ru) "Сервисы Google Play, необходимые для работы приложения "%1$s", в настоящий момент обновляются."
+      (zu) "I-%1$s ngeke ize iqalise ngaphandle kwamasevisi we-Google Play, okwamanje abuyekezwayo."
+      (lv) "Lai lietotne %1$s darbotos, ir jāinstalē Google Play pakalpojumi. Pašlaik notiek to atjaunināšana."
+      (sv) "%1$s kan inte köras utan Google Play-tjänster, och dessa uppdateras för närvarande."
+      (iw) "‏האפליקציה %1$s לא תפעל ללא שירותי Google Play, שמתעדכנים כרגע."
+      (sw) "%1$s haitafanya kazi bila huduma za Google Play. Huduma hizi zinasasishwa sasa."
+      (hy) "%1$s հավելվածը չի աշխատի առանց Google Play ծառայությունների, որոնք այս պահին թարմացվում են:"
+      (ky) "Google Play кызматтарысыз %1$s иштебейт, алар учурда жаңыртылууда."
+      (my) "Google Play ဝန်ဆောင်မှုများကို လက်ရှိအပ်ဒိတ်လုပ်နေသောကြောင့် %1$s ကိုဖွင့်၍ရမည်မဟုတ်ပါ။"
+      (az) "%1$s hal-hazırda güncəllənən Google Play xidmətləri olmadan çalışmayacaq."
+      (uz) "%1$s ilovasining ishlashi uchun zarur Google Play xizmatlari hozirda yangilanmoqda."
+      (fr-rCA) "%1$s ne fonctionnera pas sans les services Google Play, qui sont actuellement mis à jour."
+      (en-rGB) "%1$s won't run without Google Play services, which are currently updating."
+      (zh-rHK) "正在更新 Google Play 服務，更新完成後方可執行「%1$s」。"
+      (zh-rCN) "Google Play 服务当前正在更新，因此您无法运行%1$s。"
+      (pt-rBR) "%1$s não funciona sem o Google Play Services, o qual está sendo atualizado no momento."
+      (es-rUS) "%1$s no se ejecutará sin los servicios de Google Play. La plataforma se está actualizando en este momento."
+      (pt-rPT) "O %1$s não é executado sem os serviços do Google Play, os quais estão a ser atualizados."
+      (zh-rTW) "執行「%1$s」所需的 Google Play 服務正在更新。"
+    resource 0x7f0a001a string/common_google_play_services_wear_update_text
+      () "New version of Google Play services needed. It will update itself shortly."
+      (ca) "Cal una nova versió de Serveis de Google Play. S'actualitzarà automàticament aviat."
+      (da) "Du skal bruge en ny version af Google Play-tjenester. Opdateringen gennemføres automatisk om et øjeblik."
+      (fa) "‏نسخه جدید «خدمات Google Play» نیاز است. به‌زودی به‌طور خودکار به‌روزرسانی می‌شود."
+      (ja) "Google Play開発者サービスの新しいバージョンが必要です。まもなく自動更新されます。"
+      (ka) "საჭიროა Google Play Services-ის ახალი ვერსია. ის მალე განახლდება."
+      (pa) "Google Play ਸੇਵਾਵਾਂ ਦੇ ਨਵਾਂ ਸੰਸਕਰਨ ਦੀ ਲੋੜ ਹੈ। ਇਹ ਛੇਤੀ ਹੀ ਸਵੈਚਲਿਤ ਤੌਰ 'ਤੇ ਅੱਪਡੇਟ ਕਰੇਗਾ।"
+      (ta) "Google Play சேவைகளின் புதிய பதிப்பு தேவை. அது விரைவில் தானாகவே புதுப்பிக்கப்படும்."
+      (nb) "Du må installere en ny versjon av Google Play-tjenester. Appen oppdateres automatisk om en kort stund."
+      (be) "Патрабуецца новая версія служб Google Play. Яна абновіцца аўтаматычна ў бліжэйшы час."
+      (de) "Eine neue Version der Google Play-Dienste wird benötigt. Diese wird in Kürze automatisch aktualisiert."
+      (ne) "Google Play सेवाहरूको नयाँ संस्करण आवश्यक छ। यो आफै छिट्टै नै अद्यावधिक हुनेछ।"
+      (te) "కొత్త Google Play సేవల వెర్షన్ అవసరం. అది కొద్ది సేపట్లో దానంతట అదే అప్‌డేట్ చేయబడుతుంది."
+      (af) "Nuwe weergawe van Google Play Dienste is nodig. Dit sal binnekort self opdateer."
+      (bg) "Необходима е нова версия на услугите за Google Play. Скоро тя ще се актуализира автоматично."
+      (th) "จำเป็นต้องใช้บริการ Google Play เวอร์ชันใหม่ ซึ่งจะอัปเดตอัตโนมัติในอีกไม่ช้า"
+      (fi) "Uusi Google Play Palveluiden versio tarvitaan. Se päivittyy pian."
+      (hi) "Google Play सेवाओं के नए वर्शन की ज़रूरत है. यह जल्द ही अपने आप अपडेट हो जाएगा."
+      (si) "Google Play සේවාවල නව අනුවාදයක් අවශ්‍යයි. එය මද වේලාවකින් එය විසින්ම යාවත්කාලීන වනු ඇත."
+      (vi) "Cần phiên bản mới của dịch vụ Google Play. Dịch vụ sẽ sớm tự động cập nhật."
+      (kk) "Google Play қызметтерінің жаңа нұсқасы қажет. Ол қысқа уақыттан кейін өзі жаңарады."
+      (mk) "Потребна е нова верзија на услугите на Google Play. Таа наскоро самата ќе се ажурира."
+      (sk) "Vyžaduje sa nová verzia služieb Google Play. Aktualizujú sa automaticky v najbližšom čase."
+      (uk) "Потрібна нова версія сервісів Google Play. Вони невдовзі оновляться."
+      (el) "Απαιτείται νέα έκδοση των υπηρεσιών Google Play. Θα ενημερωθεί σύντομα."
+      (gl) "Necesítase a nova versión dos servizos de Google Play. Actualizarase en breve."
+      (ml) "Google Play സേവനങ്ങളുടെ പുതിയ പതിപ്പ് ആവശ്യമാണ്. താമസിയാതെ ഇത് സ്വയം അപ്‌ഡേറ്റുചെയ്യും."
+      (nl) "Er is een nieuwe versie van Google Play-services vereist. De update wordt binnenkort automatisch uitgevoerd."
+      (pl) "Wymagana jest nowa wersja Usług Google Play. Wkrótce nastąpi automatyczna aktualizacja."
+      (sl) "Potrebujete novo različico storitev Google Play. V kratkem se bodo posodobile."
+      (tl) "Kailangan ang bagong bersyon ng mga serbisyo ng Google Play. Mag-a-update itong mag-isa sa ilang sandali."
+      (am) "አዲስ የGoogle Play አገልግሎቶች ስሪት ያስፈልጋል። በቅርቡ እራሱን ያዘምናል።"
+      (km) "តម្រូវឲ្យមានកំណែថ្មីនៃសេវាកម្ម Google Play។ វានឹងអាប់ដេតដោយខ្លួនវានៅពេលបន្តិចទៀតនេះ។"
+      (bn) "Google Play পরিষেবার নতুন ভার্সন প্রয়োজন৷ খুব শীঘ্রই এটা নিজেই আপডেট হবে৷"
+      (in) "Perlu versi baru layanan Google Play. Akan segera memperbarui sendiri."
+      (kn) "Google Play ಸೇವೆಗಳ ಹೊಸ ಆವೃತ್ತಿ ಅಗತ್ಯವಿದೆ. ಸದ್ಯದಲ್ಲೇ ಅದು ತಾನಾಗಿಯೇ ಅಪ್‌ಡೇಟ್ ಆಗುತ್ತದೆ."
+      (mn) "Google Play үйлчилгээний шинэ хувилбар хэрэгтэй. Энэ нь удахгүй өөрөө өөрийгөө шинэчлэх болно."
+      (ko) "새 버전의 Google Play 서비스가 필요합니다. 곧 자동으로 업데이트됩니다."
+      (lo) "ຈຳ​ເປັນ​ຕ້ອງ​ມີ​ກາ​ນ​ບໍ​ລິ​ການ Google Play ເວີ​ຊັນ​ໃໝ່. ມັນ​ຈະ​ອັບ​ເດດ​ຕົວ​ເອງ​ໄວໆ​ນີ້."
+      (ro) "Este necesară o nouă versiune a serviciilor Google Play. Se vor actualiza automat în curând."
+      (sq) "Nevojitet një version i ri i shërbimeve të "Luaj me Google". Ai do të përditësohet automatikisht së shpejti."
+      (ar) "‏يجب توفر إصدار جديد من خدمات Google Play. سيتم تحديثها تلقائيًا قريبًا."
+      (fr) "La nouvelle version des services Google Play est nécessaire. Elle sera bientôt installée automatiquement."
+      (hr) "Potrebna je nova verzija usluga Google Playa. Uskoro će se ažurirati."
+      (mr) "Google Play सेवांच्या नवीन आवृत्तीची आवश्यकता आहे. हे स्वत:ला लवकरच अपडेट करेल."
+      (or) "Google Play ସେବାଗୁଡ଼ିକର ନୂତନ ଭର୍ସନ୍‌ ଆବଶ୍ୟକ। ଏହା ନିଜକୁ କିଛି ସମୟ ମଧ୍ୟରେ ଅପଡେଟ୍‌ କରିବ।"
+      (sr) "Потребна је нова верзија Google Play услуга. Ускоро ће се ажурирати."
+      (b+sr+Latn) "Potrebna je nova verzija Google Play usluga. Uskoro će se ažurirati."
+      (tr) "Google Play hizmetlerinin yeni sürümü gerekiyor. Kendisini kısa süre içinde güncelleyecektir."
+      (ur) "‏Google Play سروسز کے نئے ورژن کی ضرورت ہے۔ یہ تھوڑی دیر میں خود ہی اپنے آپ کو اپ ڈیٹ کر لے گا۔"
+      (as) "Google Play সেৱাসমূহৰ নতুন সংস্কৰণৰ প্ৰয়োজন৷ এইটো শীঘ্ৰেই নিজে-নিজে আপডে’ট হ’ব৷"
+      (bs) "Potrebna je nova verzija Google Play usluga. Ubrzo će se samo ažurirati."
+      (cs) "Je vyžadována nová verze služeb Google Play. Nová verze se brzy sama nainstaluje."
+      (es) "Se necesita una nueva versión de Servicios de Google Play. Se actualizará en breve."
+      (is) "Nýja útgáfu af þjónustu Google Play vantar. Hún uppfærir sig sjálf innan skamms."
+      (ms) "Versi baharu perkhidmatan Google Play diperlukan. Kemas kini automatik akan dijalankan sebentar lagi."
+      (et) "Vajalik on Google Play teenuste uus versioon. See värskendab end peagi."
+      (it) "È richiesta una nuova versione di Google Play Services. L'aggiornamento automatico verrà eseguito a breve."
+      (lt) "Reikia naujos versijos „Google Play“ paslaugų. Jos netrukus bus atnaujintos."
+      (eu) "Google Play Services-en bertsio berria behar da. Berehala eguneratuko da automatikoki."
+      (gu) "Google Play સેવાઓના નવા સંસ્કરણની જરૂર છે. તે ટૂંક સમયમાં પોતાને અપડેટ કરશે."
+      (hu) "A Google Play-szolgáltatások új verziójára van szükség. A szolgáltatás hamarosan frissíti önmagát."
+      (ru) "Версия сервисов Google Play устарела. Они автоматически обновятся в ближайшее время."
+      (zu) "Kudingeka inguqulo entsha yamasevisi we-Google Play. Izozibuyekeza ngokwayo maduze."
+      (lv) "Ir nepieciešama jauna Google Play pakalpojumu versija. Drīzumā tā tiks instalēta."
+      (sv) "En ny version av Google Play-tjänster krävs. Den uppdateras automatiskt inom kort."
+      (iw) "‏דרושה גרסה חדשה של שירותי Google Play. הגרסה תתעדכן בעצמה תוך זמן קצר."
+      (sw) "Toleo jipya la huduma za Google Play linahitajika. Litajisasisha baada ya muda mfupi."
+      (hy) "Անհրաժեշտ է Google Play ծառայությունների նոր տարբերակը: Այն շուտով կթարմացվի ավտոմատ կերպով:"
+      (ky) "Google Play кызматтарынын жаңы версиясы талап кылынат. Бир аздан кийин ал өзү эле жаңырат."
+      (my) "Google Play ဝန်ဆောင်မှုဗားရှင်းအသစ်များ လိုအပ်နေသည်။ အချိန်အနည်းငယ်အကြာတွင် ၎င်းကိုယ်တိုင်အပ်ဒိတ်လုပ်ပါ လိမ့်မည်။"
+      (az) "Google Play xidmətlərinin yeni versiyası lazımdır. Qısa müddətə özünü yeniləyəcək."
+      (uz) "Google Play xizmatlarining yangi versiyasi zarur. U o‘zini qisqa vaqt ichida yangilaydi."
+      (fr-rCA) "La nouvelle version des services Google Play est nécessaire. Elle sera bientôt installée automatiquement."
+      (en-rGB) "New version of Google Play services needed. It will update itself shortly."
+      (zh-rHK) "需要使用新版本的 Google Play 服務。更新會即將自動開始。"
+      (zh-rCN) "必须使用新版 Google Play 服务。该服务很快就会自行更新。"
+      (pt-rBR) "É necessária uma nova versão do Google Play Services. Ele será atualizado em breve."
+      (es-rUS) "Se necesita una nueva versión de los servicios de Google Play. Se actualizarán automáticamente en breve."
+      (pt-rPT) "É necessária uma nova versão dos serviços do Google Play. Esta será atualizada automaticamente em breve."
+      (zh-rTW) "必須使用新版 Google Play 服務。該服務稍後就會自動更新。"
+    resource 0x7f0a001b string/common_open_on_phone
+      () "Open on phone"
+      (ca) "Obre al telèfon"
+      (da) "Åbn på telefonen"
+      (fa) "باز کردن در تلفن"
+      (ja) "スマートフォンで開く"
+      (ka) "ტელეფონში გახსნა"
+      (pa) "ਫ਼ੋਨ 'ਤੇ ਖੋਲ੍ਹੋ"
+      (ta) "மொபைலில் திற"
+      (nb) "Åpne på telefonen"
+      (be) "Адкрыць на тэлефоне"
+      (de) "Auf Smartphone öffnen"
+      (ne) "फोनमा खोल्नुहोस्"
+      (te) "ఫోన్‌లో తెరువు"
+      (af) "Maak oop op foon"
+      (bg) "Отваряне на телефона"
+      (th) "เปิดบนโทรศัพท์"
+      (fi) "Avaa puhelimessa"
+      (hi) "फ़ोन पर खोलें"
+      (si) "දුරකථනය තුළ විවෘත කරන්න"
+      (vi) "Mở trên điện thoại"
+      (kk) "Телефонда ашу"
+      (mk) "Отвори на телефонот"
+      (sk) "Otvoriť v telefóne"
+      (uk) "Відкрити на телефоні"
+      (el) "Άνοιγμα σε τηλέφωνο"
+      (gl) "Abrir no teléfono"
+      (ml) "ഫോണിൽ തുറക്കുക"
+      (nl) "Openen op telefoon"
+      (pl) "Otwórz na telefonie"
+      (sl) "Odpiranje v telefonu"
+      (tl) "Buksan sa telepono"
+      (am) "ስልክ ላይ ክፈት"
+      (km) "បើកតាមទូរស័ព្ទ"
+      (bn) "ফোনে খুলুন"
+      (in) "Buka di ponsel"
+      (kn) "ಫೋನ್‌ನಲ್ಲಿ ತೆರೆಯಿರಿ"
+      (mn) "Утсаар нээх"
+      (ko) "스마트폰에서 열기"
+      (lo) "​ເປີດ​ໃນ​ໂທ​ລະ​ສັບ"
+      (ro) "Deschideți pe telefon"
+      (sq) "Hape në telefon"
+      (ar) "فتح على الهاتف"
+      (fr) "Ouvrir sur le téléphone"
+      (hr) "Otvori na telefonu"
+      (mr) "फोनवर उघडा"
+      (or) "ଫୋନ୍‌ରେ ଖୋଲନ୍ତୁ"
+      (sr) "Отвори на телефону"
+      (b+sr+Latn) "Otvori na telefonu"
+      (tr) "Telefonda aç"
+      (ur) "فون پر کھولیں"
+      (as) "ফ'নত খোলক"
+      (bs) "Otvori na telefonu"
+      (cs) "Otevřít v telefonu"
+      (es) "Abrir en teléfono"
+      (is) "Opna í símanum"
+      (ms) "Buka pada telefon"
+      (et) "Ava telefonis"
+      (it) "Apri sul telefono"
+      (lt) "Atidaryti telefone"
+      (eu) "Ireki telefonoan"
+      (gu) "ફોનમાં ખોલો"
+      (hu) "Megnyitás a telefonon"
+      (ru) "Открыть на телефоне"
+      (zu) "Vula kufoni"
+      (lv) "Atvērt tālrunī"
+      (sv) "Öppna på mobilen"
+      (iw) "פתח בטלפון"
+      (sw) "Fungua kwenye simu"
+      (hy) "Բացել հեռախոսով"
+      (ky) "Телефондо ачык"
+      (my) "ဖုန်းပေါ်မှာ ဖွင့်ပါ"
+      (az) "Telefonda açın"
+      (uz) "Telefonda ochish"
+      (fr-rCA) "Ouvrir sur le téléphone"
+      (en-rGB) "Open on phone"
+      (zh-rHK) "在手機開啟"
+      (zh-rCN) "在手机上打开"
+      (pt-rBR) "Abrir no smartphone"
+      (es-rUS) "Abrir en el teléfono"
+      (pt-rPT) "Abrir no telemóvel"
+      (zh-rTW) "在手機上開啟"
+    resource 0x7f0a001e string/deep_link_host
+      () "yonorummy.com"
+    resource 0x7f0a001f string/deep_link_scheme
+      () "yonorummy"
+    resource 0x7f0a0020 string/default_notification_channel_id
+      () "1"
+    resource 0x7f0a0021 string/done
+      () "Done"
+      (zh-rCN) "完成"
+    resource 0x7f0a0022 string/fcm_fallback_notification_channel_label
+      () "Miscellaneous"
+    resource 0x7f0a0023 string/gcm_defaultSenderId
+      () "193402793409"
+    resource 0x7f0a0024 string/go
+      () "Go"
+      (zh-rCN) "前往"
+    resource 0x7f0a0025 string/google_api_key
+      () "AIzaSyCwDTbuQb0y9vvmB6vmHqm2WjTn8CAQISs"
+    resource 0x7f0a0026 string/google_app_id
+      () "1:193402793409:android:e22a0c6f085451971fd340"
+    resource 0x7f0a0027 string/google_crash_reporting_api_key
+      () "AIzaSyCwDTbuQb0y9vvmB6vmHqm2WjTn8CAQISs"
+    resource 0x7f0a0028 string/google_storage_bucket
+      () "yonorummy-7a6a9.appspot.com"
+    resource 0x7f0a0029 string/next
+      () "Next"
+      (zh-rCN) "下一个"
+    resource 0x7f0a002a string/project_id
+      () "yonorummy-7a6a9"
+    resource 0x7f0a002b string/search
+      () "Search"
+      (zh-rCN) "搜索"
+    resource 0x7f0a002c string/send
+      () "Send"
+      (zh-rCN) "发送"
+  type style id=0b entryCount=5
+    resource 0x7f0b0000 style/SplashStyle
+      () (style) size=2 parent=0x01030007
+        0x01010054=@drawable/slogo_style
+        0x01010056=true
+    resource 0x7f0b0002 style/TextAppearance.Compat.Notification.Info
+      () (style) size=0 parent=0x01030200
+    resource 0x7f0b0004 style/TextAppearance.Compat.Notification.Time
+      () (style) size=0 parent=0x01030202
+    resource 0x7f0b0006 style/Widget.Compat.NotificationActionContainer
+      () (style) size=1
+        0x010100d4=@drawable/notification_action_background
+    resource 0x7f0b0007 style/Widget.Compat.NotificationActionText
+      () (style) size=3
+        0x01010034=?0x01010207
+        0x01010095=@dimen/notification_action_text_size
+        0x01010098=@color/secondary_text_default_material_light
+  type xml id=0d entryCount=2
+    resource 0x7f0d0000 xml/img_provider_paths
+      () (file) res/8m.xml type=XML
+    resource 0x7f0d0001 xml/network_security_config
+      () (file) res/8G.xml type=XML

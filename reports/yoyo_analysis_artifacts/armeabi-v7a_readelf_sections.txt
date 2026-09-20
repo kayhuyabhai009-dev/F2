@@ -1,0 +1,37 @@
+There are 28 section headers, starting at offset 0x10ba73c:
+
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+  [ 1] .note.androi[...] NOTE            00000134 000134 000098 00   A  0   0  4
+  [ 2] .note.gnu.bu[...] NOTE            000001cc 0001cc 000024 00   A  0   0  4
+  [ 3] .dynsym           DYNSYM          000001f0 0001f0 0509d0 10   A  4   1  4
+  [ 4] .dynstr           STRTAB          00050bc0 050bc0 107adc 00   A  0   0  1
+  [ 5] .gnu.hash         GNU_HASH        0015869c 15869c 027ab0 04   A  3   0  4
+  [ 6] .hash             HASH            0018014c 18014c 0242e8 04   A  3   0  4
+  [ 7] .gnu.version      VERSYM          001a4434 1a4434 00a13a 02   A  3   0  2
+  [ 8] .gnu.version_d    VERDEF          001ae570 1ae570 00001c 00   A  4   1  4
+  [ 9] .gnu.version_r    VERNEED         001ae58c 1ae58c 000060 00   A  4   3  4
+  [10] .rel.dyn          REL             001ae5ec 1ae5ec 05d028 08   A  3   0  4
+  [11] .rel.plt          REL             0020b614 20b614 014c80 08   A  3   0  4
+  [12] .plt              PROGBITS        00220294 220294 01f2d4 00  AX  0   0  4
+  [13] .text             PROGBITS        00240000 240000 bf004c 00  AX  0   0 4096
+  [14] .ARM.exidx        ARM_EXIDX       00e3004c e3004c 038468 08  AL 13   0  4
+  [15] .ARM.extab        PROGBITS        00e684b4 e684b4 02f960 00   A  0   0  4
+  [16] .rodata           PROGBITS        00e97e20 e97e20 1cabe5 00   A  0   0 16
+  [17] .data.rel.ro      PROGBITS        01064800 1063800 0382d8 00  WA  0   0 16
+  [18] .fini_array       FINI_ARRAY      0109cad8 109bad8 00000c 00  WA  0   0  4
+  [19] .init_array       INIT_ARRAY      0109cae4 109bae4 00014c 00  WA  0   0  4
+  [20] .dynamic          DYNAMIC         0109cc30 109bc30 000140 08  WA  4   0  4
+  [21] .got              PROGBITS        0109cd78 109bd78 00f288 00  WA  0   0  4
+  [22] .data             PROGBITS        010ac000 10ab000 00f398 00  WA  0   0 16
+  [23] .comment          PROGBITS        00000000 10ba398 000230 01  MS  0   0  1
+  [24] .bss              NOBITS          010bb3a0 10ba3a0 014648 00  WA  0   0 16
+  [25] .note.gnu.go[...] NOTE            00000000 10ba5c8 00001c 00      0   0  4
+  [26] .ARM.attributes   ARM_ATTRIBUTES  00000000 10ba5e4 00003a 00      0   0  1
+  [27] .shstrtab         STRTAB          00000000 10ba61e 00011b 00      0   0  1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+  L (link order), O (extra OS processing required), G (group), T (TLS),
+  C (compressed), x (unknown), o (OS specific), E (exclude),
+  D (mbind), y (purecode), p (processor specific)

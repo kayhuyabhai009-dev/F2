@@ -1,0 +1,15 @@
+kind	name	exported	permission	authority_or_action	notes
+activity	org.cocos2dx.javascript.AppActivity	true		android.intent.action.MAIN | android.intent.action.VIEW | scheme=@7F0A001F;host=@7F0A001E	
+service	org.cocos2dx.javascript.MyFirebaseMessagingService	false		com.google.firebase.MESSAGING_EVENT	
+provider	org.cocos2dx.javascript.myFileProvider	false			
+receiver	com.google.firebase.iid.FirebaseInstanceIdReceiver	true	com.google.android.c2dm.permission.SEND	com.google.android.c2dm.intent.RECEIVE	
+service	com.google.firebase.messaging.FirebaseMessagingService	false		com.google.firebase.MESSAGING_EVENT	
+service	com.google.firebase.components.ComponentDiscoveryService	false			
+activity	com.google.android.gms.common.api.GoogleApiActivity	false			
+service	com.google.android.datatransport.runtime.backends.TransportBackendDiscovery	false			
+service	com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService	false	android.permission.BIND_JOB_SERVICE		
+receiver	com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver	false			
+provider	com.google.firebase.provider.FirebaseInitProvider	false			
+receiver	com.google.android.gms.measurement.AppMeasurementReceiver	false			
+service	com.google.android.gms.measurement.AppMeasurementService	false			
+service	com.google.android.gms.measurement.AppMeasurementJobService	false	android.permission.BIND_JOB_SERVICE		
