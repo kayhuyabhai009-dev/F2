@@ -1,0 +1,30 @@
+{
+  "source_apk": "yoyo.apk",
+  "resource": "res/8G.xml",
+  "original_config": {
+    "cleartextTrafficPermitted": true,
+    "trust_anchors": [
+      "implicit platform defaults"
+    ],
+    "user_ca_explicitly_trusted": false
+  },
+  "patched_config": {
+    "cleartextTrafficPermitted": true,
+    "trust_anchors": [
+      "system",
+      "user"
+    ],
+    "user_ca_explicitly_trusted": true
+  },
+  "patched_config_bytes": 552,
+  "patched_zip_entries_before_alignment": 2473,
+  "zipalign_verified": true,
+  "signature_status": "unsigned by design; must be signed with an authorized debug/test key",
+  "production_warning": "capture-only patch; do not ship user-CA trust or cleartext support in production",
+  "fix_paths": [
+    "tools/network_capture/network_security_config.capture.xml",
+    "tools/network_capture/enable_network_capture.py",
+    "tools/network_capture/README.md"
+  ],
+  "network_stack_observation": "Java Cocos2dxDownloader uses bundled OkHttp with no visible pin set or explicit proxy override; native XMLHttpRequest is a separate stack"
+}

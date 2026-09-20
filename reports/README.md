@@ -15,5 +15,6 @@ Important machine-readable outputs are in `yoyo_analysis_artifacts/`:
 - Phase-3 files (`ca_bundle_certificates.tsv`, `duplicate_payload_groups.tsv`, `raw_asset_import_links.tsv`, `raw_binary_and_media_metadata.tsv`, and `mp3_frame_summary.tsv`) contain certificate-bundle, deduplication, asset-linkage, and media metadata results.
 - Phase-4 files (`uploaded_tool_archive_inventory.tsv`, `uploaded_nested_archive_inventory.tsv`, `uploaded_tool_archive_parts.tsv`, and `phase4_tool_archive_summary.json`) account for every entry in the uploaded APK-analysis tools and nested archives.
 - Phase-5 files (`jsc_key_analysis.json`, `jsc_key_evidence.tsv`, `jsc_key_marker_scan.tsv`, `jsc_key_native_call_scan.tsv`, and `jsc_key_jsc_inventory.tsv`) document the JSC/XXTEA key investigation. No static key was recovered.
+- `tools/network_capture/` contains a debug-only network-capture patch generator. It trusts user-installed proxy CAs, produces an unsigned output, and must not be shipped to production.
 
 The analysis was static and offline. No APK execution or remote endpoint requests were made. Binary media is represented by hashes and parser metadata; encrypted Cocos `.jsc` files are not claimed to be source-decompiled.

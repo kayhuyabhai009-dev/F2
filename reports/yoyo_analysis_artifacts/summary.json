@@ -141,5 +141,11 @@
       7.9036,
       7.9999
     ]
+  },
+  "network_capture_patch": {
+    "user_ca_trust_added": true,
+    "cleartext_preserved": true,
+    "output_unsigned_by_design": true,
+    "zipalign_validated": true
   }
 }

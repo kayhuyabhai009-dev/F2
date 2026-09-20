@@ -462,6 +462,14 @@ ARM64 disassembly of the exported `jsb_set_xxtea_key` function shows it accepts 
 - The native `aapt2` from the uploaded Build Tools archive executed successfully (`Android Asset Packaging Tool 2.19-11948202`). Its phase-4 badging output exactly matched the earlier `aapt2_badging.txt`, confirming package `com.tppart.games.yo`, version `2.3.0`, compile/target SDK 35, and the previously catalogued permissions.
 - The uploaded `apktool_3.0.3.jar` and Java-dependent `apksigner` wrapper were inventoried but not launched because no JRE is available in this sandbox. This is a tooling limitation, not an APK finding; the APK’s v1/v2 signing structures were already parsed with offline Python evidence.
 
+### Debug network-capture fix
+
+- The APK’s current `res/8G.xml` network-security configuration enables cleartext but has no explicit `<trust-anchors>` block. For HTTPS interception on Android 7+, a user-installed Burp/Charles/mitmproxy CA may therefore not be trusted.
+- The Java downloader recovered from DEX is `org.cocos2dx.lib.Cocos2dxDownloader`; it constructs the bundled `org.cocos2dx.okhttp3.OkHttpClient` with redirect and timeout options but no visible certificate pin set or explicit proxy override. The Cocos native `XMLHttpRequest` path is a separate native HTTP stack, so the patch is expected to cover the Java/OkHttp downloader path but is not a guarantee for every native request.
+- Added a reproducible capture-only patch under `tools/network_capture/`. It replaces the compiled `res/8G.xml` with a valid binary XML equivalent of a config that trusts `system` and `user` CAs while retaining the APK’s existing cleartext setting.
+- The patch was generated, aligned, and validated with the uploaded `aapt2` and `zipalign`; the resulting XML parses as `network-security-config` with `certificates src="system"` and `certificates src="user"`.
+- The output is deliberately **unsigned** because changing any APK entry invalidates the original v1/v2 signature. The README gives the owner’s authorized debug/test signing steps. This is not a production security fix: do not ship user-CA trust or cleartext support; use HTTPS and a documented production trust policy instead.
+
 ## 13. Findings and remediation priorities
 
 | Priority | Finding | Why it matters | Recommended action |
@@ -525,6 +533,7 @@ ARM64 disassembly of the exported `jsb_set_xxtea_key` function shows it accepts 
 | jsc_key_evidence.tsv | evidence-backed key investigation conclusions |
 | jsc_key_marker_scan.tsv and jsc_key_native_call_scan.tsv | APK marker and both-ABI direct-call scans |
 | jsc_key_jsc_inventory.tsv | per-JSC entropy/header inventory |
+| network_capture_patch_validation.json | capture-only network patch validation and safety status |
 | arm64-v8a_readelf_*.txt and strings | native ARM64 inspection |
 | armeabi-v7a_readelf_*.txt and strings | native ARM32 inspection |
 | decompiled_index.tsv | all 2,175 decompiled class files and line counts |
