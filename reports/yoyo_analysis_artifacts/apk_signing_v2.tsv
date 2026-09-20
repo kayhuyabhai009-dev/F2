@@ -1,0 +1,7 @@
+field	value
+signed_data_bytes	931
+signature_records_bytes	268
+public_key_bytes	294
+digests	"[[""0x103"", 32, ""081ca9c5b122f4a0b126b32f8e292297f3ea43a45fe6d307100756a1a7f2a47f""]]"
+certificates	"[[867, ""5cbb225fff2ab9db2ce018bcbadbd378151f7ed8fcbd3ec9dbeae6cc1ca8eeea"", ""de331a0c994d9cd2528e2b70a83a6b3f9dddcb17"", ""3082035f30820247a00302010202046e4dbea5300d06092a""]]"
+additional_attributes_bytes	0

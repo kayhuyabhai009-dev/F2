@@ -1,0 +1,79 @@
+{
+  "apk_size": 35771994,
+  "eocd_offset": 35771972,
+  "central_directory_offset": 35506376,
+  "signing_block_start": 35498184,
+  "signing_block_size_field": 8184,
+  "signing_pair_count": 4,
+  "pair_ids": [
+    "0x7109871a",
+    "0x504b4453",
+    "0x71777777",
+    "0x42726577"
+  ],
+  "v2_signer": {
+    "signed_data_bytes": 931,
+    "signature_records_bytes": 268,
+    "public_key_bytes": 294,
+    "digests": [
+      [
+        "0x103",
+        32,
+        "081ca9c5b122f4a0b126b32f8e292297f3ea43a45fe6d307100756a1a7f2a47f"
+      ]
+    ],
+    "certificates": [
+      [
+        867,
+        "5cbb225fff2ab9db2ce018bcbadbd378151f7ed8fcbd3ec9dbeae6cc1ca8eeea",
+        "de331a0c994d9cd2528e2b70a83a6b3f9dddcb17",
+        "3082035f30820247a00302010202046e4dbea5300d06092a"
+      ]
+    ],
+    "additional_attributes_bytes": 0
+  },
+  "main_manifest_variants": [
+    [
+      "assets/res/raw-assets/8f/8ffdc729-6c03-479a-a1bf-baeb7d618bcf.manifest",
+      "1.6.8.7",
+      "2.0.7",
+      "https://download.yonoapk.com/",
+      252,
+      0,
+      0,
+      0,
+      0,
+      0,
+      "{}",
+      "[]"
+    ],
+    [
+      "assets/res/raw-assets/aa/aaa4f37b-49ac-4725-b535-4c9c724ebfd6.manifest",
+      "1.6.8.7",
+      "",
+      "",
+      0,
+      611,
+      595,
+      16,
+      341,
+      254,
+      "{\"atlas\": 39, \"bin\": 3, \"jpeg\": 1, \"jpg\": 2, \"jsc\": 9, \"manifest\": 254, \"mp3\": 55, \"pem\": 1, \"plist\": 7, \"png\": 223, \"ttf\": 1, \"zip\": 16}",
+      "[[\"res/raw-assets/01/011232ef-e3c0-4f34-a88d-8ff5c19d8d23.manifest\", 208, \"a87642d1de78932a051c9006fb2f26c0\", 202, \"bdadccfee67e90e213880bdee2179963\"], [\"res/raw-assets/03/03e97b5e-6642-4e78-9826-8796c2abe447.manifest\", 200, \"caaa424481ee4939661510c5ba7522c5\", 194, \"ba51e240a27002eb287dacde43bb12f0\"], [\"res/raw-assets/04/04bd0ae4-36c6-4251-9992-3284d8afdf6e.manifest\", 220, \"42c1a0c3cd1ac8dcb37b58464d12cdfd\", 214, \"711deae18721965d114f5d2b28972fc9\"], [\"res/raw-assets/04/04c69595-cc9e-4592-9016-03cdbeb933df.manifest\", 236, \"a3f0a489d22ac7087846eb3611f89f73\", 230, \"61ec0b69f00c6c9eab685277e220ddf8\"], [\"res/raw-assets/05/0511e1fe-d164-4460-b4e9-59f9e96fe10e.manifest\", 204, \"d312639311a68aa161967d877df72c98\", 198, \"afb57e28cfd92e113faa64fc06a2e618\"], [\"res/raw-assets/07/0711cd30-ea49-4d56-9d08-1da548d84428.manifest\", 220, \"0b42d5a2b4dc8bebc4465be58f0c7072\", 214, \"a71d9cbd62983c03858398fd5e56a976\"], [\"res/raw-assets/08/0811261c-acbf-44a7-9afd-e9c668033d79.manifest\", 200, \"fdd9058642006629bde486ff8373c704\", 194, \"dfa18767b7a8eb7769411bcbea029522\"], [\"res/raw-assets/09/090cb904-84bf-4b58-a945-e2015964307e.manifest\", 204, \"9f258097221f475e3bdea87b40eec16c\", 198, \"509568d53399487407d89b1626da0d8e\"], [\"res/raw-assets/09/091d1f5c-6c37-4315-a4ab-64b94398d10c.manifest\", 224, \"706739da9653da3cad2b26c0c18a7fc1\", 218, \"e5fefb900198038b4226792c6d826ca9\"], [\"res/raw-assets/09/09ae25cf-d258-41cf-b79a-4aced891c40c.manifest\", 220, \"58b2b4b314478898d358b02f645657ff\", 214, \"772b7aa840f85fa18379c67097765c22\"], [\"res/raw-assets/0b/0b58adf3-ea34-42f0-85b0-ceaf21e1f743.manifest\", 230, \"1e496694fce9c705591ee35bde5a4eac\", 224, \"02fa5dc19dd954b185ae1882493e1dab\"], [\"res/raw-assets/0c/0cb038e5-724f-4200-99ce-6e704e7afd63.manifest\", 226, \"5d9e389e3e57f117320698b06e432b88\", 220, \"30043af16d866a8f65b8a67c6d24f337\"], [\"res/raw-assets/0c/0cb93d42-116b-4204-afaf-9b5e136ef7a1.manifest\", 216, \"7658d8fda3d79f7ceba9003f16bae24f\", 210, \"6646c8e32c2ddff766598318af843f34\"], [\"res/raw-assets/0e/0e5576f0-de9a-4da2-9524-6d6221af5925.manifest\", 240, \"3c1179d15b126ea4158a7c59893592e6\", 234, \"da22ca836254f244274f6b62778710a8\"], [\"res/raw-assets/12/128bfc19-fd1a-46c7-adbc-29f79846d0b1.manifest\", 208, \"cb37bcf2b91c5521bbac872c517882fa\", 202, \"90d60405979cbd71facaaa1e7ebc4f5a\"], [\"res/raw-assets/14/14756889-0a15-4f12-9408-be3d3ae09d7c.manifest\", 192, \"d12c20995e868bd19eb37bc9b731f2fa\", 186, \"2232cac4e36d70995c5c74bf396e8b14\"], [\"res/raw-assets/14/1482b4fc-8b72-44df-a753-67291621c296.manifest\", 252, \"501354269adbae906de87489af2193cb\", 246, \"52392bc026fc61befeb631664e4fddc5\"], [\"res/raw-assets/17/17f7f037-2ae2-4234-b6d1-7ffda73f912e.manifest\", 244, \"41efcfa4269046c426dcd9aae9a0c3e1\", 238, \"9f2d1f58a1b43b32f5273e09a8a906aa\"], [\"res/raw-assets/18/185f25c6-d539-4ea7-8091-a98c97bd3681.manifest\", 240, \"13f2dab1c3d82224d3684a013f8ca836\", 234, \"9d70d2907673eb2e65d4521d2a040c1a\"], [\"res/raw-assets/18/18a2b13e-6efe-4331-9180-03c912d528a5.manifest\", 224, \"5cd5e4bea1426bdd6f0ef7097e44cdc4\", 218, \"466864538316d6b1fa6d1869d49bef27\"]]"
+    ]
+  ],
+  "child_manifest_count": 252,
+  "child_manifest_unique_names": 252,
+  "main_subver_count": 252,
+  "scene_url_count": 36,
+  "feature_hit_count": 2828,
+  "feature_categories": {
+    "other": 335,
+    "payments_wallet": 1324,
+    "identity_verification": 108,
+    "promotions_rewards": 842,
+    "games": 162,
+    "responsible_gaming": 57
+  },
+  "custom_channel_pair": "{\"channel\":\"VIPDS9E4W9Q\",\"vid\":\"118543087\",\"cx\":\"2026091911107653\"}"
+}

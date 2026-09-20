@@ -369,7 +369,7 @@ The native binary is not proof that every exported/linked function is called by 
 
 ## 11. Embedded remote manifests and content catalog
 
-Found **254** embedded `.manifest` JSON descriptors, representing **253** distinct named content packages. Every parsed descriptor has version `0.0.1` in this sample and points to cleartext `http://ifs.yonorummy.in/GameX/1.6.8.7/...` plus a cleartext remote project manifest URL.
+Found **254** embedded `.manifest` JSON descriptors, representing **253** distinct named packages: **252 child game/content manifests plus two duplicate `Main` records**. The 252 child records use version `0.0.1`; the two `Main` records use version `1.6.8.7`. The child records point to cleartext `http://ifs.yonorummy.in/GameX/1.6.8.7/...` package paths and cleartext remote project manifest URLs.
 
 Examples include the application name and a large slot/casino-style catalog: `Super7772`, `Aviator`, `WildParadise`, `CaribbeanFortune`, `WildSpin`, `SerpentCrush`, `MegaAce`, `FortuneGem500`, `JackpotLotto`, `DragonsTreasureQuest`, `PowerOfTheKraken`, `Zeus2`, `Tower`, and many others. The complete machine-readable list is in `remote_game_manifests.tsv`.
 
@@ -385,6 +385,44 @@ Examples include the application name and a large slot/casino-style catalog: `Su
 | Observed Firebase domains | firebaseinstallations.googleapis.com and Google endpoints | dependency behavior; not custom endpoint proof |
 
 No network request was made to `ifs.yonorummy.in`, `yonorummy.com`, or any extracted domain.
+
+## 11A. Phase-2 targeted findings
+
+### Main manifest variants and update inventory
+
+Two distinct `Main` manifest files are embedded for the same package/version:
+
+| Variant | Contents | Static result |
+|---|---|---|
+| `assets/res/raw-assets/8f/8ffdc729-6c03-479a-a1bf-baeb7d618bcf.manifest` | `subVer` map | 252 child package names; `android_app_version` is `2.0.7`; Android download URL is `https://download.yonoapk.com/`. |
+| `assets/res/raw-assets/aa/aaa4f37b-49ac-4725-b535-4c9c724ebfd6.manifest` | `assets` map | 611 remote asset records: 254 manifests, 223 PNGs, 55 MP3s, 39 atlases, 9 JSC files, 7 plists, 3 BIN files, a PEM bundle, JPEG/JPG/TTF, and 16 packed import ZIP records. |
+
+The `subVer` names exactly match the 252 non-`Main` embedded manifest names. For the 611-entry asset map, 595 entries have a corresponding APK entry and 341 have matching recorded size and MD5. The 254 manifest records are all size/MD5 mismatches against the compact manifest files shipped in the APK; the remaining present binary/media/JSC records match. The 16 `res/import_*.zip` records are listed by the update map but are not standalone APK ZIP entries. This strongly suggests the map describes a remote/packaged update set rather than a byte-for-byte inventory of the installed APK, and it makes update verification especially important.
+
+The `Main` metadata also creates a version inconsistency worth reviewing: the installed APK is version `2.3.0`, while the embedded main manifest advertises `android_app_version: 2.0.7`. That may be stale metadata, a content-package version, or a release-process mismatch; it should not be assumed harmless without checking the update client.
+
+### Embedded web destinations and product-feature evidence
+
+A second-pass traversal of all parseable JSON scene/import assets found **36 URL-bearing references** to two HTTPS destinations:
+
+- `https://ifs.yonogamebox.com/gamerule` — used as a `dom_url` for account verification, settings/contact screens, betting/profit rules, privacy/responsible-gaming pages, terms, fair-play/about pages, and related remote images.
+- `https://www.philslotsagent.com` — displayed in a QR/download promotional prefab with the label `SCAN & DOWNLOAD AND WIN WITH ME.`; this was recovered as a UI string, not proven to be automatically opened.
+
+The same JSON traversal found 2,828 feature-oriented strings/components: 1,324 payment/wallet/bank/UPI-related hits, 842 promotion/reward/invite/cash hits, 108 identity-verification/KYC/account hits, 57 privacy/terms/responsible-gaming hits, and 162 game-category hits. These are UI/asset indicators, not proof of transaction execution or regulatory compliance. Full rows are in `embedded_scene_urls.tsv`, `feature_string_hits.tsv`, `feature_category_counts.tsv`, and `cocos_label_strings.tsv`.
+
+### APK signing block and custom metadata
+
+The APK contains a valid-structure APK Signing Block with a **v2 signer pair** (`0x7109871a`) and three additional nonstandard/custom pairs (`0x504b4453`, `0x71777777`, `0x42726577`). The v2 pair contains one RSA signature record, one certificate, no additional signer attributes, and a 32-byte digest using algorithm ID `0x0103`; the signer certificate SHA-256 is `5cbb225fff2ab9db2ce018bcbadbd378151f7ed8fcbd3ec9dbeae6cc1ca8eeea`, matching the certificate extracted from `META-INF/CERT.RSA`.
+
+The custom pair `0x71777777` is readable JSON: `{"channel":"VIPDS9E4W9Q","vid":"118543087","cx":"2026091911107653"}`. The other two custom pairs were preserved as hashes/prefixes in `apk_signing_pairs.tsv` but were not assigned meaning without a known publisher specification. The APK has no detected v3 signer pair in this block. The complete parser output is in `apk_signing_pairs.tsv`, `apk_signing_v2.tsv`, and `phase2_summary.json`.
+
+The clone-checking value recovered from `ProjUtil.checksignture` is `3jMaDJlNnNJSjitwqDprP53dyxc=`. Computing SHA-1 over the embedded signer certificate DER and Base64-encoding it produces the same value, so this build's anti-cloning check is matched to the APK certificate rather than being an unused placeholder.
+
+### JSC bytecode and native entry-point disassembly
+
+All nine `.jsc` files have high byte entropy: approximately 7.90–8.00 bits/byte, with no normal JavaScript source headers. The large application bytecode files are `settings.jsc` (2,395,304 bytes), `project.jsc` (674,172 bytes), and `cocos2d-jsb.jsc` (395,868 bytes). The complete measurements are in `jsc_entropy.tsv`.
+
+ARM64 disassembly of the exported `jsb_set_xxtea_key` function shows it accepts a C++ string-like object, extracts its pointer/length, and calls an internal helper; `jsb_run_script` and `jsb_run_script_module` similarly pass data into internal script-engine helpers. No direct ARM64 `BL` instruction targeting those three exported entry points was found in the scanned `.text` range, so they may be invoked through dynamic registration/exports or by another runtime path. This is not proof that encryption is inactive. The disassembly is preserved in `native_script_functions.txt`, and the scanned direct-call results are in `native_script_xrefs.tsv`.
 
 ## 12. Structured asset and media analysis
 
@@ -443,6 +481,12 @@ No network request was made to `ifs.yonorummy.in`, `yonorummy.com`, or any extra
 | dex_sensitive_findings.tsv | categorized static API matches |
 | dex_strings.txt | all DEX strings |
 | remote_game_manifests.tsv | all embedded content manifests |
+| apk_signing_pairs.tsv and apk_signing_v2.tsv | parsed APK Signing Block pairs and v2 signer metadata |
+| main_manifest_variants.tsv and child_manifest_catalog.tsv | main update-map variants, file verification, and child catalog |
+| embedded_scene_urls.tsv and feature_string_hits.tsv | URL-bearing scene assets and feature/UI indicators |
+| jsc_entropy.tsv | entropy/header metrics for all compiled JavaScript bytecode |
+| native_script_functions.txt and native_script_xrefs.tsv | ARM64 script-entry disassembly and direct-call scan |
+| phase2_summary.json | phase-2 aggregate measurements |
 | arm64-v8a_readelf_*.txt and strings | native ARM64 inspection |
 | armeabi-v7a_readelf_*.txt and strings | native ARM32 inspection |
 | decompiled_index.tsv | all 2,175 decompiled class files and line counts |

@@ -86,5 +86,23 @@
   "method_ids": 13742,
   "defined_class_methods": 11704,
   "field_ids": 5682,
-  "defined_class_fields": 5519
+  "defined_class_fields": 5519,
+  "phase2": {
+    "signing_pair_ids": [
+      "0x7109871a",
+      "0x504b4453",
+      "0x71777777",
+      "0x42726577"
+    ],
+    "main_variants": 2,
+    "child_manifest_count": 252,
+    "main_subver_count": 252,
+    "scene_url_references": 36,
+    "feature_string_hits": 2828,
+    "jsc_files": 9,
+    "jsc_entropy_range_bits_per_byte": [
+      7.9036,
+      7.9999
+    ]
+  }
 }
